@@ -1,0 +1,7 @@
+data/org.hitchhiker_linux.vapad.desktop.in
+data/org.hitchhiker_linux.vapad.appdata.xml.in
+data/org.hitchhiker_linux.vapad.gschema.xml
+src/window.ui
+src/main.vala
+src/window.vala
+
