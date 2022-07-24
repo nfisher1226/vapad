@@ -2,8 +2,8 @@
 <interface>
   <requires lib="gtk" version="4.0"/>
   <template class="VapadWindow" parent="GtkApplicationWindow">
-    <property name="default-width">600</property>
-    <property name="default-height">300</property>
+    <property name="default-width">700</property>
+    <property name="default-height">500</property>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="header_bar">
         <child type="end">

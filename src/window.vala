@@ -26,30 +26,69 @@ namespace Vapad {
             Object (application: app);
         }
 
-	    construct {
-	        ActionEntry[] actions = {
-	            { "new_file", this.new_page },
-	            { "close_file", this.close_page },
-	        };
-	        this.add_action_entries (actions, this);
-	        this.notebook.page_removed.connect ( () => {
-	            if (this.notebook.get_n_pages () == 0) {
-	                this.application.quit ();
-	            }
-	        });
-	    }
+	construct {
+	    ActionEntry[] actions = {
+	        { "new_file", this.new_page },
+	        { "close_file", this.close_page },
+		{ "open_file", this.open_file },
+		{ "save_file", this.save_file },
+	    };
+	    this.add_action_entries (actions, this);
+	    this.notebook.page_removed.connect ( () => {
+	        if (this.notebook.get_n_pages () == 0) {
+	            this.close ();
+	        }
+	    });
+	}
 
-	    public void new_page () {
-	        var tab = new Vapad.Tab ();
-	        this.notebook.append_page(tab, tab.lbox);
-	        tab.close_button.clicked.connect ( () => {
-	            this.notebook.remove_page (this.notebook.page_num (tab));
-	        });
-	    }
+	public void new_page () {
+	    var tab = new Vapad.Tab ();
+	    this.notebook.append_page(tab, tab.lbox);
+	    tab.close_button.clicked.connect ( () => {
+	        this.notebook.remove_page (this.notebook.page_num (tab));
+	    });
+	}
 
-	    public void close_page () {
-	        var num = this.notebook.get_current_page ();
-	        this.notebook.remove_page (num);
-	    }
+	private void close_page () {
+	    var num = this.notebook.get_current_page ();
+	    this.notebook.remove_page (num);
+	}
+
+	private void open_file () {
+	    var chooser = new Gtk.FileChooserDialog (
+                "Select a file to open",
+		this,
+		Gtk.FileChooserAction.OPEN
+            );
+	    chooser.add_button ("Accept", Gtk.ResponseType.ACCEPT);
+	    chooser.add_button ("Cancel", Gtk.ResponseType.CANCEL);
+	    chooser.response.connect ( (dlg, res) => {
+                if (res == Gtk.ResponseType.ACCEPT) {
+                    //stdout.printf ("Accepted");
+		    var file = chooser.get_file ();
+		    if (file != null) {
+                        try {
+			    uint8[] contents;
+			    string etag_out;
+			    var info = file.query_info ("standard::*", 0);
+			    var size = info.get_size ();
+			    file.load_contents (null, out contents, out etag_out);
+			    var n = this.notebook.get_current_page ();
+			    var page = this.notebook.get_nth_page (n);
+			    var tab = (Vapad.Tab)page;
+			    var buffer = tab.sourceview.get_buffer ();
+			    buffer.set_text ((string)contents, (int)size);
+                        } catch (Error e) {
+			    print ("Error: %s\n", e.message);
+			}
+		    }
+		}
+		dlg.close ();
+	    });
+	    chooser.show ();
+	}
+
+	private void save_file () {
+	}
     }
 }
