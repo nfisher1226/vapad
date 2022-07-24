@@ -25,6 +25,7 @@ namespace Vapad {
         public Label label;
 	public Button close_button;
 	public View sourceview;
+	public GLib.File? file;
 
 	public Tab () {
 	    create_widgets ();
@@ -44,6 +45,31 @@ namespace Vapad {
 	    this.sourceview = new View();
 	    scroller.set_child (this.sourceview);
 	    scroller.set_hexpand (true);
+	}
+
+	public void load_file (GLib.File f) {
+	    try {
+                uint8[] contents;
+	        string etag_out;
+	        var info = f.query_info ("standard::*", 0);
+	        var size = info.get_size ();
+                f.load_contents (null, out contents, out etag_out);
+		var buffer = (GtkSource.Buffer)this.sourceview.get_buffer ();
+		var language = new LanguageManager ().get_default ().guess_language (f.get_path (), null);
+		buffer.set_language (language);
+		buffer.set_text ((string)contents, (int)size);
+	        this.file = f;
+		this.set_title ();
+            } catch (Error e) {
+	        print ("Error: %s\n", e.message);
+	    }
+	}
+
+	private void set_title () {
+	    var name = this.file.get_basename ();
+	    if (name != null) {
+	        this.label.set_text (name);
+	    }
 	}
     }
 }

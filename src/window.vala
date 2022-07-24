@@ -64,23 +64,20 @@ namespace Vapad {
 	    chooser.add_button ("Cancel", Gtk.ResponseType.CANCEL);
 	    chooser.response.connect ( (dlg, res) => {
                 if (res == Gtk.ResponseType.ACCEPT) {
-                    //stdout.printf ("Accepted");
 		    var file = chooser.get_file ();
 		    if (file != null) {
-                        try {
-			    uint8[] contents;
-			    string etag_out;
-			    var info = file.query_info ("standard::*", 0);
-			    var size = info.get_size ();
-			    file.load_contents (null, out contents, out etag_out);
-			    var n = this.notebook.get_current_page ();
-			    var page = this.notebook.get_nth_page (n);
-			    var tab = (Vapad.Tab)page;
-			    var buffer = tab.sourceview.get_buffer ();
-			    buffer.set_text ((string)contents, (int)size);
-                        } catch (Error e) {
-			    print ("Error: %s\n", e.message);
+		        var n = this.notebook.get_current_page ();
+			var page = this.notebook.get_nth_page (n);
+			var tab = (Vapad.Tab)page;
+			if (tab.file != null) {
+		            tab = new Vapad.Tab ();
+			    this.notebook.append_page(tab, tab.lbox);
+			    tab.close_button.clicked.connect ( () => {
+			        this.notebook.remove_page (this.notebook.page_num (tab));
+			    });
 			}
+			tab.load_file (file);
+			this.set_title (file.get_uri ());
 		    }
 		}
 		dlg.close ();
