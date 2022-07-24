@@ -39,6 +39,7 @@ namespace Vapad {
 	            this.close ();
 	        }
 	    });
+	    this.notebook.switch_page.connect ( (nb, num) => update_title (num));
 	}
 
 	public void new_page () {
@@ -47,6 +48,7 @@ namespace Vapad {
 	    tab.close_button.clicked.connect ( () => {
 	        this.notebook.remove_page (this.notebook.page_num (tab));
 	    });
+	    this.notebook.set_current_page (this.notebook.page_num (tab));
 	}
 
 	private void close_page () {
@@ -77,12 +79,23 @@ namespace Vapad {
 			    });
 			}
 			tab.load_file (file);
-			this.set_title (file.get_uri ());
+			n = this.notebook.page_num (tab);
+			this.notebook.set_current_page (n);
+			this.update_title (n);
 		    }
 		}
 		dlg.close ();
 	    });
 	    chooser.show ();
+	}
+
+	private void update_title (uint num) {
+	    var tab = (Vapad.Tab)this.notebook.get_nth_page ((int)num);
+	    if (tab.file != null) {
+		this.set_title (tab.file.get_path ());
+	    } else {
+		this.set_title ("New file");
+	    }
 	}
 
 	private void save_file () {
