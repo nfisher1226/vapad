@@ -30,21 +30,21 @@ namespace Vapad {
             };
             this.add_action_entries (action_entries, this);
             this.set_accels_for_action ("app.quit", {"<primary>q"});
-	    this.set_accels_for_action ("win.new_file", {"<primary>n"});
-	    this.set_accels_for_action ("win.close_file", {"<primary>w"});
-	    this.set_accels_for_action ("win.open_file", {"<primary>o"});
-	    this.set_accels_for_action ("win.save_file", {"<primary>s"});
-	    this.set_accels_for_action ("win.save_as", {"<primary><shift>s"});
-	    this.set_accels_for_action ("win.tab1", {"<alt>1"});
-	    this.set_accels_for_action ("win.tab2", {"<alt>2"});
-	    this.set_accels_for_action ("win.tab3", {"<alt>3"});
-	    this.set_accels_for_action ("win.tab4", {"<alt>4"});
-	    this.set_accels_for_action ("win.tab5", {"<alt>5"});
-	    this.set_accels_for_action ("win.tab6", {"<alt>6"});
-	    this.set_accels_for_action ("win.tab7", {"<alt>7"});
-	    this.set_accels_for_action ("win.tab8", {"<alt>8"});
-	    this.set_accels_for_action ("win.tab9", {"<alt>9"});
-	    this.set_accels_for_action ("win.last_tab", {"<alt>0"});
+            this.set_accels_for_action ("win.new_file", {"<primary>n"});
+            this.set_accels_for_action ("win.close_file", {"<primary>w"});
+            this.set_accels_for_action ("win.open_file", {"<primary>o"});
+            this.set_accels_for_action ("win.save_file", {"<primary>s"});
+            this.set_accels_for_action ("win.save_as", {"<primary><shift>s"});
+            this.set_accels_for_action ("win.tab1", {"<alt>1"});
+            this.set_accels_for_action ("win.tab2", {"<alt>2"});
+            this.set_accels_for_action ("win.tab3", {"<alt>3"});
+            this.set_accels_for_action ("win.tab4", {"<alt>4"});
+            this.set_accels_for_action ("win.tab5", {"<alt>5"});
+            this.set_accels_for_action ("win.tab6", {"<alt>6"});
+            this.set_accels_for_action ("win.tab7", {"<alt>7"});
+            this.set_accels_for_action ("win.tab8", {"<alt>8"});
+            this.set_accels_for_action ("win.tab9", {"<alt>9"});
+            this.set_accels_for_action ("win.last_tab", {"<alt>0"});
         }
 
         public override void activate () {
@@ -52,8 +52,8 @@ namespace Vapad {
             var win = this.active_window;
             if (win == null) {
                 win = new Vapad.Window (this);
-		Vapad.Window w = (Vapad.Window)win;
-		w.new_page ();
+                Vapad.Window w = (Vapad.Window)win;
+                w.new_page ();
             }
             win.present ();
         }

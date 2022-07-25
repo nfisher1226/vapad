@@ -16,105 +16,114 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- using Gtk;
- using GtkSource;
+using Gtk;
+using GtkSource;
 
 namespace Vapad {
     public class Tab : Box {
         public Box lbox;
         public Label label;
-	public Button close_button;
-	public View sourceview;
-	public GLib.File? file;
+        public Button close_button;
+        public View sourceview;
+        public GLib.File? file;
 
-	public Tab () {
-	    create_widgets ();
-	}
+        public Tab () {
+            create_widgets ();
+        }
 
-	private void create_widgets () {
-	    this.lbox = new Box (Orientation.HORIZONTAL, 5);
-	    this.label = new Label ("New file");
-	    lbox.append (this.label);
-	    this.close_button = new Button ();
-	    this.close_button.set_has_frame (false);
-	    lbox.append (this.close_button);
-	    var image = new Image.from_icon_name ("window-close-symbolic");
-	    this.close_button.set_child (image);
-	    var scroller = new ScrolledWindow ();
-	    this.append (scroller);
-	    this.sourceview = new View();
-	    this.sourceview.set_show_line_numbers (true);
-	    this.sourceview.set_auto_indent (true);
-	    this.sourceview.set_indent_on_tab (true);
-	    this.sourceview.set_right_margin_position (80);
-	    this.sourceview.set_show_right_margin (true);
-	    scroller.set_child (this.sourceview);
-	    scroller.set_hexpand (true);
-	}
+        private void create_widgets () {
+            this.lbox = new Box (Orientation.HORIZONTAL, 5);
+            this.label = new Label ("New file");
+            lbox.append (this.label);
+            this.close_button = new Button ();
+            this.close_button.set_has_frame (false);
+            lbox.append (this.close_button);
+            var image = new Image.from_icon_name ("window-close-symbolic");
+            this.close_button.set_child (image);
+            var scroller = new ScrolledWindow ();
+            this.append (scroller);
+            this.sourceview = new View();
+            this.sourceview.set_show_line_numbers (true);
+            this.sourceview.set_auto_indent (true);
+            this.sourceview.set_indent_on_tab (true);
+            this.sourceview.set_right_margin_position (80);
+            this.sourceview.set_show_right_margin (true);
+            scroller.set_child (this.sourceview);
+            scroller.set_hexpand (true);
+        }
 
-	public void load_file (GLib.File f) {
-	    try {
+        public void load_file (GLib.File f) {
+            try {
                 uint8[] contents;
-	        string etag_out;
-	        var info = f.query_info ("standard::*", 0);
-	        var size = info.get_size ();
+                string etag_out;
+                var info = f.query_info ("standard::*", 0);
+                var size = info.get_size ();
                 f.load_contents (null, out contents, out etag_out);
-		var buffer = (GtkSource.Buffer)this.sourceview.get_buffer ();
-		var language = new LanguageManager ().get_default ().guess_language (f.get_path (), null);
-		buffer.set_language (language);
-		buffer.set_text ((string)contents, (int)size);
-	        this.file = f;
-		this.set_title ();
+                var buffer = (GtkSource.Buffer)this.sourceview.get_buffer ();
+                var language = new LanguageManager ()
+                    .get_default ()
+                    .guess_language (f.get_path (), null);
+                buffer.set_language (language);
+                buffer.set_text ((string)contents, (int)size);
+                this.file = f;
+                this.set_title ();
             } catch (Error e) {
-	        print ("Error: %s\n", e.message);
-	    }
-	}
+                print ("Error: %s\n", e.message);
+            }
+        }
 
-	public void save_file () {
-	    if (this.file != null) {
-	        try {
-		    var buffer = this.sourceview.get_buffer ();
-		    TextIter start;
-		    TextIter end;
-		    buffer.get_start_iter (out start);
-		    buffer.get_end_iter (out end);
-	            var text = buffer.get_text (start, end, true);
-		    this.file.replace_contents (text.data, null, false, GLib.FileCreateFlags.NONE, null, null);
-	        } catch (Error e) {
-	            print ("Error: %s\n", e.message);
-		}
-	    } else {
-		this.save_as ();
-	    }
-	}
+        public void save_file () {
+            if (this.file != null) {
+                try {
+                    var buffer = this.sourceview.get_buffer ();
+                    TextIter start;
+                    TextIter end;
+                    buffer.get_start_iter (out start);
+                    buffer.get_end_iter (out end);
+                    var text = buffer.get_text (start, end, true);
+                    this.file.replace_contents (
+                        text.data,
+                        null,
+                        false,
+                        GLib.FileCreateFlags.NONE,
+                        null,
+                        null
+                    );
+                } catch (Error e) {
+                    print ("Error: %s\n", e.message);
+                }
+            } else {
+                this.save_as ();
+            }
+        }
 
-	public void save_as () {
-	    var chooser = new FileChooserDialog (
-		"Save file as...",
-		(Window)this.get_root (),
-		FileChooserAction.SAVE
-	    );
-	    chooser.add_button ("Accept", Gtk.ResponseType.ACCEPT);
-	    chooser.add_button ("Cancel", Gtk.ResponseType.CANCEL);
-	    chooser.response.connect ( (dlg, res) => {
+        public void save_as () {
+            var chooser = new FileChooserDialog (
+                "Save file as...",
+                (Window)this.get_root (),
+                FileChooserAction.SAVE
+            );
+            chooser.add_button ("Accept", Gtk.ResponseType.ACCEPT);
+            chooser.add_button ("Cancel", Gtk.ResponseType.CANCEL);
+            chooser.response.connect ( (dlg, res) => {
                 if (res == Gtk.ResponseType.ACCEPT) {
-		    var file = chooser.get_file ();
-		    if (file != null) {
-			this.file = file;
-			this.save_file ();
-			this.set_title ();
-		    }
-		}
-		dlg.close ();
-	    });
-	    chooser.show ();
-	}
+                    var file = chooser.get_file ();
+                    if (file != null) {
+                        this.file = file;
+                        this.save_file ();
+                        this.set_title ();
+                    }
+                }
+                dlg.close ();
+            });
+            chooser.show ();
+        }
 
-	private void set_title () {
-	    var name = this.file.get_basename ();
-	    if (name != null) {
-	        this.label.set_text (name);
-	    }
-	}
+        private void set_title () {
+            var name = this.file.get_basename ();
+            if (name != null) {
+                this.label.set_text (name);
+            }
+        }
     }
 }

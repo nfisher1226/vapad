@@ -36,7 +36,6 @@
       </object>
     </child>
   </template>
-
   <menu id="primary_menu">
     <section>
       <item>
@@ -45,15 +44,15 @@
       </item>
       <item>
         <attribute name="label" translatable="yes">Open File</attribute>
-	<attribute name="action">win.open_file</attribute>
+        <attribute name="action">win.open_file</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">Save File</attribute>
-	<attribute name="action">win.save_file</attribute>
+        <attribute name="action">win.save_file</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">Save As</attribute>
-	<attribute name="action">win.save_as</attribute>
+        <attribute name="action">win.save_as</attribute>
       </item>
     </section>
     <section>
@@ -71,7 +70,7 @@
       </item>
       <item>
         <attribute name="label" translatable="yes">Quit</attribute>
-	<attribute name="action">app.quit</attribute>
+        <attribute name="action">app.quit</attribute>
       </item>
     </section>
   </menu>
