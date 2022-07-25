@@ -6,10 +6,28 @@
     <property name="default-height">500</property>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="header_bar">
+        <child type="start">
+          <object class="GtkButton">
+            <property name="label">Open</property>
+            <property name="action-name">win.open_file</property>
+          </object>
+        </child>
+        <child type="start">
+          <object class="GtkButton">
+            <property name="icon-name">tab-new-symbolic</property>
+            <property name="action-name">win.new_file</property>
+          </object>
+        </child>
         <child type="end">
           <object class="GtkMenuButton">
             <property name="icon-name">open-menu-symbolic</property>
             <property name="menu-model">primary_menu</property>
+          </object>
+        </child>
+        <child type="end">
+          <object class="GtkButton">
+            <property name="label">Save</property>
+            <property name="action-name">win.save_file</property>
           </object>
         </child>
       </object>
@@ -20,19 +38,7 @@
         <property name="vexpand">1</property>
         <property name="enable-popup">1</property>
         <property name="scrollable">1</property>
-        <property name="show-tabs">1</property>
-        <child type="action-end">
-          <object id="new_tab_button" class="GtkButton">
-            <property name="tooltip-text">Open a new tab</property>
-            <property name="has-frame">0</property>
-            <property name="action-name">win.new_file</property>
-            <child>
-              <object class="GtkImage">
-                <property name="icon-name">tab-new-symbolic</property>
-              </object>
-            </child>
-          </object>
-        </child>
+        <property name="show-tabs">0</property>
       </object>
     </child>
   </template>
@@ -43,16 +49,12 @@
         <attribute name="action">win.new_file</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Open File</attribute>
-        <attribute name="action">win.open_file</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Save File</attribute>
-        <attribute name="action">win.save_file</attribute>
-      </item>
-      <item>
         <attribute name="label" translatable="yes">Save As</attribute>
         <attribute name="action">win.save_as</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Save All</attribute>
+        <attribute name="action">win.save_all</attribute>
       </item>
     </section>
     <section>

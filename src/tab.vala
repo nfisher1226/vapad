@@ -1,4 +1,4 @@
-/* window.vala
+/* tab.vala
  *
  * Copyright 2022 Nathan Fisher
  *
@@ -33,7 +33,10 @@ namespace Vapad {
 
         private void create_widgets () {
             this.lbox = new Box (Orientation.HORIZONTAL, 5);
+            this.lbox.set_hexpand (true);
+            this.lbox.set_can_focus (false);
             this.label = new Label ("New file");
+            this.label.set_hexpand (true);
             lbox.append (this.label);
             this.close_button = new Button ();
             this.close_button.set_has_frame (false);

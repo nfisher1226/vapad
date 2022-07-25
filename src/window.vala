@@ -33,6 +33,7 @@ namespace Vapad {
 		{ "open_file", this.open_file },
 		{ "save_file", this.save_file },
 		{ "save_as", this.save_as },
+		{ "save_all", this.save_all },
 		{ "tab1", this.tab1 },
 		{ "tab2", this.tab2 },
 		{ "tab3", this.tab3 },
@@ -47,11 +48,8 @@ namespace Vapad {
                 { "previous_tab", this.previous_tab },
 	    };
 	    this.add_action_entries (actions, this);
-	    this.notebook.page_removed.connect ( () => {
-	        if (this.notebook.get_n_pages () == 0) {
-	            this.close ();
-	        }
-	    });
+	    this.notebook.page_removed.connect (check_tab_visibility);
+	    this.notebook.page_added.connect (check_tab_visibility);
 	    this.notebook.switch_page.connect ( (nb, num) => update_title (num));
 	}
 
@@ -102,6 +100,22 @@ namespace Vapad {
 	    chooser.show ();
 	}
 
+        private void check_tab_visibility () {
+            switch (this.notebook.get_n_pages ()) {
+                case 0:
+                    this.close ();
+                    break;
+                case 1:
+                    this.notebook.set_show_tabs (false);
+                    break;
+                default:
+                    if (!this.notebook.get_show_tabs ()) {
+                        this.notebook.set_show_tabs (true);
+                    }
+                    break;
+            }
+        }
+
 	private void update_title (uint num) {
 	    var tab = (Vapad.Tab)this.notebook.get_nth_page ((int)num);
 	    if (tab.file != null) {
@@ -123,6 +137,13 @@ namespace Vapad {
 	private void save_as () {
 	    this.current_tab ().save_as ();
 	}
+
+        private void save_all () {
+            for (int n = 0; n < this.notebook.get_n_pages (); n++) {
+                var tab = (Vapad.Tab)this.notebook.get_nth_page (n);
+                tab.save_file ();
+            }
+        }
 
 	private void tab1 () {
 	    this.notebook.set_current_page (0);

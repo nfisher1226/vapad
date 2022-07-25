@@ -35,6 +35,7 @@ namespace Vapad {
             this.set_accels_for_action ("win.open_file", {"<primary>o"});
             this.set_accels_for_action ("win.save_file", {"<primary>s"});
             this.set_accels_for_action ("win.save_as", {"<primary><shift>s"});
+            this.set_accels_for_action ("win.save_all", {"<primary><shift>l"});
             this.set_accels_for_action ("win.tab1", {"<alt>1"});
             this.set_accels_for_action ("win.tab2", {"<alt>2"});
             this.set_accels_for_action ("win.tab3", {"<alt>3"});
