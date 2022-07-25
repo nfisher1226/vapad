@@ -43,6 +43,8 @@ namespace Vapad {
 		{ "tab8", this.tab8 },
 		{ "tab9", this.tab9 },
 		{ "last_tab", this.last_tab },
+                { "next_tab", this.next_tab },
+                { "previous_tab", this.previous_tab },
 	    };
 	    this.add_action_entries (actions, this);
 	    this.notebook.page_removed.connect ( () => {
@@ -158,9 +160,25 @@ namespace Vapad {
 	    this.notebook.set_current_page (8);
 	}
 
-	private void last_tab () {
-	    var num = this.notebook.get_n_pages ();
-	    this.notebook.set_current_page (num - 1);
-	}
+        private void last_tab () {
+            var num = this.notebook.get_n_pages ();
+            this.notebook.set_current_page (num - 1);
+        }
+
+        private void next_tab () {
+            if (this.notebook.get_current_page () >= this.notebook.get_n_pages () - 1) {
+                this.notebook.set_current_page (0);
+            } else {
+                this.notebook.next_page ();
+            }
+        }
+
+        private void previous_tab () {
+            if (this.notebook.get_current_page () == 0) {
+                this.notebook.set_current_page (this.notebook.get_n_pages () - 1);
+            } else {
+                this.notebook.prev_page ();
+            }
+        }
     }
 }

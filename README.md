@@ -42,6 +42,8 @@ placeholders).
 | Save As | <Ctrl><Shift>S |
 | Close Tab | <Ctrl>W |
 | Close Window | <Ctrl>Q |
+| Next Tab | <Alt>Right |
+| Previous Tab | <Alt>Left |
 | Go To Tab[number] | <Alt>number |
 | Go to last Tab | <Alt>0 |
 

@@ -45,6 +45,8 @@ namespace Vapad {
             this.set_accels_for_action ("win.tab8", {"<alt>8"});
             this.set_accels_for_action ("win.tab9", {"<alt>9"});
             this.set_accels_for_action ("win.last_tab", {"<alt>0"});
+            this.set_accels_for_action ("win.next_tab", {"<alt>Right"});
+            this.set_accels_for_action ("win.previous_tab", {"<alt>Left"});
         }
 
         public override void activate () {
