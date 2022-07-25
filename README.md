@@ -7,10 +7,11 @@ Contents
 ## Introduction
 This is a simple text editor written in Vala, and is little more than a learning
 exercise undertaken to explore using Vala. It's not expected to turn into
-anything serious. Vapad takes as inspiration the old Gtk2 editor Leafpad which
-has been around forever, but updates the interface somewhat and adds tabs and
-syntax highlighting. Printing is not yet supported and there are not any
-user-customizable settings, although those features are planned.
+anything serious. Vapad takes as inspiration the old Gtk2 editor
+[Leafpad](http://tarot.freeshell.org/leafpad/) which has been around forever,
+but updates the interface somewhat and adds tabs and syntax highlighting.
+Printing is not yet supported and there are not any user-customizable settings,
+although those features are planned.
 
 On the plus side, the resulting binary is just 52K on my system and thus well
 suited to minimalist installations.
