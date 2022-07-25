@@ -32,6 +32,17 @@ namespace Vapad {
 	        { "close_file", this.close_page },
 		{ "open_file", this.open_file },
 		{ "save_file", this.save_file },
+		{ "save_as", this.save_as },
+		{ "tab1", this.tab1 },
+		{ "tab2", this.tab2 },
+		{ "tab3", this.tab3 },
+		{ "tab4", this.tab4 },
+		{ "tab5", this.tab5 },
+		{ "tab6", this.tab6 },
+		{ "tab7", this.tab7 },
+		{ "tab8", this.tab8 },
+		{ "tab9", this.tab9 },
+		{ "last_tab", this.last_tab },
 	    };
 	    this.add_action_entries (actions, this);
 	    this.notebook.page_removed.connect ( () => {
@@ -98,7 +109,58 @@ namespace Vapad {
 	    }
 	}
 
+	private Vapad.Tab current_tab () {
+	    return (Vapad.Tab)this.notebook.get_nth_page (this.notebook.get_current_page ());
+	}
+
 	private void save_file () {
+	    this.current_tab ().save_file ();
+	    this.update_title (this.notebook.get_current_page ());
+	}
+
+	private void save_as () {
+	    this.current_tab ().save_as ();
+	}
+
+	private void tab1 () {
+	    this.notebook.set_current_page (0);
+	}
+
+	private void tab2 () {
+	    this.notebook.set_current_page (1);
+	}
+
+	private void tab3 () {
+	    this.notebook.set_current_page (2);
+	}
+
+	private void tab4 () {
+	    this.notebook.set_current_page (3);
+	}
+
+	private void tab5 () {
+	    this.notebook.set_current_page (4);
+	}
+
+	private void tab6 () {
+	    this.notebook.set_current_page (5);
+	}
+
+	private void tab7 () {
+	    this.notebook.set_current_page (6);
+	}
+
+	private void tab8 () {
+	    this.notebook.set_current_page (7);
+	}
+
+	private void tab9 () {
+	    this.notebook.set_current_page (8);
+	}
+
+	private void last_tab () {
+	    var num = this.notebook.get_n_pages ();
+	    this.notebook.set_current_page (num - 1);
 	}
     }
 }
