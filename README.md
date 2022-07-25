@@ -40,6 +40,7 @@ placeholders).
 | Open File | <Ctrl>O |
 | Save File | <Ctrl>S |
 | Save As | <Ctrl><Shift>S |
+| Save All | <Ctrl><Shift>L |
 | Close Tab | <Ctrl>W |
 | Close Window | <Ctrl>Q |
 | Next Tab | <Alt>Right |
