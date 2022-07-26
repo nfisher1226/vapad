@@ -31,6 +31,7 @@ namespace Vapad {
             this.add_action_entries (action_entries, this);
             this.set_accels_for_action ("app.quit", {"<primary>q"});
             this.set_accels_for_action ("win.search", {"<primary>f"});
+            this.set_accels_for_action ("win.hide_search", {"Escape"});
             this.set_accels_for_action ("win.new_file", {"<primary>n"});
             this.set_accels_for_action ("win.close_file", {"<primary>w"});
             this.set_accels_for_action ("win.open_file", {"<primary>o"});

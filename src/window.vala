@@ -21,6 +21,8 @@ namespace Vapad {
     public class Window : Gtk.ApplicationWindow {
         [GtkChild]
         private unowned Gtk.Notebook notebook;
+        [GtkChild]
+        private unowned Gtk.Box search_box;
 
         public Window (Gtk.Application app) {
             Object (application: app);
@@ -30,6 +32,7 @@ namespace Vapad {
             ActionEntry[] actions = {
                 { "new_file", this.new_page },
                 { "search", this.search },
+                { "hide_search", this.hide_search },
                 { "close_file", this.close_page },
                 { "open_file", this.open_file },
                 { "save_file", this.save_file },
@@ -55,7 +58,7 @@ namespace Vapad {
         }
 
         public void new_page () {
-            var tab = new Vapad.Tab ();
+            Tab tab = new Vapad.Tab ();
             this.notebook.append_page(tab, tab.lbox);
             tab.close_button.clicked.connect ( () => {
                 this.notebook.remove_page (this.notebook.page_num (tab));
@@ -64,12 +67,12 @@ namespace Vapad {
         }
 
         private void close_page () {
-            var num = this.notebook.get_current_page ();
+            int num = this.notebook.get_current_page ();
             this.notebook.remove_page (num);
         }
 
         private void open_file () {
-            var chooser = new Gtk.FileChooserDialog (
+            Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
                 "Select a file to open",
                 this,
                 Gtk.FileChooserAction.OPEN
@@ -78,11 +81,10 @@ namespace Vapad {
             chooser.add_button ("Cancel", Gtk.ResponseType.CANCEL);
             chooser.response.connect ( (dlg, res) => {
                 if (res == Gtk.ResponseType.ACCEPT) {
-                    var file = chooser.get_file ();
+                    File file = chooser.get_file ();
                     if (file != null) {
-                        var n = this.notebook.get_current_page ();
-                        var page = this.notebook.get_nth_page (n);
-                        var tab = (Vapad.Tab)page;
+                        int n = this.notebook.get_current_page ();
+                        var tab = (Vapad.Tab)this.notebook.get_nth_page (n);
                         if (tab.file != null) {
                             tab = new Vapad.Tab ();
                             this.notebook.append_page(tab, tab.lbox);
@@ -120,7 +122,8 @@ namespace Vapad {
         private void update_title (uint num) {
             var tab = (Vapad.Tab)this.notebook.get_nth_page ((int)num);
             if (tab.file != null) {
-                this.set_title (tab.file.get_path ());
+                string path = tab.file.get_path ();
+                this.set_title (@"$path - Vapad");
             } else {
                 this.set_title ("New file");
             }
@@ -141,7 +144,7 @@ namespace Vapad {
 
         private void save_all () {
             for (int n = 0; n < this.notebook.get_n_pages (); n++) {
-                var tab = (Vapad.Tab)this.notebook.get_nth_page (n);
+                Tab tab = (Vapad.Tab)this.notebook.get_nth_page (n);
                 tab.save_file ();
             }
         }
@@ -183,7 +186,7 @@ namespace Vapad {
         }
 
         private void last_tab () {
-            var num = this.notebook.get_n_pages ();
+            int num = this.notebook.get_n_pages ();
             this.notebook.set_current_page (num - 1);
         }
 
@@ -204,6 +207,11 @@ namespace Vapad {
         }
 
         private void search () {
+            this.search_box.show ();
+        }
+
+        private void hide_search () {
+            this.search_box.hide ();
         }
     }
 }

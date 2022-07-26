@@ -8,12 +8,6 @@
       <object class="GtkHeaderBar" id="header_bar">
         <child type="start">
           <object class="GtkButton">
-            <property name="icon-name">system-search-symbolic</property>
-            <property name="action-name">win.search</property>
-          </object>
-        </child>
-        <child type="start">
-          <object class="GtkButton">
             <property name="label">Open</property>
             <property name="action-name">win.open_file</property>
           </object>
@@ -39,12 +33,79 @@
       </object>
     </child>
     <child>
-      <object class="GtkNotebook" id="notebook">
+      <object class="GtkBox">
         <property name="hexpand">1</property>
         <property name="vexpand">1</property>
-        <property name="enable-popup">1</property>
-        <property name="scrollable">1</property>
-        <property name="show-tabs">0</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkNotebook" id="notebook">
+            <property name="hexpand">1</property>
+            <property name="vexpand">1</property>
+            <property name="enable-popup">1</property>
+            <property name="scrollable">1</property>
+            <property name="show-tabs">0</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox" id="search_box">
+            <property name="hexpand">1</property>
+            <property name="vexpand">0</property>
+            <property name="orientation">horizontal</property>
+            <property name="spacing">5</property>
+            <property name="margin-top">5</property>
+            <property name="margin-bottom">5</property>
+            <property name="margin-start">5</property>
+            <property name="margin-end">5</property>
+            <property name="visible">0</property>
+            <child>
+              <object class="GtkButton" id="close_search">
+                <property name="icon-name">window-close-symbolic</property>
+                <property name="tooltip-text">Close the search bar</property>
+                <property name="action-name">win.hide_search</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="css-classes">linked</property>
+                <child>
+                  <object class="GtkSearchEntry" id="search_entry">
+                    <property name="placeholder-text">Search query ..</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="search_forward">
+                    <property name="icon-name">go-down-symbolic</property>
+                    <property name="tooltip-text">Find next match</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="search_backward">
+                    <property name="icon-name">go-up-symbolic</property>
+                    <property name="tooltip-text">Find previous match</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="match_case">
+                <property name="label">Match case</property>
+                <property name="tooltip-text">Perform a case sensitive search</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="whole_words">
+                <property name="label">Whole words</property>
+                <property name="tooltip-text">Match only whole words</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="advanced_search">
+                <property name="label">Advanced</property>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </template>

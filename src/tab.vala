@@ -41,9 +41,9 @@ namespace Vapad {
             this.close_button = new Button ();
             this.close_button.set_has_frame (false);
             lbox.append (this.close_button);
-            var image = new Image.from_icon_name ("window-close-symbolic");
+            Image image = new Image.from_icon_name ("window-close-symbolic");
             this.close_button.set_child (image);
-            var scroller = new ScrolledWindow ();
+            ScrolledWindow scroller = new ScrolledWindow ();
             this.append (scroller);
             this.sourceview = new View();
             this.sourceview.set_show_line_numbers (true);
@@ -59,11 +59,11 @@ namespace Vapad {
             try {
                 uint8[] contents;
                 string etag_out;
-                var info = f.query_info ("standard::*", 0);
-                var size = info.get_size ();
+                FileInfo info = f.query_info ("standard::*", 0);
+                int64 size = info.get_size ();
                 f.load_contents (null, out contents, out etag_out);
-                var buffer = (GtkSource.Buffer)this.sourceview.get_buffer ();
-                var language = new LanguageManager ()
+                Buffer buffer = (Buffer)this.sourceview.get_buffer ();
+                Language language = new LanguageManager ()
                     .get_default ()
                     .guess_language (f.get_path (), null);
                 buffer.set_language (language);
@@ -78,12 +78,12 @@ namespace Vapad {
         public void save_file () {
             if (this.file != null) {
                 try {
-                    var buffer = this.sourceview.get_buffer ();
+                    TextBuffer buffer = this.sourceview.get_buffer ();
                     TextIter start;
                     TextIter end;
                     buffer.get_start_iter (out start);
                     buffer.get_end_iter (out end);
-                    var text = buffer.get_text (start, end, true);
+                    string text = buffer.get_text (start, end, true);
                     this.file.replace_contents (
                         text.data,
                         null,
@@ -101,7 +101,7 @@ namespace Vapad {
         }
 
         public void save_as () {
-            var chooser = new FileChooserDialog (
+            FileChooserDialog chooser = new FileChooserDialog (
                 "Save file as...",
                 (Window)this.get_root (),
                 FileChooserAction.SAVE
@@ -110,7 +110,7 @@ namespace Vapad {
             chooser.add_button ("Cancel", Gtk.ResponseType.CANCEL);
             chooser.response.connect ( (dlg, res) => {
                 if (res == Gtk.ResponseType.ACCEPT) {
-                    var file = chooser.get_file ();
+                    GLib.File file = chooser.get_file ();
                     if (file != null) {
                         this.file = file;
                         this.save_file ();
@@ -123,10 +123,13 @@ namespace Vapad {
         }
 
         private void set_title () {
-            var name = this.file.get_basename ();
+            string name = this.file.get_basename ();
             if (name != null) {
                 this.label.set_text (name);
             }
+        }
+        
+        public void search (SearchContext context) {
         }
     }
 }
