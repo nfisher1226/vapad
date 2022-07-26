@@ -135,9 +135,9 @@ namespace Vapad {
             var tab = (Vapad.Tab)this.notebook.get_nth_page ((int)num);
             if (tab.file != null) {
                 string path = tab.file.get_path ();
-                this.set_title (@"$path - Vapad");
+                this.set_title (@"$path ~ $PROGNAME-$VERSION");
             } else {
-                this.set_title ("New file");
+                this.set_title (@"New file ~ $PROGNAME-$VERSION");
             }
         }
 

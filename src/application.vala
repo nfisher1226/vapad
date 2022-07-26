@@ -17,6 +17,10 @@
  */
 
 namespace Vapad {
+    public const string PROGNAME = "Vapad";
+    public const string VERSION = "0.1.0";
+    public const string[] authors = { "Nathan Fisher" };
+
     public class Application : Gtk.Application {
         public Application () {
             Object (application_id: "org.hitchhiker_linux.vapad", flags: ApplicationFlags.FLAGS_NONE);
@@ -67,9 +71,8 @@ namespace Vapad {
         }
 
         private void on_about_action () {
-            string[] authors = { "Nathan Fisher" };
             Gtk.show_about_dialog (this.active_window,
-                                   "program-name", "vapad",
+                                   "program-name", PROGNAME,
                                    "authors", authors,
                                    "version", "0.1.0");
         }
