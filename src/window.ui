@@ -58,7 +58,7 @@
             <property name="margin-end">5</property>
             <property name="visible">0</property>
             <child>
-              <object class="GtkButton" id="close_search">
+              <object class="GtkButton">
                 <property name="icon-name">window-close-symbolic</property>
                 <property name="tooltip-text">Close the search bar</property>
                 <property name="action-name">win.hide_search</property>
@@ -74,15 +74,17 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkButton" id="search_forward">
+                  <object class="GtkButton">
                     <property name="icon-name">go-down-symbolic</property>
                     <property name="tooltip-text">Find next match</property>
+                    <property name="action-name">win.find_next</property>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkButton" id="search_backward">
+                  <object class="GtkButton">
                     <property name="icon-name">go-up-symbolic</property>
                     <property name="tooltip-text">Find previous match</property>
+                    <property name="action-name">win.find_previous</property>
                   </object>
                 </child>
               </object>
@@ -102,6 +104,7 @@
             <child>
               <object class="GtkButton" id="advanced_search">
                 <property name="label">Advanced</property>
+                <property name="action-name">advanced_search</property>
               </object>
             </child>
           </object>

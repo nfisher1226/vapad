@@ -23,6 +23,13 @@ namespace Vapad {
         private unowned Gtk.Notebook notebook;
         [GtkChild]
         private unowned Gtk.Box search_box;
+        [GtkChild]
+        private unowned Gtk.SearchEntry search_entry;
+        [GtkChild]
+        private unowned Gtk.CheckButton match_case;
+        [GtkChild]
+        private unowned Gtk.CheckButton whole_words;
+        public GtkSource.SearchContext? search_context;
 
         public Window (Gtk.Application app) {
             Object (application: app);
@@ -31,7 +38,11 @@ namespace Vapad {
         construct {
             ActionEntry[] actions = {
                 { "new_file", this.new_page },
-                { "search", this.search },
+                { "search", this.show_search },
+                { "find_next", this.find_next },
+                { "find_previous", this.find_previous },
+                { "replace_text", this.replace_text },
+                { "advanced_search", this.advanced_search },
                 { "hide_search", this.hide_search },
                 { "close_file", this.close_page },
                 { "open_file", this.open_file },
@@ -55,6 +66,7 @@ namespace Vapad {
             this.notebook.page_removed.connect (check_tab_visibility);
             this.notebook.page_added.connect (check_tab_visibility);
             this.notebook.switch_page.connect ( (nb, num) => update_title (num));
+            this.search_entry.activate.connect (new_search);
         }
 
         public void new_page () {
@@ -133,6 +145,10 @@ namespace Vapad {
             return (Vapad.Tab)this.notebook.get_nth_page (this.notebook.get_current_page ());
         }
 
+        private GtkSource.Buffer current_buffer () {
+            return (GtkSource.Buffer)this.current_tab ().sourceview.get_buffer ();
+        }
+
         private void save_file () {
             this.current_tab ().save_file ();
             this.update_title (this.notebook.get_current_page ());
@@ -206,12 +222,88 @@ namespace Vapad {
             }
         }
 
-        private void search () {
+        private void show_search () {
             this.search_box.show ();
+            this.search_entry.grab_focus ();
+            if (this.search_context != null) {
+                this.search_context.set_highlight (true);
+            }
+        }
+
+        private void new_search () {
+            var settings = new GtkSource.SearchSettings ();
+            settings.set_wrap_around (true);
+            settings.set_case_sensitive (this.match_case.get_active ());
+            settings.set_at_word_boundaries (this.whole_words.get_active ());
+            settings.set_search_text (this.search_entry.get_text ());
+            this.search_context = new GtkSource.SearchContext (this.current_buffer (), settings);
+            this.find_next ();
         }
 
         private void hide_search () {
             this.search_box.hide ();
+            if (this.search_context != null) {
+                this.search_context.set_highlight (false);
+            }
+        }
+
+        private void find_next () {
+            if (this.search_context == null) {
+                this.show_search ();
+                return;
+            }
+            this.search_context.set_highlight (true);
+            var view = this.current_tab ().sourceview;
+            var buffer = this.current_buffer ();
+            var position = GLib.Value (GLib.Type.INT);
+            buffer.get_property ("cursor_position", ref position);
+            Gtk.TextIter current;
+            Gtk.TextIter start;
+            Gtk.TextIter end;
+            buffer.get_iter_at_offset (out current, (int)position);
+            Gtk.TextIter sel_start;
+            Gtk.TextIter sel_end;
+            if (buffer.get_selection_bounds (out sel_start, out sel_end)) {
+                current = sel_end;
+            }
+            bool has_wrapped;
+            this.search_context.forward (current, out start, out end, out has_wrapped);
+            buffer.place_cursor (start);
+            buffer.select_range (start, end);
+            view.scroll_to_iter (start, 0.25, false, 0.1, 0.1);
+        }
+
+        private void find_previous () {
+            if (this.search_context == null) {
+                this.show_search ();
+                return;
+            }
+            this.search_context.set_highlight (true);
+            var view = this.current_tab ().sourceview;
+            var buffer = this.current_buffer ();
+            var position = GLib.Value (GLib.Type.INT);
+            buffer.get_property ("cursor_position", ref position);
+            Gtk.TextIter current;
+            Gtk.TextIter start;
+            Gtk.TextIter end;
+            buffer.get_iter_at_offset (out current, (int)position);
+            Gtk.TextIter sel_start;
+            Gtk.TextIter sel_end;
+            if (buffer.get_selection_bounds (out sel_start, out sel_end)) {
+                current = sel_start;
+            }
+            bool has_wrapped;
+            this.search_context.backward (current, out start, out end, out has_wrapped);
+            buffer.place_cursor (start);
+            buffer.select_range (start, end);
+            view.scroll_to_iter (start, 0.25, false, 0.1, 0.1);
+        }
+
+        private void advanced_search () {
+            this.hide_search ();
+        }
+
+        private void replace_text () {
         }
     }
 }
