@@ -155,7 +155,7 @@ namespace Vapad {
             }
         }
 
-        private Vapad.Tab current_tab () {
+        public Vapad.Tab current_tab () {
             return (Vapad.Tab)this.notebook.get_nth_page (this.notebook.get_current_page ());
         }
 

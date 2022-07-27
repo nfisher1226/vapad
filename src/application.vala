@@ -23,7 +23,7 @@ namespace Vapad {
 
     public class Application : Gtk.Application {
         public Application () {
-            Object (application_id: "org.hitchhiker_linux.vapad", flags: ApplicationFlags.FLAGS_NONE);
+            Object (application_id: "org.hitchhiker_linux.vapad", flags: ApplicationFlags.HANDLES_OPEN);
         }
 
         construct {
@@ -57,6 +57,7 @@ namespace Vapad {
             this.set_accels_for_action ("win.last_tab", {"<alt>0"});
             this.set_accels_for_action ("win.next_tab", {"<alt>Right"});
             this.set_accels_for_action ("win.previous_tab", {"<alt>Left"});
+            this.open.connect (open_files);
         }
 
         public override void activate () {
@@ -68,6 +69,19 @@ namespace Vapad {
                 w.new_page ();
             }
             win.present ();
+        }
+
+        private void open_files(File[] files) {
+            var win = (Vapad.Window)this.active_window;
+            if (win == null) {
+                var w = new Vapad.Window (this);
+                win = (Vapad.Window)w;
+                win.present ();
+            }
+            foreach (File file in files) {
+                win.new_page ();
+                win.current_tab ().load_file (file);
+            }
         }
 
         private void on_about_action () {
