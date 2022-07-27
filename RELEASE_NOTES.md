@@ -5,8 +5,11 @@ Contents
 
 ## Unreleased
 * Make program name, version, and authors constants in application.vala
-* When opening files the FileChooserDialog will open in the folder containing
+* When opening files the `FileChooserDialog` will open in the folder containing
   the current file
+* Use the GtkSource provided `FileLoader` and `FileSaver` classes to do async io
+* Make sure window title gets set after `save_as` action
+* Set smart home, end and backspace key handling
 
 ## 0.1.0
 First basic proof of concept release.
