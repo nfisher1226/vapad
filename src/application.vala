@@ -19,7 +19,7 @@
 namespace Vapad {
     public const string PROGNAME = "Vapad";
     public const string VERSION = "0.1.0";
-    public const string[] authors = { "Nathan Fisher" };
+    public const string[] AUTHORS = { "Nathan Fisher" };
 
     public class Application : Gtk.Application {
         public Application () {
@@ -73,8 +73,8 @@ namespace Vapad {
         private void on_about_action () {
             Gtk.show_about_dialog (this.active_window,
                                    "program-name", PROGNAME,
-                                   "authors", authors,
-                                   "version", "0.1.0");
+                                   "authors", AUTHORS,
+                                   "version", VERSION);
         }
 
         private void on_preferences_action () {

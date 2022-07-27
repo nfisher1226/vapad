@@ -89,6 +89,14 @@ namespace Vapad {
                 this,
                 Gtk.FileChooserAction.OPEN
             );
+            var f = this.current_tab ().file;
+            if (f != null) {
+                try {
+                    chooser.set_current_folder (f.get_parent ());
+                } catch (Error e) {
+                    print ("Error: %s\n", e.message);
+                }
+            }
             chooser.add_button ("Accept", Gtk.ResponseType.ACCEPT);
             chooser.add_button ("Cancel", Gtk.ResponseType.CANCEL);
             chooser.response.connect ( (dlg, res) => {
