@@ -26,6 +26,8 @@ namespace Vapad {
         public Button close_button;
         public View sourceview;
         public GLib.File? file;
+        public GtkSource.File? sourcefile;
+        public signal void file_saved ();
 
         public Tab () {
             create_widgets ();
@@ -51,50 +53,33 @@ namespace Vapad {
             this.sourceview.set_indent_on_tab (true);
             this.sourceview.set_right_margin_position (80);
             this.sourceview.set_show_right_margin (true);
+            this.sourceview.set_smart_home_end (SmartHomeEndType.AFTER);
+            this.sourceview.set_smart_backspace (true);
             scroller.set_child (this.sourceview);
             scroller.set_hexpand (true);
         }
 
         public void load_file (GLib.File f) {
-            try {
-                uint8[] contents;
-                string etag_out;
-                FileInfo info = f.query_info ("standard::*", 0);
-                int64 size = info.get_size ();
-                f.load_contents (null, out contents, out etag_out);
-                Buffer buffer = (Buffer)this.sourceview.get_buffer ();
-                Language language = new LanguageManager ()
-                    .get_default ()
-                    .guess_language (f.get_path (), null);
-                buffer.set_language (language);
-                buffer.set_text ((string)contents, (int)size);
-                this.file = f;
-                this.set_title ();
-            } catch (Error e) {
-                print ("Error: %s\n", e.message);
-            }
+            Buffer buffer = (Buffer)this.sourceview.get_buffer ();
+            GtkSource.File file = new GtkSource.File ();
+            file.set_location (f);
+            FileLoader loader = new FileLoader (buffer, file);
+            Language language = new LanguageManager ()
+                .get_default ()
+                .guess_language (f.get_path (), null);
+            buffer.set_language (language);
+            loader.load_async.begin (-100, null, null);
+            this.file = f;
+            this.sourcefile = file;
+            this.set_title ();
         }
 
         public void save_file () {
             if (this.file != null) {
-                try {
-                    TextBuffer buffer = this.sourceview.get_buffer ();
-                    TextIter start;
-                    TextIter end;
-                    buffer.get_start_iter (out start);
-                    buffer.get_end_iter (out end);
-                    string text = buffer.get_text (start, end, true);
-                    this.file.replace_contents (
-                        text.data,
-                        null,
-                        false,
-                        GLib.FileCreateFlags.NONE,
-                        null,
-                        null
-                    );
-                } catch (Error e) {
-                    print ("Error: %s\n", e.message);
-                }
+                Buffer buffer = (Buffer) this.sourceview.get_buffer ();
+                FileSaver saver = new FileSaver (buffer, this.sourcefile);
+                saver.save_async.begin (-100, null, null);
+                this.file_saved ();
             } else {
                 this.save_as ();
             }
@@ -110,9 +95,12 @@ namespace Vapad {
             chooser.add_button ("Cancel", Gtk.ResponseType.CANCEL);
             chooser.response.connect ( (dlg, res) => {
                 if (res == Gtk.ResponseType.ACCEPT) {
-                    GLib.File file = chooser.get_file ();
-                    if (file != null) {
-                        this.file = file;
+                    GLib.File f = chooser.get_file ();
+                    if (f != null) {
+                        this.file = f;
+                        GtkSource.File file = new GtkSource.File ();
+                        file.set_location (f);
+                        this.sourcefile = file;
                         this.save_file ();
                         this.set_title ();
                     }

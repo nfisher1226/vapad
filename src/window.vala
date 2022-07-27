@@ -75,6 +75,9 @@ namespace Vapad {
             tab.close_button.clicked.connect ( () => {
                 this.notebook.remove_page (this.notebook.page_num (tab));
             });
+            tab.file_saved.connect ( () => {
+                this.update_title (this.notebook.get_current_page ());
+            });
             this.notebook.set_current_page (this.notebook.page_num (tab));
         }
 
@@ -110,6 +113,9 @@ namespace Vapad {
                             this.notebook.append_page(tab, tab.lbox);
                             tab.close_button.clicked.connect ( () => {
                                 this.notebook.remove_page (this.notebook.page_num (tab));
+                            });
+                            tab.file_saved.connect ( () => {
+                                this.update_title (this.notebook.get_current_page ());
                             });
                         }
                         tab.load_file (file);
