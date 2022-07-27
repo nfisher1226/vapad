@@ -79,7 +79,9 @@ namespace Vapad {
                 win.present ();
             }
             foreach (File file in files) {
-                win.new_page ();
+                if (win.current_tab () == null) {
+                    win.new_page ();
+                }
                 win.current_tab ().load_file (file);
             }
         }
