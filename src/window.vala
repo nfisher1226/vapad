@@ -18,7 +18,7 @@
 
 namespace Vapad {
     [GtkTemplate (ui = "/org/hitchhiker_linux/vapad/window.ui")]
-    public class Window : Gtk.ApplicationWindow {
+    public class Window : Adw.ApplicationWindow {
         [GtkChild]
         private unowned Gtk.Notebook notebook;
         [GtkChild]
@@ -31,7 +31,7 @@ namespace Vapad {
         private unowned Gtk.CheckButton whole_words;
         public GtkSource.SearchContext? search_context;
 
-        public Window (Gtk.Application app) {
+        public Window (Adw.Application app) {
             Object (application: app);
         }
 
