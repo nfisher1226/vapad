@@ -135,27 +135,24 @@
                 <property name="margin-start">15</property>
                 <property name="margin-end">15</property>
                 <child>
-                  <object class="GtkCheckButton">
+                  <object class="GtkCheckButton" id="close_when_finished">
                     <property name="label">Close</property>
                     <property name="tooltip-text">Close the search dialog when finished</property>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkButton">
+                  <object class="GtkButton" id="replace_in_session_button">
                     <property name="label">In Session</property>
-                    <property name="action-name">win.replace_in_session</property>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkButton">
+                  <object class="GtkButton" id="replace_in_document_button">
                     <property name="label">In Document</property>
-                    <property name="action-name">win.replace_in_document</property>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkButton">
+                  <object class="GtkButton" id="replace_in_selection_button">
                     <property name="label">In Selection</property>
-                    <property name="action-name">win.replace_in_selection</property>
                   </object>
                 </child>
               </object>

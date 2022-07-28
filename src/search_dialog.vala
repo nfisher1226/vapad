@@ -34,6 +34,14 @@ namespace Vapad {
         [GtkChild]
         private unowned Gtk.CheckButton backwards;
         [GtkChild]
+        private unowned Gtk.CheckButton close_when_finished;
+        [GtkChild]
+        private unowned Gtk.Button replace_in_session_button;
+        [GtkChild]
+        private unowned Gtk.Button replace_in_document_button;
+        [GtkChild]
+        private unowned Gtk.Button replace_in_selection_button;
+        [GtkChild]
         private unowned Gtk.Button find_button;
         [GtkChild]
         private unowned Gtk.Button replace_button;
@@ -49,7 +57,9 @@ namespace Vapad {
             this.find_button.clicked.connect (find);
             this.replace_button.clicked.connect (replace);
             this.replace_find_button.clicked.connect (replace_find);
-            
+            this.replace_in_session_button.clicked.connect (replace_in_session);
+            this.replace_in_document_button.clicked.connect (replace_in_document);
+            this.replace_in_selection_button.clicked.connect (replace_in_selection);
         }
 
         private GtkSource.SearchSettings get_search_settings () {
@@ -73,7 +83,7 @@ namespace Vapad {
         private void find () {
             var win = (Vapad.Window)this.get_transient_for ();
             var tab = (Vapad.Tab)win.current_tab ();
-            var view = (GtkSource.View)tab.sourceview;
+            var view = tab.sourceview;
             var buffer = (GtkSource.Buffer)view.get_buffer ();
             var search_context = this.get_search_context (tab);
             var position = GLib.Value (GLib.Type.INT);
@@ -115,7 +125,7 @@ namespace Vapad {
             }
             var search_text = this.search_entry.get_text ();
             var replace_text = this.replace_entry.get_text ();
-            if (search_text == "" || replace_text == "") {
+            if (search_text == "") {
                 return;
             }
             Gtk.TextIter start;
@@ -132,6 +142,29 @@ namespace Vapad {
         }
 
         private void replace_find () {
+            this.replace ();
+            this.find ();
+        }
+
+        private void replace_in_session () {
+        }
+
+        private void replace_in_document () {
+            var win = (Vapad.Window)this.get_transient_for ();
+            var tab = (Vapad.Tab)win.current_tab ();
+            var search_context = this.get_search_context (tab);
+            var replace_text = this.replace_entry.get_text ();
+            try {
+                search_context.replace_all (replace_text, -1);
+            } catch (Error e) {
+                print ("%s\n", e.message);
+            }
+            if (this.close_when_finished.get_active ()) {
+                this.close ();
+            }
+        }
+
+        private void replace_in_selection () {
         }
     }
 }
