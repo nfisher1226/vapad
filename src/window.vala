@@ -39,6 +39,7 @@ namespace Vapad {
             ActionEntry[] actions = {
                 { "new_file", this.new_page },
                 { "search", this.show_search },
+                { "advanced_search", this.advanced_search },
                 { "find_next", this.find_next },
                 { "find_previous", this.find_previous },
                 { "replace_text", this.replace_text },
@@ -155,7 +156,7 @@ namespace Vapad {
             }
         }
 
-        public Vapad.Tab current_tab () {
+        public Vapad.Tab? current_tab () {
             return (Vapad.Tab)this.notebook.get_nth_page (this.notebook.get_current_page ());
         }
 
@@ -315,6 +316,8 @@ namespace Vapad {
 
         private void advanced_search () {
             this.hide_search ();
+            var dialog = new Vapad.SearchDialog (this);
+            dialog.show ();
         }
 
         private void replace_text () {

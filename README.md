@@ -15,6 +15,11 @@ Vapad does not have a plethora of configuration options, by design. Comfort
 features like syntax highlighting and line numbers are considered a sane default
 and thus are always on. Focus on your writing, not configuring your editor.
 
+### Naming
+In Star Wars lore, Mace Windu's style of lightsaber conflict was known as vaapad.
+Anything involving both Samual L Jackson and Star Wars must by definition be
+badass. Vapad is also a nice amalgam of Vala and Notepad, so it seemed a good fit.
+
 ## Building
 Vapad requires Gtk+-4.0 or greater and GtkSourceView 5. You will also need to
 have the Vala compiler (valac) installed, along with Meson and Ninja. Package

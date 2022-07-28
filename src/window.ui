@@ -104,7 +104,7 @@
             <child>
               <object class="GtkButton" id="advanced_search">
                 <property name="label">Advanced</property>
-                <property name="action-name">advanced_search</property>
+                <property name="action-name">win.advanced_search</property>
               </object>
             </child>
           </object>

@@ -3,6 +3,7 @@ vapad_sources = [
   'window.vala',
   'application.vala',
   'tab.vala',
+  'search_dialog.vala'
 ]
 
 vapad_deps = [

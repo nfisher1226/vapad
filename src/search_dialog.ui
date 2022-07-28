@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="VapadSearchDialog" parent="GtkDialog">
+    <property name="title" translatable="1">Vapad - Search</property>
+    <property name="destroy-with-parent">1</property>
+    <property name="modal">1</property>
+    <property name="use-header-bar">1</property>
+    <child type="action">
+      <object class="GtkButton" id="button_close">
+        <property name="label" translatable="1">_Close</property>
+        <property name="use-underline">1</property>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="close">button_close</action-widget>
+    </action-widgets>
+    <child internal-child="content_area">
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="margin-top">5</property>
+        <property name="margin-bottom">25</property>
+        <property name="margin-start">25</property>
+        <property name="margin-end">25</property>
+        <property name="spacing">15</property>
+        <child>
+          <object class="GtkGrid">
+            <property name="halign">fill</property>
+            <property name="hexpand">1</property>
+            <property name="column-spacing">15</property>
+            <property name="row-spacing">15</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Search:</property>
+                <property name="halign">start</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSearchEntry" id="search_entry">
+                <property name="placeholder-text">Search for ..</property>
+                <property name="halign">fill</property>
+                <property name="hexpand">1</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label">Replace:</property>
+                <property name="halign">start</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkEntry" id="replace_entry">
+                <property name="placeholder-text">Replace with ..</property>
+                <property name="halign">fill</property>
+                <property name="hexpand">1</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkGrid">
+            <property name="halign">fill</property>
+            <property name="hexpand">1</property>
+            <property name="column-spacing">15</property>
+            <property name="row-spacing">15</property>
+            <child>
+              <object class="GtkCheckButton" id="use_regex">
+                <property name="label">Use regular expressions</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="case_sensitive">
+                <property name="label">Case sensitive</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="whole_words">
+                <property name="label">Match only whole words</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="wrap">
+                <property name="label">Wrap search</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="backwards">
+                <property name="label">Search backwards</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkExpander">
+            <property name="label">Replace all</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="spacing">15</property>
+                <property name="margin-start">15</property>
+                <property name="margin-end">15</property>
+                <child>
+                  <object class="GtkCheckButton">
+                    <property name="label">Close</property>
+                    <property name="tooltip-text">Close the search dialog when finished</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="label">In Session</property>
+                    <property name="action-name">win.replace_in_session</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="label">In Document</property>
+                    <property name="action-name">win.replace_in_document</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton">
+                    <property name="label">In Selection</property>
+                    <property name="action-name">win.replace_in_selection</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">horizontal</property>
+            <property name="spacing">15</property>
+            <property name="margin-start">15</property>
+            <property name="margin-end">15</property>
+            <property name="halign">end</property>
+            <property name="hexpand">1</property>
+            <child>
+              <object class="GtkButton">
+                <property name="label">_Find</property>
+                <property name="use-underline">1</property>
+                <property name="action-name">advanced_search.find</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label">_Replace</property>
+                <property name="use-underline">1</property>
+                <property name="action-name">advanced_search.replace</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label">Replace &amp; Find</property>
+                <property name="action-name">advanced_search.replace_find</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
