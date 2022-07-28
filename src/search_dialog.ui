@@ -171,23 +171,20 @@
             <property name="halign">end</property>
             <property name="hexpand">1</property>
             <child>
-              <object class="GtkButton">
+              <object class="GtkButton" id="find_button">
                 <property name="label">_Find</property>
                 <property name="use-underline">1</property>
-                <property name="action-name">advanced_search.find</property>
               </object>
             </child>
             <child>
-              <object class="GtkButton">
+              <object class="GtkButton" id="replace_button">
                 <property name="label">_Replace</property>
                 <property name="use-underline">1</property>
-                <property name="action-name">advanced_search.replace</property>
               </object>
             </child>
             <child>
-              <object class="GtkButton">
+              <object class="GtkButton" id="replace_find_button">
                 <property name="label">Replace &amp; Find</property>
-                <property name="action-name">advanced_search.replace_find</property>
               </object>
             </child>
           </object>

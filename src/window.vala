@@ -282,10 +282,11 @@ namespace Vapad {
                 current = sel_end;
             }
             bool has_wrapped;
-            this.search_context.forward (current, out start, out end, out has_wrapped);
-            buffer.place_cursor (start);
-            buffer.select_range (start, end);
-            view.scroll_to_iter (start, 0.25, false, 0.1, 0.1);
+            if (this.search_context.forward (current, out start, out end, out has_wrapped)) {
+                buffer.place_cursor (start);
+                buffer.select_range (start, end);
+                view.scroll_to_iter (start, 0.25, false, 0.1, 0.1);
+            }
         }
 
         private void find_previous () {
@@ -308,10 +309,11 @@ namespace Vapad {
                 current = sel_start;
             }
             bool has_wrapped;
-            this.search_context.backward (current, out start, out end, out has_wrapped);
-            buffer.place_cursor (start);
-            buffer.select_range (start, end);
-            view.scroll_to_iter (start, 0.25, false, 0.1, 0.1);
+            if (this.search_context.backward (current, out start, out end, out has_wrapped)) {
+                buffer.place_cursor (start);
+                buffer.select_range (start, end);
+                view.scroll_to_iter (start, 0.25, false, 0.1, 0.1);
+            }
         }
 
         private void advanced_search () {

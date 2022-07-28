@@ -11,6 +11,7 @@ Contents
 * Make sure window title gets set after `save_as` action
 * Set smart home, end and backspace key handling
 * Open files from command line
+* Implement advanced search find and replace methods
 
 ## 0.1.0
 First basic proof of concept release.
