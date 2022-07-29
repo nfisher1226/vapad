@@ -79,7 +79,9 @@ namespace Vapad {
                 this.notebook.remove_page (this.notebook.page_num (tab));
             });
             tab.file_saved.connect ( () => {
-                this.update_title (this.notebook.get_current_page ());
+                var page = this.notebook.get_current_page ();
+                this.update_title (page);
+                this.send_saved_toast (page);
             });
             this.notebook.set_current_page (this.notebook.page_num (tab));
         }
@@ -155,6 +157,14 @@ namespace Vapad {
                 this.set_title (@"$path ~ $PROGNAME-$VERSION");
             } else {
                 this.set_title (@"New file ~ $PROGNAME-$VERSION");
+            }
+        }
+
+        private void send_saved_toast (uint num) {
+            var tab = (Vapad.Tab)this.notebook.get_nth_page ((int)num);
+            if (tab.file != null) {
+                string filename = tab.file.get_basename ();
+                this.set_toast (@"$filename saved");
             }
         }
 
