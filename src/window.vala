@@ -78,10 +78,10 @@ namespace Vapad {
             tab.close_button.clicked.connect ( () => {
                 this.notebook.remove_page (this.notebook.page_num (tab));
             });
-            tab.file_saved.connect ( () => {
+            tab.file_saved.connect ( (name) => {
                 var page = this.notebook.get_current_page ();
                 this.update_title (page);
-                this.send_saved_toast (page);
+                this.send_saved_toast (name);
             });
             this.notebook.set_current_page (this.notebook.page_num (tab));
         }
@@ -160,12 +160,8 @@ namespace Vapad {
             }
         }
 
-        private void send_saved_toast (uint num) {
-            var tab = (Vapad.Tab)this.notebook.get_nth_page ((int)num);
-            if (tab.file != null) {
-                string filename = tab.file.get_basename ();
-                this.set_toast (@"$filename saved");
-            }
+        private void send_saved_toast (string name) {
+            this.set_toast (@"$name saved");
         }
 
         public Vapad.Tab? current_tab () {

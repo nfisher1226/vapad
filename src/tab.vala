@@ -27,7 +27,7 @@ namespace Vapad {
         public View sourceview;
         public GLib.File? file;
         public GtkSource.File? sourcefile;
-        public signal void file_saved ();
+        public signal void file_saved (string name);
 
         public Tab () {
             create_widgets ();
@@ -79,7 +79,7 @@ namespace Vapad {
                 Buffer buffer = (Buffer) this.sourceview.get_buffer ();
                 FileSaver saver = new FileSaver (buffer, this.sourcefile);
                 saver.save_async.begin (-100, null, null);
-                this.file_saved ();
+                this.file_saved (this.file.get_basename ());
             } else {
                 this.save_as ();
             }
