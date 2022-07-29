@@ -146,22 +146,28 @@ namespace Vapad {
             this.find ();
         }
 
-        private void replace_in_document_common (Vapad.Tab tab) {
+        private uint? replace_in_document_common (Vapad.Tab tab) {
             var search_context = this.get_search_context (tab);
             var replace_text = this.replace_entry.get_text ();
             try {
-                search_context.replace_all (replace_text, -1);
+                return search_context.replace_all (replace_text, -1);
             } catch (Error e) {
                 print ("%s\n", e.message);
+                return null;
             }
         }
 
         private void replace_in_session () {
             var win = (Vapad.Window)this.get_transient_for ();
+            uint cases = 0;
             for (int n = 0; n < win.n_tabs (); n++) {
                 var tab = (Vapad.Tab)win.nth_tab (n);
-                this.replace_in_document_common (tab);
+                var num = this.replace_in_document_common (tab);
+                if (num != null) {
+                    cases += num;
+                }
             }
+            win.set_toast (@"Replaced $cases occurrances");
             if (this.close_when_finished.get_active ()) {
                 this.close ();
             }
@@ -170,7 +176,10 @@ namespace Vapad {
         private void replace_in_document () {
             var win = (Vapad.Window)this.get_transient_for ();
             var tab = (Vapad.Tab)win.current_tab ();
-            this.replace_in_document_common (tab);
+            var cases = this.replace_in_document_common (tab);
+            if (cases != null) {
+                win.set_toast (@"Replaced $cases occurrances");
+            }
             if (this.close_when_finished.get_active ()) {
                 this.close ();
             }

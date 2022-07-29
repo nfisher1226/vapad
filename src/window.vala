@@ -345,7 +345,7 @@ namespace Vapad {
         private void replace_text () {
         }
         
-        private void set_toast (string str){
+        public void set_toast (string str){
             var toast = new Adw.Toast (str);
             toast.set_timeout (3);
             overlay.add_toast (toast);
