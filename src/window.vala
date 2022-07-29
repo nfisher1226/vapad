@@ -160,6 +160,14 @@ namespace Vapad {
             return (Vapad.Tab)this.notebook.get_nth_page (this.notebook.get_current_page ());
         }
 
+        public Vapad.Tab? nth_tab (int n) {
+            return (Vapad.Tab)this.notebook.get_nth_page (n);
+        }
+
+        public int n_tabs () {
+            return this.notebook.get_n_pages ();
+        }
+
         private GtkSource.Buffer current_buffer () {
             return (GtkSource.Buffer)this.current_tab ().sourceview.get_buffer ();
         }

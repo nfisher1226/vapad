@@ -146,12 +146,7 @@ namespace Vapad {
             this.find ();
         }
 
-        private void replace_in_session () {
-        }
-
-        private void replace_in_document () {
-            var win = (Vapad.Window)this.get_transient_for ();
-            var tab = (Vapad.Tab)win.current_tab ();
+        private void replace_in_document_common (Vapad.Tab tab) {
             var search_context = this.get_search_context (tab);
             var replace_text = this.replace_entry.get_text ();
             try {
@@ -159,12 +154,65 @@ namespace Vapad {
             } catch (Error e) {
                 print ("%s\n", e.message);
             }
+        }
+
+        private void replace_in_session () {
+            var win = (Vapad.Window)this.get_transient_for ();
+            for (int n = 0; n < win.n_tabs (); n++) {
+                var tab = (Vapad.Tab)win.nth_tab (n);
+                this.replace_in_document_common (tab);
+            }
+            if (this.close_when_finished.get_active ()) {
+                this.close ();
+            }
+        }
+
+        private void replace_in_document () {
+            var win = (Vapad.Window)this.get_transient_for ();
+            var tab = (Vapad.Tab)win.current_tab ();
+            this.replace_in_document_common (tab);
             if (this.close_when_finished.get_active ()) {
                 this.close ();
             }
         }
 
         private void replace_in_selection () {
+            var win = (Vapad.Window)this.get_transient_for ();
+            var tab = (Vapad.Tab)win.current_tab ();
+            var buffer = (GtkSource.Buffer)tab.sourceview.get_buffer ();
+            if (!buffer.get_has_selection ()) {
+                return;
+            }
+            var search_context = this.get_search_context (tab);
+            bool has_wrapped;
+            Gtk.TextIter current, selection_end;
+            buffer.get_selection_bounds (out current, out selection_end);
+            var current_mark = buffer.create_mark ("current_mark", current, true);
+            var end_mark = buffer.create_mark ("selection_mark", selection_end, true);
+            while (true) {
+                Gtk.TextIter start, end, current_iter, sel_end;
+                buffer.get_iter_at_mark (out current_iter, current_mark);
+                buffer.get_iter_at_mark (out sel_end, end_mark);
+                if (!search_context.forward (current_iter, out start, out end, out has_wrapped)) {
+                    break;
+                }
+                buffer.move_mark (current_mark, end);
+                if (end.compare (sel_end) <= 0) {
+                    string replace = this.replace_entry.get_text ();
+                    try {
+                        search_context.replace (start, end, replace, -1);
+                    } catch (Error e) {
+                        print ("Error: %s\n", e.message);
+                    }
+                } else {
+                    break;
+                }
+            }
+            buffer.delete_mark (current_mark);
+            buffer.delete_mark (end_mark);
+            if (this.close_when_finished.get_active ()) {
+                this.close ();
+            }
         }
     }
 }
