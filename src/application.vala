@@ -21,7 +21,7 @@ namespace Vapad {
     public const string VERSION = "0.1.0";
     public const string[] AUTHORS = { "Nathan Fisher" };
 
-    public class Application : Gtk.Application {
+    public class Application : Adw.Application {
         public Application () {
             Object (application_id: "org.hitchhiker_linux.vapad", flags: ApplicationFlags.HANDLES_OPEN);
         }

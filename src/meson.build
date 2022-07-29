@@ -9,6 +9,7 @@ vapad_sources = [
 vapad_deps = [
   dependency('gtk4'),
   dependency('gtksourceview-5'),
+  dependency('libadwaita-1')
 ]
 
 gnome = import('gnome')

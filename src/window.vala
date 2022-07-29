@@ -18,7 +18,7 @@
 
 namespace Vapad {
     [GtkTemplate (ui = "/org/hitchhiker_linux/vapad/window.ui")]
-    public class Window : Gtk.ApplicationWindow {
+    public class Window : Adw.ApplicationWindow {
         [GtkChild]
         private unowned Gtk.Notebook notebook;
         [GtkChild]
@@ -29,9 +29,11 @@ namespace Vapad {
         private unowned Gtk.CheckButton match_case;
         [GtkChild]
         private unowned Gtk.CheckButton whole_words;
+        [GtkChild]
+        private unowned Adw.ToastOverlay overlay;
         public GtkSource.SearchContext? search_context;
 
-        public Window (Gtk.Application app) {
+        public Window (Adw.Application app) {
             Object (application: app);
         }
 
@@ -331,6 +333,12 @@ namespace Vapad {
         }
 
         private void replace_text () {
+        }
+        
+        private void set_toast (string str){
+            var toast = new Adw.Toast (str);
+            toast.set_timeout (3);
+            overlay.add_toast (toast);
         }
     }
 }
