@@ -47,6 +47,7 @@ namespace Vapad {
         private unowned Gtk.Button replace_button;
         [GtkChild]
         private unowned Gtk.Button replace_find_button;
+        public signal void strings_replaced (uint num);
 
         public SearchDialog (Gtk.Window window) {
             Object (use_header_bar: 1, transient_for: window);
@@ -54,6 +55,7 @@ namespace Vapad {
 
         construct {
             this.response.connect ( () => this.close ());
+            this.search_entry.activate.connect (find);
             this.find_button.clicked.connect (find);
             this.replace_button.clicked.connect (replace);
             this.replace_find_button.clicked.connect (replace_find);
@@ -167,7 +169,7 @@ namespace Vapad {
                     cases += num;
                 }
             }
-            win.set_toast (@"Replaced $cases occurrances");
+            this.strings_replaced (cases);
             if (this.close_when_finished.get_active ()) {
                 this.close ();
             }
@@ -178,7 +180,7 @@ namespace Vapad {
             var tab = (Vapad.Tab)win.current_tab ();
             var cases = this.replace_in_document_common (tab);
             if (cases != null) {
-                win.set_toast (@"Replaced $cases occurrances");
+                this.strings_replaced (cases);
             }
             if (this.close_when_finished.get_active ()) {
                 this.close ();

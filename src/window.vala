@@ -339,13 +339,16 @@ namespace Vapad {
         private void advanced_search () {
             this.hide_search ();
             var dialog = new Vapad.SearchDialog (this);
+            dialog.strings_replaced.connect ( (n) => {
+                this.set_toast (@"replaced $n occurances");
+            });
             dialog.show ();
         }
 
         private void replace_text () {
         }
         
-        public void set_toast (string str){
+        private void set_toast (string str){
             var toast = new Adw.Toast (str);
             toast.set_timeout (3);
             overlay.add_toast (toast);
