@@ -12,6 +12,12 @@ Contents
 * Set smart home, end and backspace key handling
 * Open files from command line
 * Implement advanced search find and replace methods
+* Link to LibAdwaita and begin transition to Gnome HIG (alexkdeveloper)
+  * Subclass from Adw.ApplicationWindow instead of Gtk.ApplicationWindow
+  * Use Adw.HeaderBar
+  * Add symbolic icons for open and save buttons in headerbar
+  * Add Adw.ToastOverlay for in app notifications
+* Display message on file save using AdwToast
 
 ## 0.1.0
 First basic proof of concept release.
