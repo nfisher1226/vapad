@@ -11,7 +11,12 @@
       <object class="AdwHeaderBar" id="header_bar">
         <child type="start">
           <object class="GtkButton">
-            <property name="label">Open</property>
+            <property name="child">
+              <object class="AdwButtonContent">
+               <property name="icon-name">document-open-symbolic</property>
+               <property name="label">Open</property>
+              </object>
+            </property>
             <property name="action-name">win.open_file</property>
           </object>
         </child>
@@ -29,7 +34,12 @@
         </child>
         <child type="end">
           <object class="GtkButton">
-            <property name="label">Save</property>
+            <property name="child">
+              <object class="AdwButtonContent">
+                <property name="icon-name">document-save-symbolic</property>
+                <property name="label">Save</property>
+               </object>
+            </property>
             <property name="action-name">win.save_file</property>
           </object>
         </child>
@@ -41,6 +51,8 @@
         <property name="vexpand">1</property>
         <property name="orientation">vertical</property>
         <child>
+         <object class="AdwToastOverlay" id="overlay">
+          <property name="child">
           <object class="GtkNotebook" id="notebook">
             <property name="hexpand">1</property>
             <property name="vexpand">1</property>
@@ -48,6 +60,8 @@
             <property name="scrollable">1</property>
             <property name="show-tabs">0</property>
           </object>
+         </property>
+        </object>
         </child>
         <child>
           <object class="GtkBox" id="search_box">

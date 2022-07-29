@@ -29,6 +29,8 @@ namespace Vapad {
         private unowned Gtk.CheckButton match_case;
         [GtkChild]
         private unowned Gtk.CheckButton whole_words;
+        [GtkChild]
+        private unowned Adw.ToastOverlay overlay;
         public GtkSource.SearchContext? search_context;
 
         public Window (Adw.Application app) {
@@ -318,6 +320,12 @@ namespace Vapad {
         }
 
         private void replace_text () {
+        }
+        
+        private void set_toast (string str){
+            var toast = new Adw.Toast (str);
+            toast.set_timeout (3);
+            overlay.add_toast (toast);
         }
     }
 }
