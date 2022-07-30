@@ -20,7 +20,7 @@ namespace Vapad {
     [GtkTemplate (ui = "/org/hitchhiker_linux/vapad/search_dialog.ui")]
     public class SearchDialog : Gtk.Dialog {
         [GtkChild]
-        private unowned Gtk.SearchEntry search_entry;
+        private unowned Gtk.Entry search_entry;
         [GtkChild]
         private unowned Gtk.Entry replace_entry;
         [GtkChild]
@@ -62,6 +62,8 @@ namespace Vapad {
             this.replace_in_session_button.clicked.connect (replace_in_session);
             this.replace_in_document_button.clicked.connect (replace_in_document);
             this.replace_in_selection_button.clicked.connect (replace_in_selection);
+            var win = (Vapad.Window)this.get_transient_for ();
+            this.search_entry.set_completion (win.search_completion);
         }
 
         private GtkSource.SearchSettings get_search_settings () {

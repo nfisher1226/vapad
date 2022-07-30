@@ -18,6 +18,7 @@ Contents
   * Add symbolic icons for open and save buttons in headerbar
   * Add Adw.ToastOverlay for in app notifications
 * Display message on file save using AdwToast
+* Display completions in search bar and dialog for previously searched strings
 
 ## 0.1.0
 First basic proof of concept release.

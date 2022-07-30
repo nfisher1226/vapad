@@ -32,7 +32,7 @@ namespace Vapad {
         [GtkChild]
         private unowned Adw.ToastOverlay overlay;
         public GtkSource.SearchContext? search_context;
-        private Gtk.EntryCompletion search_completion;
+        public Gtk.EntryCompletion search_completion;
 
         public Window (Adw.Application app) {
             Object (application: app);
