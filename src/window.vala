@@ -24,7 +24,7 @@ namespace Vapad {
         [GtkChild]
         private unowned Gtk.Box search_box;
         [GtkChild]
-        private unowned Gtk.SearchEntry search_entry;
+        private unowned Gtk.Entry search_entry;
         [GtkChild]
         private unowned Gtk.CheckButton match_case;
         [GtkChild]
@@ -32,6 +32,7 @@ namespace Vapad {
         [GtkChild]
         private unowned Adw.ToastOverlay overlay;
         public GtkSource.SearchContext? search_context;
+        private Gtk.EntryCompletion search_completion;
 
         public Window (Adw.Application app) {
             Object (application: app);
@@ -70,6 +71,13 @@ namespace Vapad {
             this.notebook.page_added.connect (check_tab_visibility);
             this.notebook.switch_page.connect ( (nb, num) => update_title (num));
             this.search_entry.activate.connect (new_search);
+            this.search_completion = new Gtk.EntryCompletion ();
+            this.search_completion.set_popup_completion (true);
+            this.search_completion.set_text_column (0);
+            this.search_completion.set_minimum_key_length (1);
+            var ls = new Gtk.ListStore (1, GLib.Type.STRING);
+            this.search_completion.set_model (ls);
+            this.search_entry.set_completion (this.search_completion);
         }
 
         public void new_page () {
@@ -267,6 +275,10 @@ namespace Vapad {
             settings.set_case_sensitive (this.match_case.get_active ());
             settings.set_at_word_boundaries (this.whole_words.get_active ());
             settings.set_search_text (this.search_entry.get_text ());
+            var list = (Gtk.ListStore)this.search_completion.get_model ();
+            Gtk.TreeIter iter;
+            list.append (out iter);
+            list.set (iter, 0, this.search_entry.get_text ());
             this.search_context = new GtkSource.SearchContext (this.current_buffer (), settings);
             this.find_next ();
         }

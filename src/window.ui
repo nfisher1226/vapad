@@ -86,7 +86,7 @@
                 <property name="orientation">horizontal</property>
                 <property name="css-classes">linked</property>
                 <child>
-                  <object class="GtkSearchEntry" id="search_entry">
+                  <object class="GtkEntry" id="search_entry">
                     <property name="placeholder-text">Search query ..</property>
                   </object>
                 </child>
