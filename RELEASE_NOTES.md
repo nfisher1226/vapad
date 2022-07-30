@@ -1,7 +1,11 @@
 Contents
 ========
+- [Unreleased](#unreleased)
 - [0.2.0](#0.2.0)
 - [0.1.0](#0.1.0)
+
+## Unreleased
+- Add theme switcher to main menu (styling to be added later)
 
 ## 0.2.0
 * Make program name, version, and authors constants in application.vala
@@ -18,6 +22,8 @@ Contents
   * Add symbolic icons for open and save buttons in headerbar
   * Add Adw.ToastOverlay for in app notifications
 * Display message on file save using AdwToast
+* Display message on number of strings replaced for replace in document and
+  replace in session
 * Display completions in search bar and dialog for previously searched strings
 
 ## 0.1.0

@@ -3,6 +3,7 @@ vapad_sources = [
   'window.vala',
   'application.vala',
   'tab.vala',
+  'theme_switcher.vala',
   'search_dialog.vala'
 ]
 

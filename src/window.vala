@@ -20,6 +20,8 @@ namespace Vapad {
     [GtkTemplate (ui = "/org/hitchhiker_linux/vapad/window.ui")]
     public class Window : Adw.ApplicationWindow {
         [GtkChild]
+        private unowned Gtk.MenuButton menu_button;
+        [GtkChild]
         private unowned Gtk.Notebook notebook;
         [GtkChild]
         private unowned Gtk.Box search_box;
@@ -31,6 +33,7 @@ namespace Vapad {
         private unowned Gtk.CheckButton whole_words;
         [GtkChild]
         private unowned Adw.ToastOverlay overlay;
+        private Vapad.ThemeSwitcher theme_switcher;
         public GtkSource.SearchContext? search_context;
         public Gtk.EntryCompletion search_completion;
 
@@ -67,6 +70,9 @@ namespace Vapad {
                 { "previous_tab", this.previous_tab },
             };
             this.add_action_entries (actions, this);
+            var pop = (Gtk.PopoverMenu)this.menu_button.get_popover ();
+            this.theme_switcher = new Vapad.ThemeSwitcher ();
+            pop.add_child (this.theme_switcher, "theme");
             this.notebook.page_removed.connect (check_tab_visibility);
             this.notebook.page_added.connect (check_tab_visibility);
             this.notebook.switch_page.connect ( (nb, num) => update_title (num));
@@ -78,6 +84,9 @@ namespace Vapad {
             var ls = new Gtk.ListStore (1, GLib.Type.STRING);
             this.search_completion.set_model (ls);
             this.search_entry.set_completion (this.search_completion);
+            this.theme_switcher.use_system_theme.connect (set_system_theme);
+            this.theme_switcher.use_light_theme.connect (set_light_theme);
+            this.theme_switcher.use_dark_theme.connect (set_dark_theme);
         }
 
         public void new_page () {
@@ -360,6 +369,18 @@ namespace Vapad {
             var toast = new Adw.Toast (str);
             toast.set_timeout (3);
             overlay.add_toast (toast);
+        }
+
+        private void set_system_theme () {
+            Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.DEFAULT);
+        }
+
+        private void set_light_theme () {
+            Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.FORCE_LIGHT);
+        }
+
+        private void set_dark_theme () {
+            Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.FORCE_DARK);
         }
     }
 }
