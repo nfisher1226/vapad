@@ -40,18 +40,18 @@ placeholders).
 ## Keyboard Shortcuts
 | Action | Shortcut |
 | --- | --- |
-| New File | <Ctrl>N |
-| Open File | <Ctrl>O |
-| Save File | <Ctrl>S |
-| Save As | <Ctrl><Shift>S |
-| Save All | <Ctrl><Shift>L |
-| Search | <Ctrl>F |
-| Find Next | <Ctrl>G |
-| Find Previous | <Ctrl><Shift>G |
-| Close Tab | <Ctrl>W |
-| Close Window | <Ctrl>Q |
-| Next Tab | <Alt>Right |
-| Previous Tab | <Alt>Left |
-| Go To Tab[number] | <Alt>number |
-| Go to last Tab | <Alt>0 |
+| New File | `<Ctrl>N` |
+| Open File | `<Ctrl>O` |
+| Save File | `<Ctrl>S` |
+| Save As | `<Ctrl><Shift>S` |
+| Save All | `<Ctrl><Shift>L` |
+| Search | `<Ctrl>F` |
+| Find Next | `<Ctrl>G` |
+| Find Previous | `<Ctrl><Shift>G` |
+| Close Tab | `<Ctrl>W` |
+| Close Window | `<Ctrl>Q` |
+| Next Tab | `<Alt>Right` |
+| Previous Tab | `<Alt>Left` |
+| Go To Tab[number] | `<Alt>number` |
+| Go to last Tab | `<Alt>0` |
 
