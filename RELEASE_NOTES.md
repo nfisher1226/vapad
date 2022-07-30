@@ -1,9 +1,9 @@
 Contents
 ========
-- [Unreleased](#unreleased)
+- [0.2.0](#0.2.0)
 - [0.1.0](#0.1.0)
 
-## Unreleased
+## 0.2.0
 * Make program name, version, and authors constants in application.vala
 * When opening files the `FileChooserDialog` will open in the folder containing
   the current file
