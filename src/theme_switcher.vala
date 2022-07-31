@@ -17,40 +17,24 @@
  */
 
 namespace Vapad {
-    public class ThemeSwitcher : Gtk.Box {
-        private Gtk.ToggleButton system_button;
-        private Gtk.ToggleButton light_button;
-        private Gtk.ToggleButton dark_button;
+    [GtkTemplate (ui = "/org/hitchhiker_linux/vapad/theme_switcher.ui")]
+    public class ThemeSwitcher : Gtk.Widget {
+        [GtkChild]
+        private unowned Gtk.ToggleButton system_button;
+        [GtkChild]
+        private unowned Gtk.ToggleButton light_button;
+        [GtkChild]
+        private unowned Gtk.ToggleButton dark_button;
         public signal void use_system_theme ();
         public signal void use_light_theme ();
         public signal void use_dark_theme ();
 
         public ThemeSwitcher () {
-            Object (
-                orientation: Gtk.Orientation.HORIZONTAL,
-                margin_top: 10,
-                margin_bottom: 10,
-                margin_start: 10,
-                margin_end: 10
-            );
+            Object ();
         }
 
         construct {
-            this.system_button = new Gtk.ToggleButton ();
-            this.light_button = new Gtk.ToggleButton ();
-            this.dark_button = new Gtk.ToggleButton ();
-            Gtk.ToggleButton[] buttons = {this.system_button, this.light_button, this.dark_button};
-            foreach (Gtk.ToggleButton button in buttons) {
-                button.set_hexpand (true);
-                button.set_halign (Gtk.Align.CENTER);
-                this.append (button);
-            }
-            this.system_button.set_tooltip_text ("Follow system style");
-            this.light_button.set_tooltip_text ("Light style");
-            this.dark_button.set_tooltip_text ("Dark style");
-            this.light_button.set_group (this.system_button);
-            this.dark_button.set_group (this.system_button);
-            this.system_button.set_active (true);
+            this.set_layout_manager (new Gtk.BinLayout ());
             this.system_button.toggled.connect (emit);
             this.light_button.toggled.connect (emit);
             this.dark_button.toggled.connect (emit);

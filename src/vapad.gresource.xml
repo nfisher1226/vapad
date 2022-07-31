@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="/org/hitchhiker_linux/vapad">
     <file>window.ui</file>
+    <file>theme_switcher.ui</file>
     <file>search_dialog.ui</file>
     <file>gtk/help-overlay.ui</file>
   </gresource>
