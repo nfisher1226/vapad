@@ -68,6 +68,9 @@ namespace Vapad {
                 Vapad.Window w = (Vapad.Window)win;
                 w.new_page ();
             }
+            var provider = new Gtk.CssProvider ();
+            provider.load_from_resource ("/org/hitchhiker_linux/vapad/style.css");
+            Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
             win.present ();
         }
 

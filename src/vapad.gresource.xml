@@ -4,6 +4,7 @@
     <file>window.ui</file>
     <file>theme_switcher.ui</file>
     <file>search_dialog.ui</file>
+    <file>style.css</file>
     <file>gtk/help-overlay.ui</file>
   </gresource>
 </gresources>

@@ -20,11 +20,11 @@ namespace Vapad {
     [GtkTemplate (ui = "/org/hitchhiker_linux/vapad/theme_switcher.ui")]
     public class ThemeSwitcher : Gtk.Widget {
         [GtkChild]
-        private unowned Gtk.ToggleButton system_button;
+        private unowned Gtk.CheckButton system_button;
         [GtkChild]
-        private unowned Gtk.ToggleButton light_button;
+        private unowned Gtk.CheckButton light_button;
         [GtkChild]
-        private unowned Gtk.ToggleButton dark_button;
+        private unowned Gtk.CheckButton dark_button;
         public signal void use_system_theme ();
         public signal void use_light_theme ();
         public signal void use_dark_theme ();
