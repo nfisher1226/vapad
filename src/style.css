@@ -1,4 +1,4 @@
-window.vapad-window checkbutton.theme-button {
+window.vapad-window .themeswitcher checkbutton.theme-button {
   padding: 0;
   min-height: 44px;
   min-width: 44px;
@@ -8,23 +8,23 @@ window.vapad-window checkbutton.theme-button {
   box-shadow: inset 0 0 0 1px @borders;
 }
 
-window.vapad-window checkbutton.theme-button:checked {
+window.vapad-window .themeswitcher checkbutton.theme-button:checked {
   box-shadow: inset 0 0 0 2px @theme_selected_bg_color;
 }
 
-window.vapad-window checkbutton.theme-system {
+window.vapad-window .themeswitcher checkbutton.theme-system {
   background-image: linear-gradient(to bottom right, #fff 49.99%, #202020 50.01%);
 }
 
-window.vapad-window checkbutton.theme-light {
+window.vapad-window .themeswitcher checkbutton.theme-light {
   background-color: #fff;
 }
 
-window.vapad-window checkbutton.theme-dark {
+window.vapad-window .themeswitcher checkbutton.theme-dark {
   background-color: #202020;
 }
 
-window.vapad-window checkbutton.theme-button radio {
+window.vapad-window .themeswitcher checkbutton.theme-button radio {
   -gtk-icon-source: none;
   border: none;
   background: none;
@@ -35,7 +35,7 @@ window.vapad-window checkbutton.theme-button radio {
   padding: 2px;
 }
 
-window.vapad-window checkbutton.theme-button radio:checked {
+window.vapad-window .themeswitcher checkbutton.theme-button radio:checked {
   -gtk-icon-source: -gtk-icontheme("object-select-symbolic");
   background-color: @theme_selected_bg_color;
   color: @theme_selected_fg_color;
