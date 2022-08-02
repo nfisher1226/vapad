@@ -125,6 +125,10 @@ namespace Vapad {
                 this.send_saved_toast (name);
             });
             this.notebook.set_current_page (this.notebook.page_num (tab));
+            var manager = new GtkSource.StyleSchemeManager ();
+            var scheme = manager.get_scheme (this.editor_theme);
+            var buffer = (GtkSource.Buffer)tab.sourceview.get_buffer ();
+            buffer.set_style_scheme (scheme);
         }
 
         private void close_page () {
@@ -156,6 +160,10 @@ namespace Vapad {
                         var tab = (Vapad.Tab)this.notebook.get_nth_page (n);
                         if (tab.file != null) {
                             tab = new Vapad.Tab ();
+                            var manager = new GtkSource.StyleSchemeManager ();
+                            var scheme = manager.get_scheme (this.editor_theme);
+                            var buffer = (GtkSource.Buffer)tab.sourceview.get_buffer ();
+                            buffer.set_style_scheme (scheme);
                             this.notebook.append_page(tab, tab.lbox);
                             tab.close_button.clicked.connect ( () => {
                                 this.notebook.remove_page (this.notebook.page_num (tab));
