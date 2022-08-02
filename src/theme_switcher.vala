@@ -1,4 +1,4 @@
-/* window.vala
+/* theme_switcher.vala
  *
  * Copyright 2022 Nathan Fisher
  *

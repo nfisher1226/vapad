@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/hitchhiker_linux/vapad">
-    <file>window.ui</file>
-    <file>theme_switcher.ui</file>
-    <file>search_dialog.ui</file>
-    <file>style.css</file>
     <file>gtk/help-overlay.ui</file>
+    <file>search_dialog.ui</file>
+    <file>theme_switcher.ui</file>
+    <file>window.ui</file>
+    <file>style.css</file>
   </gresource>
 </gresources>

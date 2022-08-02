@@ -160,9 +160,15 @@
     </section>
     <section>
       <item>
-        <attribute name="label" translatable="yes">_Preferences</attribute>
-        <attribute name="action">app.preferences</attribute>
+        <attribute name="label" translatable="yes">Vi Mode</attribute>
+        <attribute name="action">win.vimode</attribute>
       </item>
+      <item>
+        <attribute name="label" translatable="yes">Editor Font</attribute>
+        <attribute name="action">win.set_font</attribute>
+      </item>
+    </section>
+    <section>
       <item>
         <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>

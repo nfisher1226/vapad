@@ -34,27 +34,32 @@ namespace Vapad {
         }
 
         private void create_widgets () {
-            this.lbox = new Box (Orientation.HORIZONTAL, 5);
-            this.lbox.set_hexpand (true);
-            this.lbox.set_can_focus (false);
-            this.label = new Label ("New file");
-            this.label.set_hexpand (true);
+            this.lbox = new Box (Orientation.HORIZONTAL, 5) {
+                hexpand = true,
+                can_focus = false,
+            };
+            this.label = new Label ("New file") {
+                hexpand = true,
+            };
             lbox.append (this.label);
-            this.close_button = new Button ();
-            this.close_button.set_has_frame (false);
+            this.close_button = new Button () {
+                has_frame = false,
+            };
             lbox.append (this.close_button);
             Image image = new Image.from_icon_name ("window-close-symbolic");
             this.close_button.set_child (image);
             ScrolledWindow scroller = new ScrolledWindow ();
             this.append (scroller);
-            this.sourceview = new View();
-            this.sourceview.set_show_line_numbers (true);
-            this.sourceview.set_auto_indent (true);
-            this.sourceview.set_indent_on_tab (true);
-            this.sourceview.set_right_margin_position (80);
-            this.sourceview.set_show_right_margin (true);
-            this.sourceview.set_smart_home_end (SmartHomeEndType.AFTER);
-            this.sourceview.set_smart_backspace (true);
+            this.sourceview = new View() {
+                show_line_numbers = true,
+                auto_indent = true,
+                indent_on_tab = true,
+                right_margin_position = 80,
+                show_right_margin = true,
+                smart_home_end = SmartHomeEndType.AFTER,
+                smart_backspace = true,
+                highlight_current_line = true,
+            };
             scroller.set_child (this.sourceview);
             scroller.set_hexpand (true);
         }

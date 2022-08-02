@@ -37,7 +37,6 @@ namespace Vapad {
         public GtkSource.SearchContext? search_context;
         public Gtk.EntryCompletion search_completion;
         public bool vimode { get; set; }
-        public string editor_theme { get; set; }
 
         public Window (Adw.Application app) {
             Object (application: app);
@@ -70,16 +69,9 @@ namespace Vapad {
                 { "last_tab", this.last_tab },
                 { "next_tab", this.next_tab },
                 { "previous_tab", this.previous_tab },
-                { "set_font", this.set_font },
             };
             this.add_action_entries (actions, this);
             var vimode = new PropertyAction ("vimode", this, "vimode");
-            vimode.notify.connect (this.set_vi_mode);
-            this.add_action (vimode);
-            this.editor_theme = "Adwaita";
-            var set_editor_theme = new PropertyAction ("set_editor_theme", this, "editor_theme");
-            set_editor_theme.notify.connect (this.set_theme);
-            this.add_action (set_editor_theme);
             var pop = (Gtk.PopoverMenu)this.menu_button.get_popover ();
             this.theme_switcher = new Vapad.ThemeSwitcher ();
             pop.add_child (this.theme_switcher, "theme");
@@ -97,18 +89,6 @@ namespace Vapad {
             this.theme_switcher.use_system_theme.connect (set_system_theme);
             this.theme_switcher.use_light_theme.connect (set_light_theme);
             this.theme_switcher.use_dark_theme.connect (set_dark_theme);
-            this.init_style_menu (pop);
-        }
-
-        private void init_style_menu (Gtk.PopoverMenu pop) {
-            GLib.Menu menu = new GLib.Menu ();
-            var manager = new GtkSource.StyleSchemeManager ();
-            var ids = manager.get_scheme_ids ();
-            foreach (string id in ids) {
-                menu.append (id, @"win.set_editor_theme::$id");
-            }
-            var model = (GLib.Menu)pop.get_menu_model ();
-            model.insert_submenu (3, "Editor Theme", menu);
         }
 
         public void new_page () {
@@ -403,29 +383,6 @@ namespace Vapad {
 
         private void set_dark_theme () {
             Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.FORCE_DARK);
-        }
-
-        private void set_vi_mode () {
-            print ("Placeholder\n");
-            if (this.vimode) {
-                print ("Vi mode on\n");
-            } else {
-                print ("Vi mode off\n");
-            }
-        }
-
-        private void set_theme () {
-            var manager = new GtkSource.StyleSchemeManager ();
-            var scheme = manager.get_scheme (this.editor_theme);
-            for (int i = 0; i < this.notebook.get_n_pages (); i++) {
-                var tab = (Vapad.Tab)this.notebook.get_nth_page (i);
-                var buffer = (GtkSource.Buffer)tab.sourceview.get_buffer ();
-                buffer.set_style_scheme (scheme);
-            }
-        }
-
-        private void set_font () {
-            message ("Not yet implemented");
         }
     }
 }
