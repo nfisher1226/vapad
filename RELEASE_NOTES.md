@@ -5,7 +5,8 @@ Contents
 - [0.1.0](#0.1.0)
 
 ## Unreleased
-- Add theme switcher to main menu (styling to be added later)
+* Add theme switcher to main menu
+* Add submenu for highlighting schemes
 
 ## 0.2.0
 * Make program name, version, and authors constants in application.vala

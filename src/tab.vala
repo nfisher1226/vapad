@@ -121,8 +121,5 @@ namespace Vapad {
                 this.label.set_text (name);
             }
         }
-        
-        public void search (SearchContext context) {
-        }
     }
 }
