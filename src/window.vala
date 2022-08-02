@@ -422,6 +422,12 @@ namespace Vapad {
         }
 
         private void set_vi_mode () {
+            var app = this.get_application ();
+            if (this.vimode) {
+                app.set_accels_for_action ("win.search", {});
+            } else {
+                app.set_accels_for_action ("win.search", {"<primary>f"});
+            }
             for (int i = 0; i < this.notebook.get_n_pages (); i++) {
                 var tab = (Vapad.Tab)this.notebook.get_nth_page (i);
                 if (this.vimode) {

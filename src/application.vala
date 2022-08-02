@@ -38,7 +38,7 @@ namespace Vapad {
             this.set_accels_for_action ("win.find_next", {"<primary>g"});
             this.set_accels_for_action ("win.replace_text", {"<primary>h"});
             this.set_accels_for_action ("win.find_previous", {"<primary><shift>g"});
-            //this.set_accels_for_action ("win.hide_search", {"Escape"});
+            this.set_accels_for_action ("win.hide_search", {"<shift>Escape"});
             this.set_accels_for_action ("win.new_file", {"<primary>n"});
             this.set_accels_for_action ("win.close_file", {"<primary>w"});
             this.set_accels_for_action ("win.open_file", {"<primary>o"});

@@ -27,7 +27,7 @@ namespace Vapad {
         public View sourceview;
         public GLib.File? file;
         public GtkSource.File? sourcefile;
-        private Gtk.EventController controller;
+        private Gtk.EventController? controller;
         private Gtk.Box cmd_bar;
         private Gtk.Label cmd_bar_txt;
         private Gtk.Label cmd_txt;
@@ -170,6 +170,7 @@ namespace Vapad {
         public void unset_vi_mode () {
             this.sourceview.remove_controller (this.controller);
             this.cmd_bar.set_visible (false);
+            this.controller = null;
         }
     }
 }

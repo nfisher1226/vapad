@@ -61,6 +61,7 @@ placeholders).
 | Search | `<Ctrl>F` |
 | Find Next | `<Ctrl>G` |
 | Find Previous | `<Ctrl><Shift>G` |
+| Hide Search | `<Shift>Escape` |
 | Close Tab | `<Ctrl>W` |
 | Close Window | `<Ctrl>Q` |
 | Next Tab | `<Alt>Right` |
