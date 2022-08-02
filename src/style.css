@@ -40,3 +40,8 @@ window.vapad-window .themeswitcher checkbutton.theme-button radio:checked {
   background-color: @theme_selected_bg_color;
   color: @theme_selected_fg_color;
 }
+
+window.vapad-window box.vi-cmd-bar {
+  color: #00fe00;
+  background-color: #202020;
+}

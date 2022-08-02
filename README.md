@@ -31,6 +31,7 @@ badass. Vapad is also a nice amalgam of Vala and Notepad, so it seemed a good fi
 - Advanced search including replace all in document/session/selection
 - Simple and lightweight interface with no preferences window
 - Standard keyboard shortcuts for all major interactions
+- Vi emulation mode (requires Ibus)
 
 ## Building
 Vapad requires Gtk+-4.0 or greater and GtkSourceView 5. You will also need to

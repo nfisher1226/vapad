@@ -27,9 +27,17 @@ namespace Vapad {
         public View sourceview;
         public GLib.File? file;
         public GtkSource.File? sourcefile;
+        private Gtk.EventController controller;
+        private Gtk.Box cmd_bar;
+        private Gtk.Label cmd_bar_txt;
+        private Gtk.Label cmd_txt;
         public signal void file_saved (string name);
 
         public Tab () {
+            Object (
+                orientation: Gtk.Orientation.VERTICAL,
+                vexpand: true
+            );
             create_widgets ();
         }
 
@@ -48,7 +56,10 @@ namespace Vapad {
             lbox.append (this.close_button);
             Image image = new Image.from_icon_name ("window-close-symbolic");
             this.close_button.set_child (image);
-            ScrolledWindow scroller = new ScrolledWindow ();
+            ScrolledWindow scroller = new ScrolledWindow () {
+                hexpand = true,
+                vexpand = true,
+            };
             this.append (scroller);
             this.sourceview = new View() {
                 show_line_numbers = true,
@@ -61,7 +72,23 @@ namespace Vapad {
                 highlight_current_line = true,
             };
             scroller.set_child (this.sourceview);
-            scroller.set_hexpand (true);
+            this.cmd_bar = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 5) {
+                visible = false,
+                hexpand = true,
+                vexpand = false,
+                css_classes = { "vi-cmd-bar" },
+            };
+            this.cmd_bar_txt = new Gtk.Label ("") {
+                margin_start = 10,
+                margin_end = 10,
+            };
+            this.cmd_txt = new Gtk.Label ("") {
+                margin_start = 10,
+                margin_end = 10,
+            };
+            cmd_bar.append (cmd_bar_txt);
+            cmd_bar.append (cmd_txt);
+            this.append (cmd_bar);
         }
 
         public void load_file (GLib.File f) {
@@ -120,6 +147,29 @@ namespace Vapad {
             if (name != null) {
                 this.label.set_text (name);
             }
+        }
+
+        public void set_vi_mode () {
+            var ctx = new GtkSource.VimIMContext ();
+            var key = new Gtk.EventControllerKey ();
+            key.set_im_context (ctx);
+            key.set_propagation_phase (Gtk.PropagationPhase.CAPTURE);
+            this.sourceview.add_controller (key);
+            ctx.set_client_widget (this.sourceview);
+            this.controller = key;
+            this.cmd_bar.show ();
+            ctx.bind_property ("command-bar-text", this.cmd_bar_txt, "label", 0);
+            ctx.bind_property ("command-text", this.cmd_txt, "label", 0);
+            ctx.write.connect (save_file);
+            ctx.edit.connect ( (ctx,view,path) => {
+                var win = (Vapad.Window)this.get_root ();
+                win.open_named (path);
+            });
+        }
+
+        public void unset_vi_mode () {
+            this.sourceview.remove_controller (this.controller);
+            this.cmd_bar.set_visible (false);
         }
     }
 }

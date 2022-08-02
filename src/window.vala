@@ -115,20 +115,28 @@ namespace Vapad {
 
         public void new_page () {
             Tab tab = new Vapad.Tab ();
-            this.notebook.append_page(tab, tab.lbox);
-            tab.close_button.clicked.connect ( () => {
-                this.notebook.remove_page (this.notebook.page_num (tab));
-            });
-            tab.file_saved.connect ( (name) => {
-                var page = this.notebook.get_current_page ();
-                this.update_title (page);
-                this.send_saved_toast (name);
-            });
-            this.notebook.set_current_page (this.notebook.page_num (tab));
+            this.setup_tab (tab);
+        }
+
+        private void setup_tab (Vapad.Tab tab) {
             var manager = new GtkSource.StyleSchemeManager ();
             var scheme = manager.get_scheme (this.editor_theme);
             var buffer = (GtkSource.Buffer)tab.sourceview.get_buffer ();
             buffer.set_style_scheme (scheme);
+            this.notebook.append_page(tab, tab.lbox);
+            tab.close_button.clicked.connect ( () => {
+                this.notebook.remove_page (this.notebook.page_num (tab));
+            });
+            tab.file_saved.connect ( () => {
+                this.update_title (this.notebook.get_current_page ());
+                this.send_saved_toast (name);
+            });
+            if (this.vimode) {
+                tab.set_vi_mode ();
+            }
+            var n = this.notebook.page_num (tab);
+            this.notebook.set_current_page (n);
+            this.update_title (n);
         }
 
         private void close_page () {
@@ -160,27 +168,21 @@ namespace Vapad {
                         var tab = (Vapad.Tab)this.notebook.get_nth_page (n);
                         if (tab.file != null) {
                             tab = new Vapad.Tab ();
-                            var manager = new GtkSource.StyleSchemeManager ();
-                            var scheme = manager.get_scheme (this.editor_theme);
-                            var buffer = (GtkSource.Buffer)tab.sourceview.get_buffer ();
-                            buffer.set_style_scheme (scheme);
-                            this.notebook.append_page(tab, tab.lbox);
-                            tab.close_button.clicked.connect ( () => {
-                                this.notebook.remove_page (this.notebook.page_num (tab));
-                            });
-                            tab.file_saved.connect ( () => {
-                                this.update_title (this.notebook.get_current_page ());
-                            });
+                            this.setup_tab (tab);
                         }
                         tab.load_file (file);
-                        n = this.notebook.page_num (tab);
-                        this.notebook.set_current_page (n);
-                        this.update_title (n);
                     }
                 }
                 dlg.close ();
             });
             chooser.show ();
+        }
+
+        public void open_named (string path) {
+            var file = GLib.File.new_for_path (path);
+            var tab = new Vapad.Tab ();
+            tab.load_file (file);
+            this.setup_tab (tab);
         }
 
         private void check_tab_visibility () {
@@ -420,11 +422,13 @@ namespace Vapad {
         }
 
         private void set_vi_mode () {
-            print ("Placeholder\n");
-            if (this.vimode) {
-                print ("Vi mode on\n");
-            } else {
-                print ("Vi mode off\n");
+            for (int i = 0; i < this.notebook.get_n_pages (); i++) {
+                var tab = (Vapad.Tab)this.notebook.get_nth_page (i);
+                if (this.vimode) {
+                    tab.set_vi_mode ();
+                } else {
+                    tab.unset_vi_mode ();
+                }
             }
         }
 
