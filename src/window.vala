@@ -87,10 +87,12 @@ namespace Vapad {
             this.notebook.page_added.connect (check_tab_visibility);
             this.notebook.switch_page.connect ( (nb, num) => update_title (num));
             this.search_entry.activate.connect (new_search);
-            this.search_completion = new Gtk.EntryCompletion ();
-            this.search_completion.set_popup_completion (true);
-            this.search_completion.set_text_column (0);
-            this.search_completion.set_minimum_key_length (1);
+
+            this.search_completion = new Gtk.EntryCompletion () {
+                popup_completion = true,
+                text_column = 0,
+                minimum_key_length = 1,
+            };
             var ls = new Gtk.ListStore (1, GLib.Type.STRING);
             this.search_completion.set_model (ls);
             this.search_entry.set_completion (this.search_completion);
@@ -301,11 +303,12 @@ namespace Vapad {
         }
 
         private void new_search () {
-            var settings = new GtkSource.SearchSettings ();
-            settings.set_wrap_around (true);
-            settings.set_case_sensitive (this.match_case.get_active ());
-            settings.set_at_word_boundaries (this.whole_words.get_active ());
-            settings.set_search_text (this.search_entry.get_text ());
+            var settings = new GtkSource.SearchSettings () {
+                wrap_around = true,
+                case_sensitive = this.match_case.get_active (),
+                at_word_boundaries = this.whole_words.get_active (),
+                search_text = this.search_entry.get_text (),
+            };
             var list = (Gtk.ListStore)this.search_completion.get_model ();
             Gtk.TreeIter iter;
             list.append (out iter);
@@ -395,14 +398,17 @@ namespace Vapad {
 
         private void set_system_theme () {
             Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.DEFAULT);
+            this.set_toast ("Using system application style");
         }
 
         private void set_light_theme () {
             Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.FORCE_LIGHT);
+            this.set_toast ("Using light application style");
         }
 
         private void set_dark_theme () {
             Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.FORCE_DARK);
+            this.set_toast ("Using dark application style");
         }
 
         private void set_vi_mode () {
@@ -422,6 +428,7 @@ namespace Vapad {
                 var buffer = (GtkSource.Buffer)tab.sourceview.get_buffer ();
                 buffer.set_style_scheme (scheme);
             }
+            this.set_toast (@"Set editor style $(this.editor_theme)");
         }
 
         private void set_font () {

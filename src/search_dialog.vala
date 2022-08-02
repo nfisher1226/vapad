@@ -67,20 +67,22 @@ namespace Vapad {
         }
 
         private GtkSource.SearchSettings get_search_settings () {
-            var settings = new GtkSource.SearchSettings ();
-            settings.set_regex_enabled (this.use_regex.get_active ());
-            settings.set_case_sensitive (this.case_sensitive.get_active ());
-            settings.set_at_word_boundaries (this.whole_words.get_active ());
-            settings.set_wrap_around (this.wrap.get_active ());
-            settings.set_search_text (this.search_entry.get_text ());
+            var settings = new GtkSource.SearchSettings () {
+                regex_enabled = this.use_regex.get_active (),
+                case_sensitive = this.case_sensitive.get_active (),
+                at_word_boundaries = this.whole_words.get_active (),
+                wrap_around = this.wrap.get_active (),
+                search_text = this.search_entry.get_text (),
+            };
             return settings;
         }
 
         private GtkSource.SearchContext get_search_context (Vapad.Tab tab) {
             var settings = this.get_search_settings ();
             var buffer = (GtkSource.Buffer)tab.sourceview.get_buffer ();
-            var search_context = new GtkSource.SearchContext (buffer,  settings);
-            search_context.set_highlight (true);
+            var search_context = new GtkSource.SearchContext (buffer,  settings) {
+                highlight = true,
+            };
             return search_context;
         }
 
