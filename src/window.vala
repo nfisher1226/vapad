@@ -38,7 +38,7 @@ namespace Vapad {
         public Gtk.EntryCompletion search_completion;
         public bool vimode { get; set; }
         public string editor_theme { get; set; }
-        public string? font;
+        public string? editor_font { get; set; }
 
         public Window (Adw.Application app) {
             Object (application: app);
@@ -135,8 +135,9 @@ namespace Vapad {
             if (this.vimode) {
                 tab.set_vi_mode ();
             }
-            if (this.font != null) {
-                tab.set_css_font (@"textview { font: $(this.font); }");
+            if (this.editor_font != null) {
+                var font = Pango.FontDescription.from_string (this.editor_font);
+                tab.set_css_font (this.get_font_css (font));
             }
             var n = this.notebook.page_num (tab);
             this.notebook.set_current_page (n);
@@ -453,70 +454,75 @@ namespace Vapad {
             this.set_toast (@"Set editor style $(this.editor_theme)");
         }
 
+        private string get_font_css (Pango.FontDescription font) {
+            var family = font.get_family ();
+            var style = "normal";
+            switch (font.get_style ()) {
+                case Pango.Style.ITALIC:
+                    style = "Italic";
+                    break;
+                case Pango.Style.OBLIQUE:
+                    style = "Oblique";
+                    break;
+                default:
+                    style = "Normal";
+                    break;
+            }
+            var size = font.get_size () / 1024;
+            int weight = 400;
+            switch (font.get_weight ()) {
+                case Pango.Weight.BOLD:
+                    weight = 700;
+                    break;
+                case Pango.Weight.THIN:
+                    weight = 100;
+                    break;
+                case Pango.Weight.BOOK:
+                    weight = 400;
+                    break;
+                case Pango.Weight.HEAVY:
+                    weight = 900;
+                    break;
+                case Pango.Weight.LIGHT:
+                    weight = 300;
+                    break;
+                case Pango.Weight.MEDIUM:
+                    weight = 500;
+                    break;
+                case Pango.Weight.SEMIBOLD:
+                    weight = 600;
+                    break;
+                case Pango.Weight.SEMILIGHT:
+                    weight = 350;
+                    break;
+                case Pango.Weight.ULTRABOLD:
+                    weight = 800;
+                    break;
+                case Pango.Weight.ULTRALIGHT:
+                    weight = 100;
+                    break;
+                case Pango.Weight.ULTRAHEAVY:
+                    weight = 950;
+                    break;
+                default:
+                    weight = 400;
+                    break;
+            }
+            var css = @"textview.view { font-family: $family; font-size: $(size)pt; font-weight: $weight; font-style: $style; }";
+            return css;
+        }
+
         private void set_font () {
             var dlg = new Gtk.FontChooserDialog ("Select a font", this);
-            if (this.font!= null) {
-                dlg.set_font (font);
+            if (this.editor_font!= null) {
+                dlg.set_font (editor_font);
             }
             dlg.response.connect ( (dlg,res) => {
                 if (res == Gtk.ResponseType.OK) {
                     var chooser = (Gtk.FontChooser)dlg;
                     var font = chooser.get_font_desc ();
-                    this.font = font.to_string ();
-                    var family = font.get_family ();
-                    var style = "normal";
-                    switch (font.get_style ()) {
-                        case Pango.Style.ITALIC:
-                            style = "Italic";
-                            break;
-                        case Pango.Style.OBLIQUE:
-                            style = "Oblique";
-                            break;
-                        default:
-                            style = "Normal";
-                            break;
-                    }
-                    var size = font.get_size () / 1024;
-                    int weight = 400;
-                    switch (font.get_weight ()) {
-                        case Pango.Weight.BOLD:
-                            weight = 700;
-                            break;
-                        case Pango.Weight.THIN:
-                            weight = 100;
-                            break;
-                        case Pango.Weight.BOOK:
-                            weight = 400;
-                            break;
-                        case Pango.Weight.HEAVY:
-                            weight = 900;
-                            break;
-                        case Pango.Weight.LIGHT:
-                            weight = 300;
-                            break;
-                        case Pango.Weight.MEDIUM:
-                            weight = 500;
-                            break;
-                        case Pango.Weight.SEMIBOLD:
-                            weight = 600;
-                            break;
-                        case Pango.Weight.SEMILIGHT:
-                            weight = 350;
-                            break;
-                        case Pango.Weight.ULTRABOLD:
-                            weight = 800;
-                            break;
-                        case Pango.Weight.ULTRALIGHT:
-                            weight = 100;
-                            break;
-                        case Pango.Weight.ULTRAHEAVY:
-                            weight = 950;
-                            break;
-                        default:
-                            weight = 400;
-                            break;
-                    }
-                    var css = @"textview.view { font-family: $family; font-size: $(size)pt; font-weight: $weight; font-style: $style; }";
+                    this.editor_font = font.to_string ();
+                    var css = this.get_font_css (font);
                     for (int i = 0; i < this.notebook.get_n_pages (); i++) {
                         var tab = (Vapad.Tab)this.notebook.get_nth_page (i);
                         tab.set_css_font(css);
