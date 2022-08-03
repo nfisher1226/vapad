@@ -172,5 +172,12 @@ namespace Vapad {
             this.cmd_bar.set_visible (false);
             this.controller = null;
         }
+
+        public void set_css_font (string css) {
+            var provider = new Gtk.CssProvider ();
+            provider.load_from_data (css.data);
+            var ctx = this.sourceview.get_style_context ();
+            ctx.add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        }
     }
 }
