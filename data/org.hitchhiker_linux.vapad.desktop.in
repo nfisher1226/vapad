@@ -1,8 +1,9 @@
 [Desktop Entry]
-Name=vapad
+Name=Vapad
 Exec=vapad
 Icon=org.hitchhiker_linux.vapad
 Terminal=false
 Type=Application
-Categories=GTK;
+Categories=GTK;Utility;TextEditor;
 StartupNotify=true
+MimeType=text/plain;

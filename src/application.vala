@@ -90,10 +90,16 @@ namespace Vapad {
         }
 
         private void on_about_action () {
-            Gtk.show_about_dialog (this.active_window,
-                                   "program-name", PROGNAME,
-                                   "authors", AUTHORS,
-                                   "version", VERSION);
+            Gtk.show_about_dialog (
+                this.active_window,
+                "program-name", PROGNAME,
+                "authors", AUTHORS,
+                "version", VERSION,
+                "logo-icon-name", "org.hitchhiker_linux.vapad",
+                "comments", "A simple text editor for Linux",
+                "license-type", Gtk.License.GPL_3_0,
+                "copyright", "Copyright © 2022 by Nathan Fisher"
+            );
         }
 
         private void on_preferences_action () {
