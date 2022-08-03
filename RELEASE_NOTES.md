@@ -8,6 +8,7 @@ Contents
 * Add theme switcher to main menu
 * Add submenu for highlighting schemes
 * Vi emulation mode
+* Save settings via gschema
 
 ## 0.2.0
 * Make program name, version, and authors constants in application.vala

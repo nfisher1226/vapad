@@ -44,11 +44,9 @@ terminal and navigate to the source directory before issuing these commands.
 ```Sh
 meson build
 ninja -C build
+# To install under /usr/local/bin
+ninja -C build install
 ```
-The result should be a binary at build/src/vapad. This binary can be run from
-there or placed into your $PATH. There are currently no other files which need
-to be installed (the icons and .desktop file in the source distribution are
-placeholders).
 
 ## Keyboard Shortcuts
 | Action | Shortcut |

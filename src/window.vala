@@ -451,7 +451,7 @@ namespace Vapad {
                 var buffer = (GtkSource.Buffer)tab.sourceview.get_buffer ();
                 buffer.set_style_scheme (scheme);
             }
-            this.set_toast (@"Set editor style $(this.editor_theme)");
+            //this.set_toast (@"Set editor style $(this.editor_theme)");
         }
 
         private string get_font_css (Pango.FontDescription font) {

@@ -64,20 +64,16 @@ namespace Vapad {
             base.activate ();
             var win = this.active_window;
             if (win == null) {
-                win = new Vapad.Window (this);
-                Vapad.Window w = (Vapad.Window)win;
-                w.new_page ();
+                win = this.create_window ();
+                win.present ();
             }
-            var provider = new Gtk.CssProvider ();
-            provider.load_from_resource ("/org/hitchhiker_linux/vapad/style.css");
-            Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
-            win.present ();
+            ((Vapad.Window)win).new_page ();
         }
 
         private void open_files(File[] files) {
             var win = (Vapad.Window)this.active_window;
             if (win == null) {
-                var w = new Vapad.Window (this);
+                var w = this.create_window ();
                 win = (Vapad.Window)w;
                 win.present ();
             }
@@ -87,6 +83,22 @@ namespace Vapad {
                 }
                 win.current_tab ().load_file (file);
             }
+        }
+
+        private Vapad.Window create_window () {
+            var win = new Vapad.Window (this);
+
+            // Css settings
+            var provider = new Gtk.CssProvider ();
+            provider.load_from_resource ("/org/hitchhiker_linux/vapad/style.css");
+            Gtk.StyleContext.add_provider_for_display (Gdk.Display.get_default (), provider, Gtk.STYLE_PROVIDER_PRIORITY_USER);
+
+            // GLib settings
+            var settings = new GLib.Settings ("org.hitchhiker_linux.vapad");
+            settings.bind ("vimode", win, "vimode", GLib.SettingsBindFlags.DEFAULT);
+            settings.bind ("syntax", win, "editor_theme", GLib.SettingsBindFlags.DEFAULT);
+            settings.bind ("font", win, "editor_font", GLib.SettingsBindFlags.DEFAULT);
+            return win;
         }
 
         private void on_about_action () {

@@ -168,7 +168,9 @@ namespace Vapad {
         }
 
         public void unset_vi_mode () {
-            this.sourceview.remove_controller (this.controller);
+            if (this.controller != null) {
+                this.sourceview.remove_controller (this.controller);
+            }
             this.cmd_bar.set_visible (false);
             this.controller = null;
         }

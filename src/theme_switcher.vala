@@ -17,6 +17,12 @@
  */
 
 namespace Vapad {
+    public enum AppTheme {
+        SYSTEM = 0,
+        LIGHT = 1,
+        DARK = 2,
+    }
+
     [GtkTemplate (ui = "/org/hitchhiker_linux/vapad/theme_switcher.ui")]
     public class ThemeSwitcher : Gtk.Widget {
         [GtkChild]
@@ -28,6 +34,7 @@ namespace Vapad {
         public signal void use_system_theme ();
         public signal void use_light_theme ();
         public signal void use_dark_theme ();
+        public Vapad.AppTheme app_theme;
 
         public ThemeSwitcher () {
             Object ();
