@@ -214,13 +214,14 @@ namespace Vapad {
             var tab = (Vapad.Tab)this.notebook.get_nth_page ((int)num);
             if (tab.file != null) {
                 string path = tab.file.get_path ();
-                this.window_title.set_subtitle (path);
-                this.window_title.set_title (@"$PROGNAME-$VERSION");
-                //this.set_title (@"$path ~ $PROGNAME-$VERSION");
+                string home = GLib.Environment.get_home_dir ();
+                var fname = GLib.Path.get_basename (path);
+                string title = path.replace (home, "~").replace (fname, "");
+                this.window_title.set_subtitle (title);
+                this.window_title.set_title (@"$PROGNAME-$VERSION ~ $fname");
             } else {
                 this.window_title.set_subtitle ("New file");
                 this.window_title.set_title (@"$PROGNAME-$VERSION");
-                //this.set_title (@"New file ~ $PROGNAME-$VERSION");
             }
         }
 
