@@ -1,15 +1,19 @@
 Contents
 ========
 - [Unreleased](#unreleased)
+- [0.3.0](#0.3.0)
 - [0.2.0](#0.2.0)
 - [0.1.0](#0.1.0)
 
 ## Unreleased
+
+## 0.3.0
 * Add theme switcher to main menu
 * Add submenu for highlighting schemes
 * Vi emulation mode
 * Save settings via gschema
 * Add context menu to update the syntax language if guessed incorrectly
+* Use AdwWindowTitle for window title, allows setting title and subtitle
 
 ## 0.2.0
 * Make program name, version, and authors constants in application.vala
