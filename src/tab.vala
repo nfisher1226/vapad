@@ -46,7 +46,7 @@ namespace Vapad {
                 hexpand = true,
                 can_focus = false,
             };
-            this.label = new Label ("New file") {
+            this.label = new Label (_("New file")) {
                 hexpand = true,
             };
             lbox.append (this.label);
@@ -133,12 +133,12 @@ namespace Vapad {
 
         public void save_as () {
             FileChooserDialog chooser = new FileChooserDialog (
-                "Save file as...",
+                _("Save file as..."),
                 (Window)this.get_root (),
                 FileChooserAction.SAVE
             );
-            chooser.add_button ("Accept", Gtk.ResponseType.ACCEPT);
-            chooser.add_button ("Cancel", Gtk.ResponseType.CANCEL);
+            chooser.add_button (_("Accept"), Gtk.ResponseType.ACCEPT);
+            chooser.add_button (_("Cancel"), Gtk.ResponseType.CANCEL);
             chooser.response.connect ( (dlg, res) => {
                 if (res == Gtk.ResponseType.ACCEPT) {
                     GLib.File f = chooser.get_file ();
@@ -203,7 +203,7 @@ namespace Vapad {
             foreach (string id in languages) {
                 menu.append (id, @"tab.set_lang::$id");
             }
-            model.insert_submenu (2, "Language", menu);
+            model.insert_submenu (2, _("Language"), menu);
         }
 
         private void set_language () {

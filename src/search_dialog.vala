@@ -217,7 +217,8 @@ namespace Vapad {
                     try {
                         search_context.replace (start, end, replace, -1);
                     } catch (Error e) {
-                        print ("Error: %s\n", e.message);
+                        string error = _("Error");
+                        print ("%s: %s\n", error, e.message);
                     }
                 } else {
                     break;

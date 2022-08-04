@@ -27,6 +27,7 @@
               <object class="GtkButton">
                 <property name="icon-name">tab-new-symbolic</property>
                 <property name="action-name">win.new_file</property>
+                <property name="tooltip-text" translatable="yes">Open a new tab</property>
               </object>
             </child>
             <child type="title">
@@ -175,11 +176,11 @@
     </section>
     <section>
       <item>
-        <attribute name="label" translatable="yes">_Keyboard Shortcuts</attribute>
+        <attribute name="label" translatable="yes">Keyboard Shortcuts</attribute>
         <attribute name="action">win.show-help-overlay</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">_About vapad</attribute>
+        <attribute name="label" translatable="yes">About vapad</attribute>
         <attribute name="action">app.about</attribute>
       </item>
       <item>

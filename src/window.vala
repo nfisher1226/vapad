@@ -114,7 +114,7 @@ namespace Vapad {
                 menu.append (id, @"win.set_editor_theme::$id");
             }
             var model = (GLib.Menu)pop.get_menu_model ();
-            model.insert_submenu (3, "Editor Theme", menu);
+            model.insert_submenu (3, _("Editor Theme"), menu);
         }
 
         public void new_page () {
@@ -154,7 +154,7 @@ namespace Vapad {
 
         private void open_file () {
             Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
-                "Select a file to open",
+                _("Select a file to open"),
                 this,
                 Gtk.FileChooserAction.OPEN
             );
@@ -166,8 +166,8 @@ namespace Vapad {
                     print ("Error: %s\n", e.message);
                 }
             }
-            chooser.add_button ("Accept", Gtk.ResponseType.ACCEPT);
-            chooser.add_button ("Cancel", Gtk.ResponseType.CANCEL);
+            chooser.add_button (_("Accept"), Gtk.ResponseType.ACCEPT);
+            chooser.add_button (_("Cancel"), Gtk.ResponseType.CANCEL);
             chooser.response.connect ( (dlg, res) => {
                 if (res == Gtk.ResponseType.ACCEPT) {
                     File file = chooser.get_file ();
@@ -220,13 +220,14 @@ namespace Vapad {
                 this.window_title.set_subtitle (title);
                 this.window_title.set_title (@"$PROGNAME-$VERSION ~ $fname");
             } else {
-                this.window_title.set_subtitle ("New file");
+                this.window_title.set_subtitle (_("New file"));
                 this.window_title.set_title (@"$PROGNAME-$VERSION");
             }
         }
 
         private void send_saved_toast (string name) {
-            this.set_toast (@"$name saved");
+            var saved = _("saved");
+            this.set_toast (@"$name $saved");
         }
 
         public Vapad.Tab? current_tab () {
@@ -406,7 +407,9 @@ namespace Vapad {
             this.hide_search ();
             var dialog = new Vapad.SearchDialog (this);
             dialog.strings_replaced.connect ( (n) => {
-                this.set_toast (@"replaced $n occurances");
+                string replaced = _("replaced");
+                string occurances = _("occurances");
+                this.set_toast (@"$replaced $n $occurances");
             });
             dialog.show ();
         }
@@ -422,17 +425,17 @@ namespace Vapad {
 
         private void set_system_theme () {
             Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.DEFAULT);
-            this.set_toast ("Using system application style");
+            this.set_toast (_("Using system application style"));
         }
 
         private void set_light_theme () {
             Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.FORCE_LIGHT);
-            this.set_toast ("Using light application style");
+            this.set_toast (_("Using light application style"));
         }
 
         private void set_dark_theme () {
             Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.FORCE_DARK);
-            this.set_toast ("Using dark application style");
+            this.set_toast (_("Using dark application style"));
         }
 
         private void set_vi_mode () {
@@ -522,7 +525,7 @@ namespace Vapad {
         }
 
         private void set_font () {
-            var dlg = new Gtk.FontChooserDialog ("Select a font", this);
+            var dlg = new Gtk.FontChooserDialog (_("Select a font"), this);
             if (this.editor_font!= null) {
                 dlg.set_font (editor_font);
             }
