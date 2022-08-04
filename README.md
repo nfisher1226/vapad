@@ -25,13 +25,14 @@ badass. Vapad is also a nice amalgam of Vala and Notepad, so it seemed a good fi
 - Syntax highlighting for all languages supported by GtkSourceView'
 - Comfort features like line numbers, long line marker, and auto-indent on by default
 - Tabbed interface
-- Light and dark themes using LibAdwaita
+- Light and dark application themes using LibAdwaita
 - Themeable syntax highlighting
 - Quick search bar
 - Advanced search including replace all in document/session/selection
 - Simple and lightweight interface with no preferences window
 - Standard keyboard shortcuts for all major interactions
 - Vi emulation mode (requires Ibus)
+- No preferences dialog - all settings via the application menu
 
 ## Building
 Vapad requires Gtk+-4.0 or greater and GtkSourceView 5. You will also need to

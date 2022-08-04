@@ -9,6 +9,7 @@ Contents
 * Add submenu for highlighting schemes
 * Vi emulation mode
 * Save settings via gschema
+* Add context menu to update the syntax language if guessed incorrectly
 
 ## 0.2.0
 * Make program name, version, and authors constants in application.vala
