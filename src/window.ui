@@ -29,6 +29,11 @@
                 <property name="action-name">win.new_file</property>
               </object>
             </child>
+            <child type="title">
+              <object class="AdwWindowTitle" id="window_title">
+                <property name="title">Vapad</property>
+              </object>
+            </child>
             <child type="end">
               <object class="GtkMenuButton" id="menu_button">
                 <property name="icon-name">open-menu-symbolic</property>

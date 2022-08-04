@@ -20,6 +20,8 @@ namespace Vapad {
     [GtkTemplate (ui = "/org/hitchhiker_linux/vapad/window.ui")]
     public class Window : Adw.ApplicationWindow {
         [GtkChild]
+        private unowned Adw.WindowTitle window_title;
+        [GtkChild]
         private unowned Gtk.MenuButton menu_button;
         [GtkChild]
         private unowned Gtk.Notebook notebook;
@@ -74,6 +76,7 @@ namespace Vapad {
                 { "set_font", this.set_font },
             };
             this.add_action_entries (actions, this);
+            this.window_title.set_title (@"$PROGNAME-$VERSION");
             var vimode = new PropertyAction ("vimode", this, "vimode");
             vimode.notify.connect (this.set_vi_mode);
             this.add_action (vimode);
@@ -176,6 +179,7 @@ namespace Vapad {
                             this.setup_tab (tab);
                         }
                         tab.load_file (file);
+                        this.update_title (this.notebook.page_num (tab));
                     }
                 }
                 dlg.close ();
@@ -210,9 +214,13 @@ namespace Vapad {
             var tab = (Vapad.Tab)this.notebook.get_nth_page ((int)num);
             if (tab.file != null) {
                 string path = tab.file.get_path ();
-                this.set_title (@"$path ~ $PROGNAME-$VERSION");
+                this.window_title.set_subtitle (path);
+                this.window_title.set_title (@"$PROGNAME-$VERSION");
+                //this.set_title (@"$path ~ $PROGNAME-$VERSION");
             } else {
-                this.set_title (@"New file ~ $PROGNAME-$VERSION");
+                this.window_title.set_subtitle ("New file");
+                this.window_title.set_title (@"$PROGNAME-$VERSION");
+                //this.set_title (@"New file ~ $PROGNAME-$VERSION");
             }
         }
 
