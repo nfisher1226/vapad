@@ -32,16 +32,16 @@ namespace Vapad {
         private Gtk.Label cmd_bar_txt;
         private Gtk.Label cmd_txt;
         public signal void file_saved (string name);
+        public string syntax_language { get; set; }
 
         public Tab () {
             Object (
                 orientation: Gtk.Orientation.VERTICAL,
                 vexpand: true
             );
-            create_widgets ();
         }
 
-        private void create_widgets () {
+        construct {
             this.lbox = new Box (Orientation.HORIZONTAL, 5) {
                 hexpand = true,
                 can_focus = false,
@@ -89,6 +89,13 @@ namespace Vapad {
             cmd_bar.append (cmd_bar_txt);
             cmd_bar.append (cmd_txt);
             this.append (cmd_bar);
+
+            this.syntax_language = "C";
+            var tabgroup = new GLib.SimpleActionGroup ();
+            this.insert_action_group ("tab", tabgroup);
+            var set_lang = new GLib.PropertyAction ("set_lang", this, "syntax_language");
+            tabgroup.add_action (set_lang);
+            set_lang.notify.connect (set_language);
         }
 
         public void load_file (GLib.File f) {
@@ -99,11 +106,18 @@ namespace Vapad {
             Language language = new LanguageManager ()
                 .get_default ()
                 .guess_language (f.get_path (), null);
-            buffer.set_language (language);
+            if (language != null) {
+                buffer.set_language (language);
+                this.syntax_language = language.get_id ();
+            }
             loader.load_async.begin (-100, null, null);
             this.file = f;
             this.sourcefile = file;
             this.set_title ();
+            var extra_menu = this.sourceview.get_extra_menu ();
+            if (extra_menu != null) {
+                this.set_lang_menu ((GLib.Menu)extra_menu);
+            }
         }
 
         public void save_file () {
@@ -180,6 +194,23 @@ namespace Vapad {
             provider.load_from_data (css.data);
             var ctx = this.sourceview.get_style_context ();
             ctx.add_provider (provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION);
+        }
+
+        public void set_lang_menu (GLib.Menu model) {
+            var manager = new GtkSource.LanguageManager ();
+            var languages = manager.get_language_ids ();
+            var menu = new GLib.Menu ();
+            foreach (string id in languages) {
+                menu.append (id, @"tab.set_lang::$id");
+            }
+            model.insert_submenu (2, "Language", menu);
+        }
+
+        private void set_language () {
+            var manager = new GtkSource.LanguageManager ();
+            var language = manager.get_language (syntax_language);
+            var buffer = (GtkSource.Buffer)this.sourceview.buffer;
+            buffer.set_language (language);
         }
     }
 }

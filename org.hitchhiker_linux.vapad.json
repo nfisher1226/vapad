@@ -31,7 +31,7 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "file:///home/nathan/Projects/vapad"
+                    "url" : "https://codeberg.org/jeang3nie/vapad"
                 }
             ]
         }
