@@ -17,7 +17,7 @@
                 <property name="child">
                   <object class="AdwButtonContent">
                     <property name="icon-name">document-open-symbolic</property>
-                    <property name="label">Open</property>
+                    <property name="label" translatable="yes">Open</property>
                   </object>
                 </property>
                 <property name="action-name">win.open_file</property>
@@ -45,7 +45,7 @@
                 <property name="child">
                   <object class="AdwButtonContent">
                     <property name="icon-name">document-save-symbolic</property>
-                    <property name="label">Save</property>
+                    <property name="label" translatable="yes">Save</property>
                   </object>
                 </property>
                 <property name="action-name">win.save_file</property>
@@ -85,7 +85,7 @@
                 <child>
                   <object class="GtkButton">
                     <property name="icon-name">window-close-symbolic</property>
-                    <property name="tooltip-text">Close the search bar</property>
+                    <property name="tooltip-text" translatable="yes">Close the search bar</property>
                     <property name="action-name">win.hide_search</property>
                   </object>
                 </child>
@@ -95,20 +95,20 @@
                     <property name="css-classes">linked</property>
                     <child>
                       <object class="GtkEntry" id="search_entry">
-                        <property name="placeholder-text">Search query ..</property>
+                        <property name="placeholder-text" translatable="yes">Search query ..</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkButton">
                         <property name="icon-name">go-down-symbolic</property>
-                        <property name="tooltip-text">Find next match</property>
+                        <property name="tooltip-text" translatable="yes">Find next match</property>
                         <property name="action-name">win.find_next</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkButton">
                         <property name="icon-name">go-up-symbolic</property>
-                        <property name="tooltip-text">Find previous match</property>
+                        <property name="tooltip-text" translatable="yes">Find previous match</property>
                         <property name="action-name">win.find_previous</property>
                       </object>
                     </child>
@@ -116,19 +116,19 @@
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="match_case">
-                    <property name="label">Match case</property>
-                    <property name="tooltip-text">Perform a case sensitive search</property>
+                    <property name="label" translatable="yes">Match case</property>
+                    <property name="tooltip-text" translatable="yes">Perform a case sensitive search</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkCheckButton" id="whole_words">
-                    <property name="label">Whole words</property>
-                    <property name="tooltip-text">Match only whole words</property>
+                    <property name="label" translatable="yes">Whole words</property>
+                    <property name="tooltip-text" translatable="yes">Match only whole words</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton" id="advanced_search">
-                    <property name="label">Advanced</property>
+                    <property name="label" translatable="yes">Advanced</property>
                     <property name="action-name">win.advanced_search</property>
                   </object>
                 </child>

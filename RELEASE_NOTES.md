@@ -6,6 +6,7 @@ Contents
 - [0.1.0](#0.1.0)
 
 ## Unreleased
+* Translated into Russian (alexkdeveloper)
 
 ## 0.3.0
 * Add theme switcher to main menu
