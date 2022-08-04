@@ -1,0 +1,348 @@
+#
+#  <>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: unnamed project\n"
+"POT-Creation-Date: 2022-08-04 19:54+0800\n"
+"PO-Revision-Date: 2022-08-04 20:15+0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.1.1\n"
+"X-Poedit-Basepath: ../src\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Общие"
+
+#: gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Показать комбинации клавиш"
+
+#: gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Open File"
+msgstr "Открыть файл"
+
+#: gtk/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Save File"
+msgstr "Сохранить файл"
+
+#: gtk/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Save As"
+msgstr "Сохранить как"
+
+#: gtk/help-overlay.ui:38
+msgctxt "shortcut window"
+msgid "Save All"
+msgstr "Сохранить все"
+
+#: gtk/help-overlay.ui:44 gtk/help-overlay.ui:58
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Поиск"
+
+#: gtk/help-overlay.ui:50
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Выход"
+
+#: gtk/help-overlay.ui:61
+msgctxt "shortcut window"
+msgid "New Search"
+msgstr "Новый Поиск"
+
+#: gtk/help-overlay.ui:67
+msgctxt "shortcut window"
+msgid "Find Next"
+msgstr "Найти следующее"
+
+#: gtk/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Find Previous"
+msgstr "Найти предыдущее"
+
+#: gtk/help-overlay.ui:79
+msgctxt "shortcut window"
+msgid "Hide Search"
+msgstr "Скрыть поиск"
+
+#: gtk/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "Навигация"
+
+#: gtk/help-overlay.ui:90
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Следующая вкладка"
+
+#: gtk/help-overlay.ui:96
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Предыдущая вкладка"
+
+#: gtk/help-overlay.ui:102
+msgctxt "shortcut window"
+msgid "Tab1"
+msgstr ""
+
+#: gtk/help-overlay.ui:108
+msgctxt "shortcut window"
+msgid "Tab2"
+msgstr ""
+
+#: gtk/help-overlay.ui:114
+msgctxt "shortcut window"
+msgid "Tab3"
+msgstr ""
+
+#: gtk/help-overlay.ui:120
+msgctxt "shortcut window"
+msgid "Tab4"
+msgstr ""
+
+#: gtk/help-overlay.ui:126
+msgctxt "shortcut window"
+msgid "Tab5"
+msgstr ""
+
+#: gtk/help-overlay.ui:132
+msgctxt "shortcut window"
+msgid "Tab6"
+msgstr ""
+
+#: gtk/help-overlay.ui:138
+msgctxt "shortcut window"
+msgid "Tab7"
+msgstr ""
+
+#: gtk/help-overlay.ui:144
+msgctxt "shortcut window"
+msgid "Tab8"
+msgstr ""
+
+#: gtk/help-overlay.ui:150
+msgctxt "shortcut window"
+msgid "Tab9"
+msgstr ""
+
+#: gtk/help-overlay.ui:156
+msgctxt "shortcut window"
+msgid "Last Tab"
+msgstr "Последняя вкладка"
+
+#: search_dialog.ui:33
+msgid "Search:"
+msgstr "Поиск:"
+
+#: search_dialog.ui:43
+msgid "Search for .."
+msgstr "Поиск для..."
+
+#: search_dialog.ui:54
+msgid "Replace:"
+msgstr "Заменить:"
+
+#: search_dialog.ui:64
+msgid "Replace with .."
+msgstr "Заменить на..."
+
+#: search_dialog.ui:83
+msgid "Use regular expressions"
+msgstr "Использовать регулярные выражения"
+
+#: search_dialog.ui:92
+msgid "Case sensitive"
+msgstr "С учетом регистра"
+
+#: search_dialog.ui:101 window.ui:121
+msgid "Match only whole words"
+msgstr "Сопоставлять только целые слова"
+
+#: search_dialog.ui:110
+msgid "Wrap search"
+msgstr "Завершить поиск"
+
+#: search_dialog.ui:119
+msgid "Search backwards"
+msgstr "Поиск в обратном направлении"
+
+#: search_dialog.ui:130
+msgid "Replace all"
+msgstr "Заменить все"
+
+#: search_dialog.ui:139
+msgid "Close"
+msgstr "Закрыть"
+
+#: search_dialog.ui:140
+msgid "Close the search dialog when finished"
+msgstr "Закрыть диалоговое окно поиска после завершения"
+
+#: search_dialog.ui:145
+msgid "In Session"
+msgstr "В сессии"
+
+#: search_dialog.ui:150
+msgid "In Document"
+msgstr "В документе"
+
+#: search_dialog.ui:155
+msgid "In Selection"
+msgstr "В выборе"
+
+#: search_dialog.ui:172
+msgid "_Find"
+msgstr "_Найти"
+
+#: search_dialog.ui:178
+msgid "_Replace"
+msgstr "_Заменить"
+
+#: search_dialog.ui:184
+msgid "Replace & Find"
+msgstr "Заменить и найти"
+
+#: tab.vala:49
+msgid "New file"
+msgstr "Новый файл"
+
+#: tab.vala:122
+msgid "Save file as..."
+msgstr "Сохранить файл как..."
+
+#: tab.vala:126 window.vala:166
+msgid "Accept"
+msgstr "Принять"
+
+#: tab.vala:127 window.vala:167
+msgid "Cancel"
+msgstr "Отмена"
+
+#: theme_switcher.ui:21 theme_switcher.ui:28
+msgid "Follow system style"
+msgstr "Следовать системному стилю"
+
+#: theme_switcher.ui:36 theme_switcher.ui:43
+msgid "Light style"
+msgstr "Светлый стиль"
+
+#: theme_switcher.ui:51 theme_switcher.ui:58
+msgid "Dark style"
+msgstr "Темный стиль"
+
+#: window.ui:20
+msgid "Open"
+msgstr "Открыть"
+
+#: window.ui:43
+msgid "Save"
+msgstr "Сохранить"
+
+#: window.ui:83
+msgid "Close the search bar"
+msgstr "Закрыть строку поиска"
+
+#: window.ui:93
+msgid "Search query .."
+msgstr "Поисковый запрос .."
+
+#: window.ui:99
+msgid "Find next match"
+msgstr "Найти следующее совпадение"
+
+#: window.ui:106
+msgid "Find previous match"
+msgstr "Найти предыдущее совпадение"
+
+#: window.ui:114
+msgid "Match case"
+msgstr "Учитывать регистр"
+
+#: window.ui:115
+msgid "Perform a case sensitive search"
+msgstr "Выполнить поиск с учетом регистра"
+
+#: window.ui:120
+msgid "Whole words"
+msgstr "Целые слова"
+
+#: window.ui:126
+msgid "Advanced"
+msgstr "Вперед"
+
+#: window.ui:145
+msgid "New File"
+msgstr "Новый файл"
+
+#: window.ui:149
+msgid "Save As"
+msgstr "Сохранить как"
+
+#: window.ui:153
+msgid "Save All"
+msgstr "Сохранить все"
+
+#: window.ui:157
+msgid "Search"
+msgstr "Поиск"
+
+#: window.ui:163
+msgid "Vi Mode"
+msgstr "Режим Vi"
+
+#: window.ui:167
+msgid "Editor Font"
+msgstr "Шрифт редактора"
+
+#: window.ui:173
+msgid "_Keyboard Shortcuts"
+msgstr "_Комбинации клавиш"
+
+#: window.ui:177
+msgid "_About vapad"
+msgstr "_О vapad"
+
+#: window.ui:181
+msgid "Quit"
+msgstr "Выход"
+
+#: window.vala:114
+msgid "Editor Theme"
+msgstr "Тема редактора"
+
+#: window.vala:154
+msgid "Select a file to open"
+msgstr "Выбор файла для открытия"
+
+#: window.vala:400
+msgid "replaced $n occurances"
+msgstr "заменено $n вхождений"
+
+#: window.vala:416
+msgid "Using system application style"
+msgstr "Используется системный стиль"
+
+#: window.vala:421
+msgid "Using light application style"
+msgstr "Используется светлый стиль"
+
+#: window.vala:426
+msgid "Using dark application style"
+msgstr "Используется темный стиль"
+
+#: window.vala:516
+msgid "Select a font"
+msgstr "Выберите шрифт"

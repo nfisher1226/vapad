@@ -21,6 +21,9 @@ vapad_sources += gnome.compile_resources('vapad-resources',
 )
 
 executable('vapad', vapad_sources,
-  vala_args: '--target-glib=2.50',  dependencies: vapad_deps,
+  include_directories: config_h_dir,
+  vala_args: ['--target-glib=2.68', meson.project_source_root() + '/src/config.vapi'],
+  c_args: ['-include', 'config.h'],
+  dependencies: vapad_deps,
   install: true,
 )
