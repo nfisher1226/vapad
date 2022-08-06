@@ -131,7 +131,7 @@ namespace Vapad {
             tab.close_button.clicked.connect ( () => {
                 this.notebook.remove_page (this.notebook.page_num (tab));
             });
-            tab.file_saved.connect ( () => {
+            tab.file_saved.connect ( (_,name) => {
                 this.update_title (this.notebook.get_current_page ());
                 this.send_saved_toast (name);
             });

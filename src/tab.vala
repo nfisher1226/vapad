@@ -20,76 +20,33 @@ using Gtk;
 using GtkSource;
 
 namespace Vapad {
+    [GtkTemplate (ui = "/org/hitchhiker_linux/vapad/tab.ui")]
     public class Tab : Box {
-        public Box lbox;
-        public Label label;
-        public Button close_button;
-        public View sourceview;
+        [GtkChild]
+        public unowned Box lbox;
+        [GtkChild]
+        public unowned Label label;
+        [GtkChild]
+        public unowned Button close_button;
+        [GtkChild]
+        public unowned View sourceview;
+        [GtkChild]
+        private unowned Gtk.Box cmd_bar;
+        [GtkChild]
+        private unowned Gtk.Label cmd_bar_txt;
+        [GtkChild]
+        private unowned Gtk.Label cmd_txt;
         public GLib.File? file;
         public GtkSource.File? sourcefile;
         private Gtk.EventController? controller;
-        private Gtk.Box cmd_bar;
-        private Gtk.Label cmd_bar_txt;
-        private Gtk.Label cmd_txt;
         public signal void file_saved (string name);
         public string syntax_language { get; set; }
 
         public Tab () {
-            Object (
-                orientation: Gtk.Orientation.VERTICAL,
-                vexpand: true
-            );
+            Object ();
         }
 
         construct {
-            this.lbox = new Box (Orientation.HORIZONTAL, 5) {
-                hexpand = true,
-                can_focus = false,
-            };
-            this.label = new Label (_("New file")) {
-                hexpand = true,
-            };
-            lbox.append (this.label);
-            this.close_button = new Button () {
-                has_frame = false,
-            };
-            lbox.append (this.close_button);
-            Image image = new Image.from_icon_name ("window-close-symbolic");
-            this.close_button.set_child (image);
-            ScrolledWindow scroller = new ScrolledWindow () {
-                hexpand = true,
-                vexpand = true,
-            };
-            this.append (scroller);
-            this.sourceview = new View() {
-                show_line_numbers = true,
-                auto_indent = true,
-                indent_on_tab = true,
-                right_margin_position = 80,
-                show_right_margin = true,
-                smart_home_end = SmartHomeEndType.AFTER,
-                smart_backspace = true,
-                highlight_current_line = true,
-            };
-            scroller.set_child (this.sourceview);
-            this.cmd_bar = new Gtk.Box (Gtk.Orientation.HORIZONTAL, 5) {
-                visible = false,
-                hexpand = true,
-                vexpand = false,
-                css_classes = { "vi-cmd-bar" },
-            };
-            this.cmd_bar_txt = new Gtk.Label ("") {
-                margin_start = 10,
-                margin_end = 10,
-            };
-            this.cmd_txt = new Gtk.Label ("") {
-                margin_start = 10,
-                margin_end = 10,
-            };
-            cmd_bar.append (cmd_bar_txt);
-            cmd_bar.append (cmd_txt);
-            this.append (cmd_bar);
-
             this.syntax_language = "C";
             var tabgroup = new GLib.SimpleActionGroup ();
             this.insert_action_group ("tab", tabgroup);
