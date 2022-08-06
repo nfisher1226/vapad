@@ -23,7 +23,11 @@ namespace Vapad {
 
     public class Application : Adw.Application {
         public Application () {
-            Object (application_id: "org.hitchhiker_linux.vapad", flags: ApplicationFlags.HANDLES_OPEN);
+            Object (
+                application_id: "org.hitchhiker_linux.vapad",
+                flags: ApplicationFlags.HANDLES_OPEN,
+                register_session: true
+            );
         }
 
         construct {

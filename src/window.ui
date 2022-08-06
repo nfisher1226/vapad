@@ -13,7 +13,7 @@
         <child>
           <object class="AdwHeaderBar" id="header_bar">
             <child type="start">
-              <object class="GtkButton">
+              <object class="AdwSplitButton" id="open_button">
                 <property name="child">
                   <object class="AdwButtonContent">
                     <property name="icon-name">document-open-symbolic</property>

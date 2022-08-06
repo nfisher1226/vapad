@@ -20,6 +20,8 @@ namespace Vapad {
     [GtkTemplate (ui = "/org/hitchhiker_linux/vapad/window.ui")]
     public class Window : Adw.ApplicationWindow {
         [GtkChild]
+        private unowned Adw.SplitButton open_button;
+        [GtkChild]
         private unowned Adw.WindowTitle window_title;
         [GtkChild]
         private unowned Gtk.MenuButton menu_button;
@@ -84,6 +86,10 @@ namespace Vapad {
             var set_editor_theme = new PropertyAction ("set_editor_theme", this, "editor_theme");
             set_editor_theme.notify.connect (this.set_theme);
             this.add_action (set_editor_theme);
+            var open_named = new SimpleAction ("open_named", GLib.VariantType.STRING);
+            open_named.activate.connect ( (path) => this.open_named ((string)path));
+            this.add_action (open_named);
+
             var pop = (Gtk.PopoverMenu)this.menu_button.get_popover ();
             this.theme_switcher = new Vapad.ThemeSwitcher ();
             pop.add_child (this.theme_switcher, "theme");
@@ -104,6 +110,22 @@ namespace Vapad {
             this.theme_switcher.use_light_theme.connect (set_light_theme);
             this.theme_switcher.use_dark_theme.connect (set_dark_theme);
             this.init_style_menu (pop);
+            this.init_recent ();
+        }
+
+        private void init_recent () {
+            Gtk.RecentManager manager = Gtk.RecentManager.get_default ();
+            var all_items = manager.get_items ();
+            var model = new GLib.Menu ();
+            all_items.foreach ( (item) => {
+                if (item.has_application ("vapad") && item.get_age () < 7) {
+                    string path = item.get_uri_display ();
+                    string act = @"win.open_named::$path";
+                    var entry = new GLib.MenuItem (item.get_short_name (), act);
+                    model.append_item (entry);
+                }
+            });
+            this.open_button.set_menu_model (model);
         }
 
         private void init_style_menu (Gtk.PopoverMenu pop) {
