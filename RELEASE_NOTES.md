@@ -7,6 +7,7 @@ Contents
 
 ## Unreleased
 * Translated into Russian (alexkdeveloper)
+* Add dropdown displaying recently used files (past 7 days) to **Open** button
 
 ## 0.3.0
 * Add theme switcher to main menu

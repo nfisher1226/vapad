@@ -114,7 +114,8 @@ namespace Vapad {
                 "logo-icon-name", "org.hitchhiker_linux.vapad",
                 "comments", _("A simple text editor for Linux"),
                 "license-type", Gtk.License.GPL_3_0,
-                "copyright", _("Copyright © 2022 by Nathan Fisher")
+                "copyright", _("Copyright © 2022 by Nathan Fisher"),
+                "translator_credits", _("Alex Kryuchkov")
             );
         }
 
