@@ -17,12 +17,6 @@
  */
 
 namespace Vapad {
-    public enum AppTheme {
-        SYSTEM = 0,
-        LIGHT = 1,
-        DARK = 2,
-    }
-
     [GtkTemplate (ui = "/org/hitchhiker_linux/vapad/theme_switcher.ui")]
     public class ThemeSwitcher : Gtk.Widget {
         [GtkChild]
@@ -31,10 +25,6 @@ namespace Vapad {
         private unowned Gtk.CheckButton light_button;
         [GtkChild]
         private unowned Gtk.CheckButton dark_button;
-        public signal void use_system_theme ();
-        public signal void use_light_theme ();
-        public signal void use_dark_theme ();
-        public Vapad.AppTheme app_theme;
 
         public ThemeSwitcher () {
             Object ();
@@ -42,18 +32,18 @@ namespace Vapad {
 
         construct {
             this.set_layout_manager (new Gtk.BinLayout ());
-            this.system_button.toggled.connect (emit);
-            this.light_button.toggled.connect (emit);
-            this.dark_button.toggled.connect (emit);
+            this.system_button.toggled.connect (set_theme);
+            this.light_button.toggled.connect (set_theme);
+            this.dark_button.toggled.connect (set_theme);
         }
 
-        private void emit () {
+        private void set_theme () {
             if (this.system_button.get_active ()) {
-                this.use_dark_theme ();
+                Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.DEFAULT);
             } else if (this.light_button.get_active ()) {
-                this.use_light_theme ();
+                Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.FORCE_LIGHT);
             } else {
-                this.use_dark_theme ();
+                Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.FORCE_DARK);
             }
         }
     }

@@ -106,9 +106,6 @@ namespace Vapad {
             var ls = new Gtk.ListStore (1, GLib.Type.STRING);
             this.search_completion.set_model (ls);
             this.search_entry.set_completion (this.search_completion);
-            this.theme_switcher.use_system_theme.connect (set_system_theme);
-            this.theme_switcher.use_light_theme.connect (set_light_theme);
-            this.theme_switcher.use_dark_theme.connect (set_dark_theme);
             this.init_style_menu (pop);
             this.init_recent ();
         }
@@ -443,21 +440,6 @@ namespace Vapad {
             var toast = new Adw.Toast (str);
             toast.set_timeout (3);
             overlay.add_toast (toast);
-        }
-
-        private void set_system_theme () {
-            Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.DEFAULT);
-            this.set_toast (_("Using system application style"));
-        }
-
-        private void set_light_theme () {
-            Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.FORCE_LIGHT);
-            this.set_toast (_("Using light application style"));
-        }
-
-        private void set_dark_theme () {
-            Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.FORCE_DARK);
-            this.set_toast (_("Using dark application style"));
         }
 
         private void set_vi_mode () {

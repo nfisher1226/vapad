@@ -70,6 +70,9 @@ namespace Vapad {
             if (win == null) {
                 win = this.create_window ();
                 win.present ();
+                Adw.StyleManager
+                    .get_default ()
+                    .set_color_scheme (Adw.ColorScheme.DEFAULT);
             }
             ((Vapad.Window)win).new_page ();
         }
