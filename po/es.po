@@ -1,0 +1,291 @@
+# Spanish translations for vapad package.
+# Copyright (C) 2022 THE vapad'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the vapad package.
+# Óscar Fernández Díaz <oscfdezdz@tuta.io>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: vapad\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-08-09 15:48+0200\n"
+"PO-Revision-Date: 2022-08-09 16:04+0200\n"
+"Last-Translator: Óscar Fernández Díaz <oscfdezdz@tuta.io>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: data/org.hitchhiker_linux.vapad.desktop.in:3
+msgid "Vapad"
+msgstr "Vapad"
+
+#: data/org.hitchhiker_linux.vapad.appdata.xml.in:7
+msgid "No description"
+msgstr "No hay descripción"
+
+#: data/org.hitchhiker_linux.vapad.gschema.xml:6
+msgid "Use Vim emulation"
+msgstr "Usar la emulación de Vim"
+
+#: data/org.hitchhiker_linux.vapad.gschema.xml:7
+msgid "Whether to use Vim emulation"
+msgstr "Si se usa la emulación de Vim"
+
+#: data/org.hitchhiker_linux.vapad.gschema.xml:11
+msgid "Syntax highlighting theme"
+msgstr "Tema del resaltado de sintaxis"
+
+#: data/org.hitchhiker_linux.vapad.gschema.xml:12
+msgid "Which syntax highlighting theme to use in the editor"
+msgstr "Qué tema de resaltado de sintaxis usar en el editor"
+
+#: data/org.hitchhiker_linux.vapad.gschema.xml:16
+msgid "Editor font description"
+msgstr "Descripción de la tipografía del editor"
+
+#: data/org.hitchhiker_linux.vapad.gschema.xml:17
+msgid "Description of the font to use in each editor instance"
+msgstr "Descripción de la tipografía a usar en cada instancia del editor"
+
+#: src/window.ui:20
+msgid "Open"
+msgstr "Abrir"
+
+#: src/window.ui:30
+msgid "Open a new tab"
+msgstr "Abrir un pestaña nueva"
+
+#: src/window.ui:49
+msgid "Save"
+msgstr "Guardar"
+
+#: src/window.ui:89
+msgid "Close the search bar"
+msgstr "Cerrar la barra de búsqueda"
+
+#: src/window.ui:99
+msgid "Search query .."
+msgstr "Buscar..."
+
+#: src/window.ui:105
+msgid "Find next match"
+msgstr "Buscar coincidencia siguiente"
+
+#: src/window.ui:112
+msgid "Find previous match"
+msgstr "Buscar coincidencia anterior"
+
+#: src/window.ui:120
+msgid "Match case"
+msgstr "Coincidir mayúsculas y minúsculas"
+
+#: src/window.ui:121
+msgid "Perform a case sensitive search"
+msgstr "Realizar una búsqueda que distinga entre mayúsculas y minúsculas"
+
+#: src/window.ui:126
+msgid "Whole words"
+msgstr "Palabras completas"
+
+#: src/window.ui:127 src/search_dialog.ui:101
+msgid "Match only whole words"
+msgstr "Coincidir sólo con palabras completas"
+
+#: src/window.ui:132
+msgid "Advanced"
+msgstr "Avanzado"
+
+#: src/window.ui:151
+msgid "New File"
+msgstr "Archivo nuevo"
+
+#: src/window.ui:155
+msgid "Save As"
+msgstr "Guardar como"
+
+#: src/window.ui:159
+msgid "Save All"
+msgstr "Guardar todo"
+
+#: src/window.ui:163
+msgid "Search"
+msgstr "Buscar"
+
+#: src/window.ui:169
+msgid "Vi Mode"
+msgstr "Modo Vi"
+
+#: src/window.ui:173
+msgid "Editor Font"
+msgstr "Tipografía del editor"
+
+#: src/window.ui:179
+msgid "Keyboard Shortcuts"
+msgstr "Atajos del teclado"
+
+#: src/window.ui:183
+msgid "About vapad"
+msgstr "Acerca de vapad"
+
+#: src/window.ui:187
+msgid "Quit"
+msgstr "Salir"
+
+#: src/window.vala:139
+msgid "Editor Theme"
+msgstr "Tema del editor"
+
+#: src/window.vala:179
+msgid "Select a file to open"
+msgstr "Seleccionar un archivo para abrir"
+
+#: src/window.vala:191 src/tab.vala:97
+msgid "Accept"
+msgstr "Aceptar"
+
+#: src/window.vala:192 src/tab.vala:98
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: src/window.vala:245
+msgid "New file"
+msgstr "Archivo nuevo"
+
+#: src/window.vala:251
+msgid "saved"
+msgstr "guardado"
+
+#: src/window.vala:432
+msgid "replaced"
+msgstr "reemplazado"
+
+#: src/window.vala:433
+msgid "occurances"
+msgstr "ocurrencias"
+
+#: src/window.vala:450
+msgid "Using system application style"
+msgstr "Usar el estilo del sistema"
+
+#: src/window.vala:455
+msgid "Using light application style"
+msgstr "Usar el estilo claro"
+
+#: src/window.vala:460
+msgid "Using dark application style"
+msgstr "Usando el estilo oscuro"
+
+#: src/window.vala:550
+msgid "Select a font"
+msgstr "Seleccionar una tipografía"
+
+#: src/application.vala:115
+msgid "A simple text editor for Linux"
+msgstr "Un sencillo editor de texto para Linux"
+
+#: src/application.vala:117
+msgid "Copyright © 2022 by Nathan Fisher"
+msgstr "Copyright © 2022 by Nathan Fisher"
+
+#: src/application.vala:118
+msgid "Alex Kryuchkov"
+msgstr "Alex Kryuchkov"
+
+#: src/search_dialog.vala:220
+msgid "Error"
+msgstr "Error"
+
+#: src/search_dialog.ui:4
+msgid "Vapad - Search"
+msgstr "Vapad - Buscar"
+
+#: src/search_dialog.ui:10 src/search_dialog.ui:139
+msgid "Close"
+msgstr "Cerrar"
+
+#: src/search_dialog.ui:33
+msgid "Search:"
+msgstr "Buscar:"
+
+#: src/search_dialog.ui:43
+msgid "Search for .."
+msgstr "Buscar por..."
+
+#: src/search_dialog.ui:54
+msgid "Replace:"
+msgstr "Reemplazar:"
+
+#: src/search_dialog.ui:64
+msgid "Replace with .."
+msgstr "Remplazar con..."
+
+#: src/search_dialog.ui:83
+msgid "Use regular expressions"
+msgstr "Usar expresiones regulares"
+
+#: src/search_dialog.ui:92
+msgid "Case sensitive"
+msgstr "Sensible a las mayúsculas y minúsculas"
+
+#: src/search_dialog.ui:110
+msgid "Wrap search"
+msgstr "Búsqueda envolvente"
+
+#: src/search_dialog.ui:119
+msgid "Search backwards"
+msgstr "Buscar hacia atrás"
+
+#: src/search_dialog.ui:130
+msgid "Replace all"
+msgstr "Reemplazar todo"
+
+#: src/search_dialog.ui:140
+msgid "Close the search dialog when finished"
+msgstr "Cerrar el cuadro de diálogo de búsqueda cuando haya terminado"
+
+#: src/search_dialog.ui:145
+msgid "In Session"
+msgstr "En sesión"
+
+#: src/search_dialog.ui:150
+msgid "In Document"
+msgstr "En documento"
+
+#: src/search_dialog.ui:155
+msgid "In Selection"
+msgstr "En selección"
+
+#: src/search_dialog.ui:172
+msgid "Find"
+msgstr "Buscar"
+
+#: src/search_dialog.ui:178
+msgid "Replace"
+msgstr "Reemplazar"
+
+#: src/search_dialog.ui:184
+msgid "Replace and Find"
+msgstr "Reemplazar y buscar"
+
+#: src/tab.vala:93
+msgid "Save file as..."
+msgstr "Guardar archivo como..."
+
+#: src/tab.vala:163
+msgid "Language"
+msgstr "Idioma"
+
+#: src/theme_switcher.ui:21 src/theme_switcher.ui:28
+msgid "Follow system style"
+msgstr "Seguir sistema"
+
+#: src/theme_switcher.ui:36 src/theme_switcher.ui:43
+msgid "Light style"
+msgstr "Estilo claro"
+
+#: src/theme_switcher.ui:51 src/theme_switcher.ui:58
+msgid "Dark style"
+msgstr "Estilo oscuro"
