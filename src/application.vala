@@ -28,6 +28,9 @@ namespace Vapad {
                 flags: ApplicationFlags.HANDLES_OPEN,
                 register_session: true
             );
+
+            Intl.bindtextdomain (Config.GETTEXT_PACKAGE, Config.LOCALEDIR);
+            Intl.textdomain (Config.GETTEXT_PACKAGE);
         }
 
         construct {
