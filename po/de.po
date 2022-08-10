@@ -1,0 +1,392 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-08-09 21:59-0400\n"
+"PO-Revision-Date: 2022-08-09 22:28-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: data/org.hitchhiker_linux.vapad.gschema.xml:6
+msgid "Use Vim emulation"
+msgstr "Vim-Emulation verwenden"
+
+#: data/org.hitchhiker_linux.vapad.gschema.xml:7
+msgid "Whether to use Vim emulation"
+msgstr "Ob die Vim-Emulation verwendet werden soll"
+
+#: data/org.hitchhiker_linux.vapad.gschema.xml:11
+msgid "Syntax highlighting theme"
+msgstr "Design für die Syntaxhervorhebung"
+
+#: data/org.hitchhiker_linux.vapad.gschema.xml:12
+msgid "Which syntax highlighting theme to use in the editor"
+msgstr "Welches Syntaxhervorhebungsthema im Editor verwendet werden soll"
+
+#: data/org.hitchhiker_linux.vapad.gschema.xml:16
+msgid "Editor font description"
+msgstr "Beschreibung der Editor-Schriftart"
+
+#: data/org.hitchhiker_linux.vapad.gschema.xml:17
+msgid "Description of the font to use in each editor instance"
+msgstr "Beschreibung der Schriftart, die in jeder Editorinstanz verwendet werden soll"
+
+#: src/application.vala:121
+msgid "A simple text editor for Linux"
+msgstr "Ein einfacher Texteditor für Linux"
+
+#: src/application.vala:123
+msgid "Copyright © 2022 by Nathan Fisher"
+msgstr ""
+
+#: src/application.vala:124
+msgid "translator-credits"
+msgstr "Boris Fischer"
+
+#: src/gtk/help-overlay.ui:11
+msgctxt "shortcut window"
+msgid "General"
+msgstr "Allgemein"
+
+#: src/gtk/help-overlay.ui:14
+msgctxt "shortcut window"
+msgid "Show Shortcuts"
+msgstr "Tastenkombinationen anzeigen"
+
+#: src/gtk/help-overlay.ui:20
+msgctxt "shortcut window"
+msgid "Open File"
+msgstr "Offene Linie"
+
+#: src/gtk/help-overlay.ui:26
+msgctxt "shortcut window"
+msgid "Save File"
+msgstr "Datei speichern"
+
+#: src/gtk/help-overlay.ui:32
+msgctxt "shortcut window"
+msgid "Save As"
+msgstr "Speichern unter"
+
+#: src/gtk/help-overlay.ui:38
+msgctxt "shortcut window"
+msgid "Save All"
+msgstr "Alle speichern"
+
+#: src/gtk/help-overlay.ui:44 src/gtk/help-overlay.ui:58
+msgctxt "shortcut window"
+msgid "Search"
+msgstr "Suchen"
+
+#: src/gtk/help-overlay.ui:50
+msgctxt "shortcut window"
+msgid "Quit"
+msgstr "Verlassen"
+
+#: src/gtk/help-overlay.ui:61
+msgctxt "shortcut window"
+msgid "New Search"
+msgstr "Neue Suche"
+
+#: src/gtk/help-overlay.ui:67
+msgctxt "shortcut window"
+msgid "Find Next"
+msgstr "Weiter finden"
+
+#: src/gtk/help-overlay.ui:73
+msgctxt "shortcut window"
+msgid "Find Previous"
+msgstr "Vorherige finden"
+
+#: src/gtk/help-overlay.ui:79
+msgctxt "shortcut window"
+msgid "Hide Search"
+msgstr "Suche ausblenden"
+
+#: src/gtk/help-overlay.ui:87
+msgctxt "shortcut window"
+msgid "Navigation"
+msgstr "Navigation"
+
+#: src/gtk/help-overlay.ui:90
+msgctxt "shortcut window"
+msgid "Next Tab"
+msgstr "Registerkarte \"Weiter\""
+
+#: src/gtk/help-overlay.ui:96
+msgctxt "shortcut window"
+msgid "Previous Tab"
+msgstr "Registerkarte \"Zurück\""
+
+#: src/gtk/help-overlay.ui:102
+msgctxt "shortcut window"
+msgid "Tab1"
+msgstr "Registerkarte 1"
+
+#: src/gtk/help-overlay.ui:108
+msgctxt "shortcut window"
+msgid "Tab2"
+msgstr "Registerkarte 2"
+
+#: src/gtk/help-overlay.ui:114
+msgctxt "shortcut window"
+msgid "Tab3"
+msgstr "Registerkarte 3"
+
+#: src/gtk/help-overlay.ui:120
+msgctxt "shortcut window"
+msgid "Tab4"
+msgstr "Registerkarte 4"
+
+#: src/gtk/help-overlay.ui:126
+msgctxt "shortcut window"
+msgid "Tab5"
+msgstr "Registerkarte 5"
+
+#: src/gtk/help-overlay.ui:132
+msgctxt "shortcut window"
+msgid "Tab6"
+msgstr "Registerkarte 6"
+
+#: src/gtk/help-overlay.ui:138
+msgctxt "shortcut window"
+msgid "Tab7"
+msgstr "Registerkarte 7"
+
+#: src/gtk/help-overlay.ui:144
+msgctxt "shortcut window"
+msgid "Tab8"
+msgstr "Registerkarte 8"
+
+#: src/gtk/help-overlay.ui:150
+msgctxt "shortcut window"
+msgid "Tab9"
+msgstr "Registerkarte 9"
+
+#: src/gtk/help-overlay.ui:156
+msgctxt "shortcut window"
+msgid "Last Tab"
+msgstr "Letzte Registerkarte"
+
+#: src/search_dialog.ui:4
+msgid "Vapad - Search"
+msgstr "Vapad - Suche"
+
+#: src/search_dialog.ui:10 src/search_dialog.ui:139
+msgid "Close"
+msgstr "Schließen"
+
+#: src/search_dialog.ui:33
+msgid "Search:"
+msgstr "Suche:"
+
+#: src/search_dialog.ui:43
+msgid "Search for .."
+msgstr "Suchen.."
+
+#: src/search_dialog.ui:54
+msgid "Replace:"
+msgstr "Ersetzen:"
+
+#: src/search_dialog.ui:64
+msgid "Replace with .."
+msgstr "Ersetzen durch.."
+
+#: src/search_dialog.ui:83
+msgid "Use regular expressions"
+msgstr "Verwenden regulärer Ausdrücke"
+
+#: src/search_dialog.ui:92
+msgid "Case sensitive"
+msgstr "Groß-/Kleinschreibung beachten"
+
+#: src/search_dialog.ui:101 src/window.ui:127
+msgid "Match only whole words"
+msgstr "Nur ganze Wörter zuordnen"
+
+#: src/search_dialog.ui:110
+msgid "Wrap search"
+msgstr "Suche umschließen"
+
+#: src/search_dialog.ui:119
+msgid "Search backwards"
+msgstr "Rückwärts suchen"
+
+#: src/search_dialog.ui:130
+msgid "Replace all"
+msgstr "Alle ersetzen"
+
+#: src/search_dialog.ui:140
+msgid "Close the search dialog when finished"
+msgstr "Schließen Sie das Suchdialogfeld, wenn Sie fertig sind"
+
+#: src/search_dialog.ui:145
+msgid "In Session"
+msgstr "In Sitzung"
+
+#: src/search_dialog.ui:150
+msgid "In Document"
+msgstr "Im Dokument"
+
+#: src/search_dialog.ui:155
+msgid "In Selection"
+msgstr "In Auswahl"
+
+#: src/search_dialog.ui:172
+msgid "Find"
+msgstr "Finden"
+
+#: src/search_dialog.ui:178
+msgid "Replace"
+msgstr "Ersetzen"
+
+#: src/search_dialog.ui:184
+msgid "Replace and Find"
+msgstr "Ersetzen und Suchen"
+
+#: src/search_dialog.vala:220
+msgid "Error"
+msgstr "Fehler"
+
+#: src/tab.ui:10 src/window.ui:151
+msgid "New File"
+msgstr "Neue Datei"
+
+#: src/tab.vala:93
+msgid "Save file as..."
+msgstr "Datei speichern unter..."
+
+#: src/tab.vala:97 src/window.vala:188
+msgid "Accept"
+msgstr "Annehmen"
+
+#: src/tab.vala:98 src/window.vala:189
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: src/tab.vala:163
+msgid "Language"
+msgstr "Programmiersprache"
+
+#: src/theme_switcher.ui:21 src/theme_switcher.ui:28
+msgid "Follow system style"
+msgstr "Befolgen Sie den Systemstil"
+
+#: src/theme_switcher.ui:36 src/theme_switcher.ui:43
+msgid "Light style"
+msgstr "Leichter Stil"
+
+#: src/theme_switcher.ui:51 src/theme_switcher.ui:58
+msgid "Dark style"
+msgstr "Dunkler Stil"
+
+#: src/window.ui:20
+msgid "Open"
+msgstr "Offen"
+
+#: src/window.ui:30
+msgid "Open a new tab"
+msgstr "Öffnen einer neuen Registerkarte"
+
+#: src/window.ui:49
+msgid "Save"
+msgstr "Retten"
+
+#: src/window.ui:89
+msgid "Close the search bar"
+msgstr "Schließen der Suchleiste"
+
+#: src/window.ui:99
+msgid "Search query .."
+msgstr "Suchanfrage.."
+
+#: src/window.ui:105
+msgid "Find next match"
+msgstr "Nächstes Spiel finden"
+
+#: src/window.ui:112
+msgid "Find previous match"
+msgstr "Vorherige Übereinstimmung finden"
+
+#: src/window.ui:120
+msgid "Match case"
+msgstr "Groß-/Kleinschreibung abgleichen"
+
+#: src/window.ui:121
+msgid "Perform a case sensitive search"
+msgstr "Ausführen einer Suche unter Berücksichtigung der Groß-/Kleinschreibung"
+
+#: src/window.ui:126
+msgid "Whole words"
+msgstr "Ganze Worte"
+
+#: src/window.ui:132
+msgid "Advanced"
+msgstr "Fortgeschritten"
+
+#: src/window.ui:155
+msgid "Save As"
+msgstr "Speichern unter"
+
+#: src/window.ui:159
+msgid "Save All"
+msgstr "Alle speichern"
+
+#: src/window.ui:163
+msgid "Search"
+msgstr "Suchen"
+
+#: src/window.ui:169
+msgid "Vi Mode"
+msgstr "Vim-Modus"
+
+#: src/window.ui:173
+msgid "Editor Font"
+msgstr "Editor-Schriftart"
+
+#: src/window.ui:179
+msgid "Keyboard Shortcuts"
+msgstr "Tastenkombinationen"
+
+#: src/window.ui:183
+msgid "About vapad"
+msgstr "Über vapad"
+
+#: src/window.ui:187
+msgid "Quit"
+msgstr "Verlassen"
+
+#: src/window.vala:136
+msgid "Editor Theme"
+msgstr "Editor-Design"
+
+#: src/window.vala:176
+msgid "Select a file to open"
+msgstr "Wählen Sie eine zu öffnende Datei aus"
+
+#: src/window.vala:242
+msgid "New file"
+msgstr "Neue Datei"
+
+#: src/window.vala:248
+msgid "saved"
+msgstr "gespeichert"
+
+#: src/window.vala:429
+msgid "replaced"
+msgstr "ausgewechselt"
+
+#: src/window.vala:430
+msgid "occurances"
+msgstr "vorkommen"
+
+#: src/window.vala:532
+msgid "Select a font"
+msgstr "Auswählen einer Schriftart"
