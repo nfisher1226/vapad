@@ -121,7 +121,7 @@ namespace Vapad {
                 "comments", _("A simple text editor for Linux"),
                 "license-type", Gtk.License.GPL_3_0,
                 "copyright", _("Copyright © 2022 by Nathan Fisher"),
-                "translator_credits", _("Alex Kryuchkov")
+                "translator_credits", _("translator-credits")
             );
         }
 

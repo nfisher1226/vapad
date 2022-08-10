@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: vapad\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-08-09 15:48+0200\n"
-"PO-Revision-Date: 2022-08-09 16:04+0200\n"
+"PO-Revision-Date: 2022-08-09 21:43-0400\n"
 "Last-Translator: Óscar Fernández Díaz <oscfdezdz@tuta.io>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.1\n"
 
 #: data/org.hitchhiker_linux.vapad.desktop.in:3
 msgid "Vapad"
@@ -190,9 +190,9 @@ msgstr "Un sencillo editor de texto para Linux"
 msgid "Copyright © 2022 by Nathan Fisher"
 msgstr "Copyright © 2022 by Nathan Fisher"
 
-#: src/application.vala:118
-msgid "Alex Kryuchkov"
-msgstr "Alex Kryuchkov"
+#: application.vala:124
+msgid "translator-credits"
+msgstr "Óscar Fernández Díaz"
 
 #: src/search_dialog.vala:220
 msgid "Error"

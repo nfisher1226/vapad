@@ -26,6 +26,10 @@ msgstr "Простой текстовый редактор для Linux"
 msgid "Copyright © 2022 by Nathan Fisher"
 msgstr ""
 
+#: application.vala:124
+msgid "translator-credits"
+msgstr "Alex Kryuchkov"
+
 #: gtk/help-overlay.ui:11
 msgctxt "shortcut window"
 msgid "General"
