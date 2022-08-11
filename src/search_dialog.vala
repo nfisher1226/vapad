@@ -204,6 +204,7 @@ namespace Vapad {
             buffer.get_selection_bounds (out current, out selection_end);
             var current_mark = buffer.create_mark ("current_mark", current, true);
             var end_mark = buffer.create_mark ("selection_mark", selection_end, true);
+            int i = 0;
             while (true) {
                 Gtk.TextIter start, end, current_iter, sel_end;
                 buffer.get_iter_at_mark (out current_iter, current_mark);
@@ -216,6 +217,7 @@ namespace Vapad {
                     string replace = this.replace_entry.get_text ();
                     try {
                         search_context.replace (start, end, replace, -1);
+                        i += 1;
                     } catch (Error e) {
                         string error = _("Error");
                         print ("%s: %s\n", error, e.message);
@@ -229,6 +231,7 @@ namespace Vapad {
             if (this.close_when_finished.get_active ()) {
                 this.close ();
             }
+            this.strings_replaced (i);
         }
     }
 }
