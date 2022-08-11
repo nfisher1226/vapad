@@ -8,6 +8,9 @@ Contents
 ## Unreleased
 * Translated into Russian (alexkdeveloper)
 * Add dropdown displaying recently used files (past 7 days) to **Open** button
+* Prompt user to save any unsaved files when closing windows or tabs
+* Use callbacks from file loader and saver to finish when the async operations
+  are actually complete
 
 ## 0.3.0
 * Add theme switcher to main menu

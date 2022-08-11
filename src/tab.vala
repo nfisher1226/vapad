@@ -70,27 +70,33 @@ namespace Vapad {
                 buffer.set_language (language);
                 this.syntax_language = language.get_id ();
             }
-            loader.load_async.begin (-100, null, null);
+            loader.load_async.begin (-100, null, null, this.finish_load);
             this.file = f;
             this.sourcefile = file;
+        }
+        
+        private void finish_load () {
             this.set_title ();
             var extra_menu = this.sourceview.get_extra_menu ();
             if (extra_menu != null) {
                 this.set_lang_menu ((GLib.Menu)extra_menu);
             }
-            this.modified = false;
-        }
+	    this.modified = false;
+	}
 
         public void save_file () {
             if (this.file != null) {
                 Buffer buffer = (Buffer) this.sourceview.get_buffer ();
                 FileSaver saver = new FileSaver (buffer, this.sourcefile);
-                saver.save_async.begin (-100, null, null);
-                this.file_saved (this.file.get_basename ());
-                this.modified = false;
+                saver.save_async.begin (-100, null, null, this.finish_save);
             } else {
                 this.save_as ();
             }
+        }
+        
+        private void finish_save () {
+            this.file_saved (this.file.get_basename ());
+            this.modified = false;
         }
 
         public void save_as () {
