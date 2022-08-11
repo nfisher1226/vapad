@@ -6,9 +6,9 @@ Contents
 * [Keyboard Shortcuts](#keyboard_shortcuts)
 
 ## Introduction
-This is a simple text editor written in Vala, and is little more than a learning
-exercise undertaken to explore using Vala. It's not expected to turn into
-anything serious. Vapad takes as inspiration the old Gtk2 editor
+This is a simple text editor written in Vala. It was undertaken as a learning
+exercise to explore using Vala, but turned into a fairly feature complete text
+editor.  Vapad takes as inspiration the old Gtk2 editor
 [Leafpad](http://tarot.freeshell.org/leafpad/) which has been around forever,
 but updates the interface somewhat and adds tabs and syntax highlighting.
 
@@ -33,6 +33,7 @@ badass. Vapad is also a nice amalgam of Vala and Notepad, so it seemed a good fi
 - Standard keyboard shortcuts for all major interactions
 - Vi emulation mode (requires Ibus)
 - No preferences dialog - all settings via the application menu
+- Translated into Russian, Spanish and German
 
 ## Building
 Vapad requires Gtk+-4.0 or greater and GtkSourceView 5. You will also need to

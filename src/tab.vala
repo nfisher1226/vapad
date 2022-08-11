@@ -59,20 +59,24 @@ namespace Vapad {
         }
 
         public void load_file (GLib.File f) {
-            Buffer buffer = (Buffer)this.sourceview.get_buffer ();
             GtkSource.File file = new GtkSource.File ();
             file.set_location (f);
-            FileLoader loader = new FileLoader (buffer, file);
+            this.file = f;
+            this.sourcefile = file;
+            this.setup_language ();
+            FileLoader loader = new FileLoader ((Buffer)this.sourceview.buffer, file);
+            loader.load_async.begin (-100, null, null, this.finish_load);
+        }
+        
+        private void setup_language () {
             Language language = new LanguageManager ()
                 .get_default ()
-                .guess_language (f.get_path (), null);
+                .guess_language (this.file.get_path (), null);
             if (language != null) {
+    		var buffer = (GtkSource.Buffer)this.sourceview.buffer;
                 buffer.set_language (language);
                 this.syntax_language = language.get_id ();
             }
-            loader.load_async.begin (-100, null, null, this.finish_load);
-            this.file = f;
-            this.sourcefile = file;
         }
         
         private void finish_load () {
@@ -115,6 +119,11 @@ namespace Vapad {
                         GtkSource.File file = new GtkSource.File ();
                         file.set_location (f);
                         this.sourcefile = file;
+                        this.setup_language ();
+                        var extra_menu = this.sourceview.get_extra_menu ();
+    			if (extra_menu != null) {
+        		    this.set_lang_menu ((GLib.Menu)extra_menu);
+    			}
                         this.save_file ();
                         this.set_title ();
                     }
