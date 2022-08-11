@@ -171,7 +171,13 @@ namespace Vapad {
             this.close_tab (num);
         }
 
-        private void close_tab (int num) {
+        public void close_all () {
+            for (int i = 0; i < this.n_tabs (); i++) {
+                this.close_tab (i);
+            }
+        }
+
+        public void close_tab (int num) {
             var tab = (Vapad.Tab)this.notebook.get_nth_page (num);
             if (tab.modified) {
                 string fname = "Unknown File";

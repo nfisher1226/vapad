@@ -36,8 +36,7 @@ namespace Vapad {
         construct {
             ActionEntry[] action_entries = {
                 { "about", this.on_about_action },
-                { "preferences", this.on_preferences_action },
-                { "quit", this.quit }
+                { "quit", this.on_quit }
             };
             this.add_action_entries (action_entries, this);
             this.set_accels_for_action ("app.quit", {"<primary>q"});
@@ -125,8 +124,11 @@ namespace Vapad {
             );
         }
 
-        private void on_preferences_action () {
-            message ("app.preferences action activated");
+        private void on_quit() {
+            this.get_windows ().foreach ((obj) => {
+                var win = (Vapad.Window)obj;
+                win.close_all ();
+            });
         }
     }
 }
