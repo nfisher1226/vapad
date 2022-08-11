@@ -179,14 +179,18 @@ namespace Vapad {
 
         public void close_tab (int num) {
             var tab = (Vapad.Tab)this.notebook.get_nth_page (num);
-            if (tab.modified) {
+            var ext_modified = false;
+            if (tab.sourcefile != null) {
+                ext_modified = tab.sourcefile.is_externally_modified ();
+            }
+            if (tab.modified || ext_modified) {
                 string fname = "Unknown File";
                 if (tab.file != null) {
                     fname = tab.file.get_basename ();
                 }
                 var dlg = new Gtk.MessageDialog (
                     this,
-                    Gtk.DialogFlags.MODAL,
+                    Gtk.DialogFlags.USE_HEADER_BAR,
                     Gtk.MessageType.WARNING,
                     Gtk.ButtonsType.YES_NO,
                     _("Save %s before closing?"),
