@@ -108,6 +108,9 @@ namespace Vapad {
             this.search_entry.set_completion (this.search_completion);
             this.init_style_menu (pop);
             this.init_recent ();
+            this.close_request.connect (() => {
+                this.close_all ();
+            });
         }
 
         private void init_recent () {
