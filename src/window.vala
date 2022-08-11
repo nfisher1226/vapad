@@ -148,7 +148,7 @@ namespace Vapad {
             buffer.set_style_scheme (scheme);
             this.notebook.append_page(tab, tab.lbox);
             tab.close_button.clicked.connect ( () => {
-                this.notebook.remove_page (this.notebook.page_num (tab));
+                this.close_tab (this.notebook.page_num (tab));
             });
             tab.file_saved.connect ( (_,name) => {
                 this.update_title (this.notebook.get_current_page ());
@@ -168,7 +168,64 @@ namespace Vapad {
 
         private void close_page () {
             int num = this.notebook.get_current_page ();
-            this.notebook.remove_page (num);
+            this.close_tab (num);
+        }
+
+        private void close_tab (int num) {
+            var tab = (Vapad.Tab)this.notebook.get_nth_page (num);
+            if (tab.modified) {
+                string fname = "Unknown File";
+                if (tab.file != null) {
+                    fname = tab.file.get_basename ();
+                }
+                var dlg = new Gtk.MessageDialog (
+                    this,
+                    Gtk.DialogFlags.MODAL,
+                    Gtk.MessageType.WARNING,
+                    Gtk.ButtonsType.YES_NO,
+                    _("Save %s before closing?"),
+                    fname
+                );
+                dlg.response.connect ( (dlg,res) => {
+                    if (res == Gtk.ResponseType.YES) {
+                        if (tab.file != null) {
+                            tab.save_file ();
+                            dlg.close ();
+                            this.notebook.remove_page (num);
+                        } else {
+                            var chooser = new Gtk.FileChooserDialog (
+                                _("Save file as..."),
+                                this,
+                                Gtk.FileChooserAction.SAVE
+                            );
+                            chooser.add_button (_("Accept"), Gtk.ResponseType.ACCEPT);
+                            chooser.add_button (_("Cancel"), Gtk.ResponseType.CANCEL);
+                            chooser.response.connect ( (d, res) => {
+                                if (res == Gtk.ResponseType.ACCEPT) {
+                                    GLib.File f = chooser.get_file ();
+                                    if (f != null) {
+                                        tab.file = f;
+                                        GtkSource.File file = new GtkSource.File ();
+                                        file.set_location (f);
+                                        tab.sourcefile = file;
+                                        tab.save_file ();
+                                    }
+                                }
+                                d.close ();
+                                this.notebook.remove_page (num);
+                            });
+                            dlg.close ();
+                            chooser.show ();
+                        }
+                    } else if (res != Gtk.ResponseType.DELETE_EVENT) {
+                        dlg.close ();
+                        this.notebook.remove_page (num);
+                    }
+                });
+                dlg.show ();
+            } else {
+                this.notebook.remove_page (num);
+            }
         }
 
         private void open_file () {
@@ -435,7 +492,7 @@ namespace Vapad {
 
         private void replace_text () {
         }
-        
+
         private void set_toast (string str){
             var toast = new Adw.Toast (str);
             toast.set_timeout (3);
