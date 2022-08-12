@@ -7,6 +7,7 @@ Contents
 
 ## 0.4.0
 * Translated into Russian (alexkdeveloper)
+* Translated into Spanish (oscfdezdz)
 * Add dropdown displaying recently used files (past 7 days) to **Open** button
 * Prompt user to save any unsaved files when closing windows or tabs
 * Use callbacks from file loader and saver to finish when the async operations
