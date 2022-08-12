@@ -32,19 +32,9 @@ namespace Vapad {
 
         construct {
             this.set_layout_manager (new Gtk.BinLayout ());
-            this.system_button.toggled.connect (set_theme);
-            this.light_button.toggled.connect (set_theme);
-            this.dark_button.toggled.connect (set_theme);
-        }
-
-        private void set_theme () {
-            if (this.system_button.get_active ()) {
-                Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.DEFAULT);
-            } else if (this.light_button.get_active ()) {
-                Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.FORCE_LIGHT);
-            } else {
-                Adw.StyleManager.get_default ().set_color_scheme (Adw.ColorScheme.FORCE_DARK);
-            }
+            this.system_button.set_detailed_action_name ("app.set_app_theme::default");
+            this.light_button.set_detailed_action_name ("app.set_app_theme::force-light");
+            this.dark_button.set_detailed_action_name ("app.set_app_theme::force-dark");
         }
     }
 }

@@ -22,6 +22,8 @@ namespace Vapad {
     public const string[] AUTHORS = { "Nathan Fisher" };
 
     public class Application : Adw.Application {
+	public Adw.ColorScheme theme { get; set; }
+
         public Application () {
             Object (
                 application_id: "org.hitchhiker_linux.vapad",
@@ -63,6 +65,10 @@ namespace Vapad {
             this.set_accels_for_action ("win.last_tab", {"<alt>0"});
             this.set_accels_for_action ("win.next_tab", {"<alt>Right"});
             this.set_accels_for_action ("win.previous_tab", {"<alt>Left"});
+
+            var set_theme_action = new GLib.PropertyAction ("set_app_theme", this, "theme");
+            set_theme_action.notify.connect (this.set_app_theme);
+            this.add_action (set_theme_action);
             this.open.connect (open_files);
         }
 
@@ -72,9 +78,7 @@ namespace Vapad {
             if (win == null) {
                 win = this.create_window ();
                 win.present ();
-                Adw.StyleManager
-                    .get_default ()
-                    .set_color_scheme (Adw.ColorScheme.DEFAULT);
+                this.set_app_theme ();
             }
             ((Vapad.Window)win).new_page ();
         }
@@ -107,6 +111,7 @@ namespace Vapad {
             settings.bind ("vimode", win, "vimode", GLib.SettingsBindFlags.DEFAULT);
             settings.bind ("syntax", win, "editor_theme", GLib.SettingsBindFlags.DEFAULT);
             settings.bind ("font", win, "editor_font", GLib.SettingsBindFlags.DEFAULT);
+            settings.bind ("theme", this, "theme", GLib.SettingsBindFlags.DEFAULT);
             return win;
         }
 
@@ -122,6 +127,10 @@ namespace Vapad {
                 "copyright", _("Copyright © 2022 by Nathan Fisher"),
                 "translator_credits", _("translator-credits")
             );
+        }
+        
+        private void set_app_theme () {
+            Adw.StyleManager.get_default ().set_color_scheme (this.theme);
         }
 
         private void on_quit() {

@@ -79,9 +79,12 @@ namespace Vapad {
             };
             this.add_action_entries (actions, this);
             this.window_title.set_title (@"$PROGNAME-$VERSION");
+            
+            // Setup property and action for "vimode"
             var vimode = new PropertyAction ("vimode", this, "vimode");
             vimode.notify.connect (this.set_vi_mode);
             this.add_action (vimode);
+            
             this.editor_theme = "Adwaita";
             var set_editor_theme = new PropertyAction ("set_editor_theme", this, "editor_theme");
             set_editor_theme.notify.connect (this.set_theme);
