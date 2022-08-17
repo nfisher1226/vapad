@@ -26,7 +26,7 @@ namespace Vapad {
         [GtkChild]
         private unowned Gtk.MenuButton menu_button;
         [GtkChild]
-        private unowned Gtk.Notebook notebook;
+        public unowned Gtk.Notebook notebook;
         [GtkChild]
         private unowned Gtk.Box search_box;
         [GtkChild]
@@ -302,7 +302,7 @@ namespace Vapad {
             }
         }
 
-        private void update_title (uint num) {
+        public void update_title (uint num) {
             var tab = (Vapad.Tab)this.notebook.get_nth_page ((int)num);
             if (tab.file != null) {
                 string path = tab.file.get_path ();
