@@ -4,6 +4,8 @@
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
 	<description>
-	  <p>No description</p>
+	  <p>Vapad is a gtk4 text editor with a simple interface that
+             enables the most commonly used comfort features by default.
+             It strives, above all, to stay out of the user's way.</p>
 	</description>
 </component>

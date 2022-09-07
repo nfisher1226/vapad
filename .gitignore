@@ -2,3 +2,4 @@ tags
 tags.*
 build/
 .goutputstream-*
+.flatpak-builder/
