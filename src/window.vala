@@ -510,8 +510,9 @@ namespace Vapad {
         }
 
         private void set_toast (string str){
-            var toast = new Adw.Toast (str);
-            toast.set_timeout (3);
+            var toast = new Adw.Toast (str) {
+                timeout = 3,
+            };
             overlay.add_toast (toast);
         }
 

@@ -1,11 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component type="desktop">
-	<id>org.hitchhiker_linux.vapad.desktop</id>
+<!-- Copyright 2022 Nathan Fisher -->
+<component type="desktop-application">
+	<id>org.hitchhiker_linux.vapad</id>
 	<metadata_license>CC0-1.0</metadata_license>
 	<project_license>GPL-3.0-or-later</project_license>
+  <name>Vapad</name>
+  <summary>Edits text and stays out of the way</summary>
 	<description>
-	  <p>Vapad is a gtk4 text editor with a simple interface that
-             enables the most commonly used comfort features by default.
-             It strives, above all, to stay out of the user's way.</p>
+	  <p>
+	    Vapad is a gtk4 text editor with a simple interface that
+      enables the most commonly used comfort features by default.
+      It strives, above all, to stay out of the user's way.
+	  </p>
+	  <p>Features:</p>
+	  <ul>
+	    <li>Syntax highlighting for all languages supported by GtkSourceView</li>
+	    <li>
+	      Comfortfeatures like line numbers, long line marker and auto-indent on
+	      by default
+	    </li>
+	    <li>Tabbed interface</li>
+	    <li>Light and dark themes using LibAdwaita</li>
+	    <li>Themeable syntax highlighting</li>
+	    <li>Quick search bar</li>
+	    <li>Advanced search including replace all in document, session or selection</li>
+	    <li>Standard keyboard shortcuts for all major interactions</li>
+	    <li>Simple and light interface with no preferences window</li>
+	  </ul>
 	</description>
+  <screenshot>
+    <image>https://jeang3nie.codeberg.page/vapad/screenshot.png</image>
+  </screenshot>
+  <launchable type="desktop-id">org.hitchhiker_linux.vapad</launchable>
+  <url type="homepage">https://codeberg.org/jeang3nie/vapad</url>
+  <url type="bugtracker">https://codeberg.org/jeang3nie/vapad/issues</url>
+  <developer_name>Nathan Fisher</developer_name>
+  <translation type="gettext">vapad</translation>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </recommends>
+  <releases>
+    <release version="0.5.0" date="2022-08-09">
+      <description>
+        <p>Prepare for Flathub release</p>
+      </description>
+    </release>
+  </releases>
+  <content_rating type="oars-1.1" />
 </component>
