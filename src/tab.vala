@@ -165,6 +165,14 @@ namespace Vapad {
             this.cmd_bar.set_visible (false);
             this.controller = null;
         }
+        
+        public void set_display_grid (bool display) {
+	    if (display) {
+                this.sourceview.set_background_pattern (GtkSource.BackgroundPatternType.GRID);
+	    } else {
+                this.sourceview.set_background_pattern (GtkSource.BackgroundPatternType.NONE);
+	    }
+	}
 
         public void set_css_font (string css) {
             var provider = new Gtk.CssProvider ();

@@ -41,6 +41,7 @@ namespace Vapad {
         public GtkSource.SearchContext? search_context;
         public Gtk.EntryCompletion search_completion;
         public bool vimode { get; set; }
+        public bool display_grid { get; set; }
         public string editor_theme { get; set; }
         public string? editor_font { get; set; }
 
@@ -84,6 +85,11 @@ namespace Vapad {
             var vimode = new PropertyAction ("vimode", this, "vimode");
             vimode.notify.connect (this.set_vi_mode);
             this.add_action (vimode);
+            
+            // Setup property action for displaying grid pattern
+            var grid = new PropertyAction ("display_grid", this, "display_grid");
+            grid.notify.connect (this.set_grid);
+            this.add_action (grid);
             
             this.editor_theme = "Adwaita";
             var set_editor_theme = new PropertyAction ("set_editor_theme", this, "editor_theme");
@@ -162,6 +168,11 @@ namespace Vapad {
             });
             if (this.vimode) {
                 tab.set_vi_mode ();
+            }
+            if (this.display_grid) {
+                tab.set_display_grid (true);
+            } else {
+                tab.set_display_grid (false);
             }
             if (this.editor_font != null) {
                 var font = Pango.FontDescription.from_string (this.editor_font);
@@ -531,6 +542,17 @@ namespace Vapad {
                     tab.unset_vi_mode ();
                 }
             }
+        }
+        
+        private void set_grid () {
+	    for (int i = 0; i < this.notebook.get_n_pages (); i++) {
+		var tab = (Vapad.Tab)this.notebook.get_nth_page (i);
+		if (this.display_grid) {
+		    tab.set_display_grid (true);
+		} else {
+		    tab.set_display_grid (false);
+		}
+	    }
         }
 
         private void set_theme () {

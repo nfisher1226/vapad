@@ -173,6 +173,10 @@
         <attribute name="label" translatable="yes">Editor Font</attribute>
         <attribute name="action">win.set_font</attribute>
       </item>
+      <item>
+        <attribute name="label" translatable="yes">Display grid</attribute>
+	<attribute name="action">win.display_grid</attribute>
+      </item>
     </section>
     <section>
       <item>

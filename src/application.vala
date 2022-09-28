@@ -110,6 +110,7 @@ namespace Vapad {
             // GLib settings
             var settings = new GLib.Settings ("org.hitchhiker_linux.vapad");
             settings.bind ("vimode", win, "vimode", GLib.SettingsBindFlags.DEFAULT);
+            settings.bind ("grid", win, "display_grid", GLib.SettingsBindFlags.DEFAULT);
             settings.bind ("syntax", win, "editor_theme", GLib.SettingsBindFlags.DEFAULT);
             settings.bind ("font", win, "editor_font", GLib.SettingsBindFlags.DEFAULT);
             settings.bind ("theme", this, "theme", GLib.SettingsBindFlags.DEFAULT);

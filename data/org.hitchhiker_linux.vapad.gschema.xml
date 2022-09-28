@@ -6,6 +6,10 @@
       <summary>Use Vim emulation</summary>
       <description>Whether to use Vim emulation</description>
     </key>
+    <key name="grid" type="b">
+      <default>false</default>
+      <summary>Display a background grid pattern</summary>
+    </key>
     <key name="syntax" type="s">
       <default>'Adwaita'</default>
       <summary>Syntax highlighting theme</summary>
