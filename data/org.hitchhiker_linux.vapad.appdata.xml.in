@@ -28,9 +28,11 @@
       <li>Simple and light interface with no preferences window</li>
     </ul>
   </description>
-  <screenshot>
-    <image>https://jeang3nie.codeberg.page/vapad/screenshot.png</image>
-  </screenshot>
+  <screenshots>
+    <screenshot>
+      <image>https://jeang3nie.codeberg.page/vapad/screenshot.png</image>
+    </screenshot>
+  </screenshots>
   <launchable type="desktop-id">org.hitchhiker_linux.vapad.desktop</launchable>
   <url type="homepage">https://codeberg.org/jeang3nie/vapad</url>
   <url type="bugtracker">https://codeberg.org/jeang3nie/vapad/issues</url>
