@@ -36,6 +36,7 @@
             <property name="smart-home-end">after</property>
             <property name="smart-backspace">true</property>
             <property name="highlight-current-line">true</property>
+            <property name="wrap-mode">word-char</property>
           </object>
         </child>
       </object>
