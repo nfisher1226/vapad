@@ -118,17 +118,20 @@ namespace Vapad {
         }
 
         private void on_about_action () {
-            Gtk.show_about_dialog (
-                this.active_window,
-                "program-name", PROGNAME,
-                "authors", AUTHORS,
-                "version", VERSION,
-                "logo-icon-name", "org.hitchhiker_linux.vapad",
-                "comments", _("A simple text editor for Linux"),
-                "license-type", Gtk.License.GPL_3_0,
-                "copyright", _("Copyright © 2022 by Nathan Fisher"),
-                "translator_credits", _("translator-credits")
-            );
+            var win = new Adw.AboutWindow(){
+                application_name = PROGNAME,
+                developer_name = "Nathan Fisher",
+                developers = AUTHORS,
+                version = VERSION,
+                application_icon = "org.hitchhiker_linux.vapad",
+                comments = _("A simple text editor for Linux"),
+                license_type = Gtk.License.GPL_3_0,
+                copyright = _("Copyright © 2022 by Nathan Fisher"),
+                translator_credits = _("translator-credits"),
+                website = "https://codeberg.org/jeang3nie/vapad",
+                issue_url = "https://codeberg.org/jeang3nie/vapad/issues"
+                };
+                win.show();
         }
         
         private void set_app_theme () {
