@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: unnamed project\n"
-"POT-Creation-Date: 2022-08-05 10:43+0800\n"
-"PO-Revision-Date: 2022-08-05 11:21+0800\n"
+"POT-Creation-Date: 2022-10-18 14:16+0800\n"
+"PO-Revision-Date: 2022-10-18 14:19+0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -18,15 +18,15 @@ msgstr ""
 "X-Poedit-Basepath: ../src\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: application.vala:111
+#: application.vala:127
 msgid "A simple text editor for Linux"
 msgstr "Простой текстовый редактор для Linux"
 
-#: application.vala:113
+#: application.vala:129
 msgid "Copyright © 2022 by Nathan Fisher"
 msgstr ""
 
-#: application.vala:124
+#: application.vala:130
 msgid "translator-credits"
 msgstr "Alex Kryuchkov"
 
@@ -231,27 +231,27 @@ msgstr "Заменить"
 msgid "Replace and Find"
 msgstr "Заменить и Найти"
 
-#: search_dialog.vala:220
+#: search_dialog.vala:222
 msgid "Error"
 msgstr "Ошибка"
 
-#: tab.vala:49 window.vala:223
-msgid "New file"
+#: tab.ui:10 window.ui:151
+msgid "New File"
 msgstr "Новый файл"
 
-#: tab.vala:136
+#: tab.vala:108 window.vala:224
 msgid "Save file as..."
 msgstr "Сохранить файл как..."
 
-#: tab.vala:140 window.vala:169
+#: tab.vala:112 window.vala:228 window.vala:272
 msgid "Accept"
 msgstr "Принять"
 
-#: tab.vala:141 window.vala:170
+#: tab.vala:113 window.vala:229 window.vala:273
 msgid "Cancel"
 msgstr "Отмена"
 
-#: tab.vala:206
+#: tab.vala:191
 msgid "Language"
 msgstr "Язык"
 
@@ -259,11 +259,11 @@ msgstr "Язык"
 msgid "Follow system style"
 msgstr "Следовать системному стилю"
 
-#: theme_switcher.ui:36 theme_switcher.ui:43
+#: theme_switcher.ui:36 theme_switcher.ui:42
 msgid "Light style"
 msgstr "Светлый стиль"
 
-#: theme_switcher.ui:51 theme_switcher.ui:58
+#: theme_switcher.ui:50 theme_switcher.ui:56
 msgid "Dark style"
 msgstr "Темный стиль"
 
@@ -311,10 +311,6 @@ msgstr "Целые слова"
 msgid "Advanced"
 msgstr "Вперед"
 
-#: window.ui:151
-msgid "New File"
-msgstr "Новый файл"
-
 #: window.ui:155
 msgid "Save As"
 msgstr "Сохранить как"
@@ -335,53 +331,63 @@ msgstr "Режим Vi"
 msgid "Editor Font"
 msgstr "Шрифт редактора"
 
-#: window.ui:179
+#: window.ui:177
+msgid "Display grid"
+msgstr "Отображение сетки"
+
+#: window.ui:183
 msgid "Keyboard Shortcuts"
 msgstr "Комбинации клавиш"
 
-#: window.ui:183
+#: window.ui:187
 msgid "About vapad"
 msgstr "О vapad"
 
-#: window.ui:187
+#: window.ui:191
 msgid "Quit"
 msgstr "Выход"
 
-#: window.vala:117
+#: window.vala:148
 msgid "Editor Theme"
 msgstr "Тема редактора"
 
-#: window.vala:157
+#: window.vala:213
+#, c-format
+msgid "Save %s before closing?"
+msgstr "Сохранить %s перед закрытием?"
+
+#: window.vala:260
 msgid "Select a file to open"
 msgstr "Выбор файла для открытия"
 
-#: window.vala:229
+#: window.vala:326
+msgid "New file"
+msgstr "Новый файл"
+
+#: window.vala:332
 msgid "saved"
 msgstr "сохранено"
 
-#: window.vala:410
+#: window.vala:513
 msgid "replaced"
 msgstr "заменено"
 
-#: window.vala:411
+#: window.vala:514
 msgid "occurances"
 msgstr "вхождений"
 
-#: window.vala:428
-msgid "Using system application style"
-msgstr "Используется системный стиль"
-
-#: window.vala:433
-msgid "Using light application style"
-msgstr "Используется светлый стиль"
-
-#: window.vala:438
-msgid "Using dark application style"
-msgstr "Используется темный стиль"
-
-#: window.vala:528
+#: window.vala:628
 msgid "Select a font"
 msgstr "Выберите шрифт"
+
+#~ msgid "Using system application style"
+#~ msgstr "Используется системный стиль"
+
+#~ msgid "Using light application style"
+#~ msgstr "Используется светлый стиль"
+
+#~ msgid "Using dark application style"
+#~ msgstr "Используется темный стиль"
 
 #~ msgid "_Replace"
 #~ msgstr "_Заменить"
