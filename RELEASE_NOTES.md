@@ -1,9 +1,15 @@
 Contents
 ========
+- [0.5.1](#0.5.1)
 - [0.4.0](#0.4.0)
 - [0.3.0](#0.3.0)
 - [0.2.0](#0.2.0)
 - [0.1.0](#0.1.0)
+
+## 0.5.1
+* Add grid display setting
+* Port about dialog to **Adw.AboutWindow** (Alex K)
+* Improve appstream data to prepare for FlatHub
 
 ## 0.4.0
 * Translated into Russian (alexkdeveloper)

@@ -19,10 +19,10 @@
 namespace Vapad {
     public const string PROGNAME = "Vapad";
     public const string VERSION = "0.5.1";
-    public const string[] AUTHORS = { "Nathan Fisher" };
+    public const string[] AUTHORS = { "Nathan Fisher", "Alex Kryuchkov" };
 
     public class Application : Adw.Application {
-	public Adw.ColorScheme theme { get; set; }
+        public Adw.ColorScheme theme { get; set; }
 
         public Application () {
             Object (
@@ -41,30 +41,30 @@ namespace Vapad {
                 { "quit", this.on_quit }
             };
             this.add_action_entries (action_entries, this);
-            this.set_accels_for_action ("app.quit", {"<primary>q"});
-            this.set_accels_for_action ("win.search", {"<primary>f"});
-            this.set_accels_for_action ("win.find_next", {"<primary>g"});
-            this.set_accels_for_action ("win.replace_text", {"<primary>h"});
-            this.set_accels_for_action ("win.find_previous", {"<primary><shift>g"});
-            this.set_accels_for_action ("win.hide_search", {"<shift>Escape"});
-            this.set_accels_for_action ("win.new_file", {"<primary>n"});
-            this.set_accels_for_action ("win.close_file", {"<primary>w"});
-            this.set_accels_for_action ("win.open_file", {"<primary>o"});
-            this.set_accels_for_action ("win.save_file", {"<primary>s"});
-            this.set_accels_for_action ("win.save_as", {"<primary><shift>s"});
-            this.set_accels_for_action ("win.save_all", {"<primary><shift>l"});
-            this.set_accels_for_action ("win.tab1", {"<alt>1"});
-            this.set_accels_for_action ("win.tab2", {"<alt>2"});
-            this.set_accels_for_action ("win.tab3", {"<alt>3"});
-            this.set_accels_for_action ("win.tab4", {"<alt>4"});
-            this.set_accels_for_action ("win.tab5", {"<alt>5"});
-            this.set_accels_for_action ("win.tab6", {"<alt>6"});
-            this.set_accels_for_action ("win.tab7", {"<alt>7"});
-            this.set_accels_for_action ("win.tab8", {"<alt>8"});
-            this.set_accels_for_action ("win.tab9", {"<alt>9"});
-            this.set_accels_for_action ("win.last_tab", {"<alt>0"});
-            this.set_accels_for_action ("win.next_tab", {"<alt>Right"});
-            this.set_accels_for_action ("win.previous_tab", {"<alt>Left"});
+            this.set_accels_for_action ("app.quit", { "<primary>q" });
+            this.set_accels_for_action ("win.search", { "<primary>f" });
+            this.set_accels_for_action ("win.find_next", { "<primary>g" });
+            this.set_accels_for_action ("win.replace_text", { "<primary>h" });
+            this.set_accels_for_action ("win.find_previous", { "<primary><shift>g" });
+            this.set_accels_for_action ("win.hide_search", { "<shift>Escape" });
+            this.set_accels_for_action ("win.new_file", { "<primary>n" });
+            this.set_accels_for_action ("win.close_file", { "<primary>w" });
+            this.set_accels_for_action ("win.open_file", { "<primary>o" });
+            this.set_accels_for_action ("win.save_file", { "<primary>s" });
+            this.set_accels_for_action ("win.save_as", { "<primary><shift>s" });
+            this.set_accels_for_action ("win.save_all", { "<primary><shift>l" });
+            this.set_accels_for_action ("win.tab1", { "<alt>1" });
+            this.set_accels_for_action ("win.tab2", { "<alt>2" });
+            this.set_accels_for_action ("win.tab3", { "<alt>3" });
+            this.set_accels_for_action ("win.tab4", { "<alt>4" });
+            this.set_accels_for_action ("win.tab5", { "<alt>5" });
+            this.set_accels_for_action ("win.tab6", { "<alt>6" });
+            this.set_accels_for_action ("win.tab7", { "<alt>7" });
+            this.set_accels_for_action ("win.tab8", { "<alt>8" });
+            this.set_accels_for_action ("win.tab9", { "<alt>9" });
+            this.set_accels_for_action ("win.last_tab", { "<alt>0" });
+            this.set_accels_for_action ("win.next_tab", { "<alt>Right" });
+            this.set_accels_for_action ("win.previous_tab", { "<alt>Left" });
 
             var set_theme_action = new GLib.PropertyAction ("set_app_theme", this, "theme");
             set_theme_action.notify.connect (this.set_app_theme);
@@ -80,14 +80,14 @@ namespace Vapad {
                 win.present ();
                 this.set_app_theme ();
             }
-            ((Vapad.Window)win).new_page ();
+            ((Vapad.Window) win).new_page ();
         }
 
-        private void open_files(File[] files) {
-            var win = (Vapad.Window)this.active_window;
+        private void open_files (File[] files) {
+            var win = (Vapad.Window) this.active_window;
             if (win == null) {
                 var w = this.create_window ();
-                win = (Vapad.Window)w;
+                win = (Vapad.Window) w;
                 win.present ();
             }
             foreach (File file in files) {
@@ -118,29 +118,29 @@ namespace Vapad {
         }
 
         private void on_about_action () {
-            var win = new Adw.AboutWindow(){
+            var win = new Adw.AboutWindow () {
                 application_name = PROGNAME,
                 developer_name = "Nathan Fisher",
                 developers = AUTHORS,
                 version = VERSION,
                 application_icon = "org.hitchhiker_linux.vapad",
-                comments = _("A simple text editor for Linux"),
+                comments = _ ("A simple text editor for Linux"),
                 license_type = Gtk.License.GPL_3_0,
-                copyright = _("Copyright © 2022 by Nathan Fisher"),
-                translator_credits = _("translator-credits"),
+                copyright = _ ("Copyright © 2022 by Nathan Fisher"),
+                translator_credits = _ ("translator-credits"),
                 website = "https://codeberg.org/jeang3nie/vapad",
                 issue_url = "https://codeberg.org/jeang3nie/vapad/issues"
-                };
-                win.show();
+            };
+            win.show ();
         }
-        
+
         private void set_app_theme () {
             Adw.StyleManager.get_default ().set_color_scheme (this.theme);
         }
 
-        private void on_quit() {
+        private void on_quit () {
             this.get_windows ().foreach ((obj) => {
-                var win = (Vapad.Window)obj;
+                var win = (Vapad.Window) obj;
                 win.close_all ();
             });
         }
