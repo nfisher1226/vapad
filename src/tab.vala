@@ -104,13 +104,13 @@ namespace Vapad {
         }
 
         public void save_as () {
-            FileChooserDialog chooser = new FileChooserDialog (
+            FileChooserNative chooser = new FileChooserNative (
                 _("Save file as..."),
                 (Window)this.get_root (),
-                FileChooserAction.SAVE
+                FileChooserAction.SAVE,
+                null,
+                null
             );
-            chooser.add_button (_("Accept"), Gtk.ResponseType.ACCEPT);
-            chooser.add_button (_("Cancel"), Gtk.ResponseType.CANCEL);
             chooser.response.connect ( (dlg, res) => {
                 if (res == Gtk.ResponseType.ACCEPT) {
                     GLib.File f = chooser.get_file ();
@@ -128,7 +128,6 @@ namespace Vapad {
                         this.set_title ();
                     }
                 }
-                dlg.close ();
             });
             chooser.show ();
         }

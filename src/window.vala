@@ -80,31 +80,31 @@ namespace Vapad {
             };
             this.add_action_entries (actions, this);
             this.window_title.set_title (@"$PROGNAME-$VERSION");
-            
+
             // Setup property and action for "vimode"
             var vimode = new PropertyAction ("vimode", this, "vimode");
             vimode.notify.connect (this.set_vi_mode);
             this.add_action (vimode);
-            
+
             // Setup property action for displaying grid pattern
             var grid = new PropertyAction ("display_grid", this, "display_grid");
             grid.notify.connect (this.set_grid);
             this.add_action (grid);
-            
+
             this.editor_theme = "Adwaita";
             var set_editor_theme = new PropertyAction ("set_editor_theme", this, "editor_theme");
             set_editor_theme.notify.connect (this.set_theme);
             this.add_action (set_editor_theme);
             var open_named = new SimpleAction ("open_named", GLib.VariantType.STRING);
-            open_named.activate.connect ( (path) => this.open_named ((string)path));
+            open_named.activate.connect ((path) => this.open_named ((string) path));
             this.add_action (open_named);
 
-            var pop = (Gtk.PopoverMenu)this.menu_button.get_popover ();
+            var pop = (Gtk.PopoverMenu) this.menu_button.get_popover ();
             this.theme_switcher = new Vapad.ThemeSwitcher ();
             pop.add_child (this.theme_switcher, "theme");
             this.notebook.page_removed.connect (check_tab_visibility);
             this.notebook.page_added.connect (check_tab_visibility);
-            this.notebook.switch_page.connect ( (nb, num) => update_title (num));
+            this.notebook.switch_page.connect ((nb, num) => update_title (num));
             this.search_entry.activate.connect (new_search);
 
             this.search_completion = new Gtk.EntryCompletion () {
@@ -126,7 +126,7 @@ namespace Vapad {
             Gtk.RecentManager manager = Gtk.RecentManager.get_default ();
             var all_items = manager.get_items ();
             var model = new GLib.Menu ();
-            all_items.foreach ( (item) => {
+            all_items.foreach ((item) => {
                 if (item.has_application ("vapad") && item.get_age () < 7) {
                     string path = item.get_uri_display ();
                     string act = @"win.open_named::$path";
@@ -144,8 +144,8 @@ namespace Vapad {
             foreach (string id in ids) {
                 menu.append (id, @"win.set_editor_theme::$id");
             }
-            var model = (GLib.Menu)pop.get_menu_model ();
-            model.insert_submenu (3, _("Editor Theme"), menu);
+            var model = (GLib.Menu) pop.get_menu_model ();
+            model.insert_submenu (3, _ ("Editor Theme"), menu);
         }
 
         public void new_page () {
@@ -156,13 +156,13 @@ namespace Vapad {
         private void setup_tab (Vapad.Tab tab) {
             var manager = new GtkSource.StyleSchemeManager ();
             var scheme = manager.get_scheme (this.editor_theme);
-            var buffer = (GtkSource.Buffer)tab.sourceview.get_buffer ();
+            var buffer = (GtkSource.Buffer) tab.sourceview.get_buffer ();
             buffer.set_style_scheme (scheme);
-            this.notebook.append_page(tab, tab.lbox);
-            tab.close_button.clicked.connect ( () => {
+            this.notebook.append_page (tab, tab.lbox);
+            tab.close_button.clicked.connect (() => {
                 this.close_tab (this.notebook.page_num (tab));
             });
-            tab.file_saved.connect ( (_,name) => {
+            tab.file_saved.connect ((_, name) => {
                 this.update_title (this.notebook.get_current_page ());
                 this.send_saved_toast (name);
             });
@@ -195,7 +195,7 @@ namespace Vapad {
         }
 
         public void close_tab (int num) {
-            var tab = (Vapad.Tab)this.notebook.get_nth_page (num);
+            var tab = (Vapad.Tab) this.notebook.get_nth_page (num);
             var ext_modified = false;
             if (tab.sourcefile != null) {
                 ext_modified = tab.sourcefile.is_externally_modified ();
@@ -210,24 +210,24 @@ namespace Vapad {
                     Gtk.DialogFlags.USE_HEADER_BAR,
                     Gtk.MessageType.WARNING,
                     Gtk.ButtonsType.YES_NO,
-                    _("Save %s before closing?"),
+                    _ ("Save %s before closing?"),
                     fname
                 );
-                dlg.response.connect ( (dlg,res) => {
+                dlg.response.connect ((dlg, res) => {
                     if (res == Gtk.ResponseType.YES) {
                         if (tab.file != null) {
                             tab.save_file ();
                             dlg.close ();
                             this.notebook.remove_page (num);
                         } else {
-                            var chooser = new Gtk.FileChooserDialog (
-                                _("Save file as..."),
+                            var chooser = new Gtk.FileChooserNative (
+                                _ ("Save file as..."),
                                 this,
-                                Gtk.FileChooserAction.SAVE
+                                Gtk.FileChooserAction.SAVE,
+                                null,
+                                null
                             );
-                            chooser.add_button (_("Accept"), Gtk.ResponseType.ACCEPT);
-                            chooser.add_button (_("Cancel"), Gtk.ResponseType.CANCEL);
-                            chooser.response.connect ( (d, res) => {
+                            chooser.response.connect ((d, res) => {
                                 if (res == Gtk.ResponseType.ACCEPT) {
                                     GLib.File f = chooser.get_file ();
                                     if (f != null) {
@@ -238,7 +238,6 @@ namespace Vapad {
                                         tab.save_file ();
                                     }
                                 }
-                                d.close ();
                                 this.notebook.remove_page (num);
                             });
                             dlg.close ();
@@ -256,10 +255,12 @@ namespace Vapad {
         }
 
         private void open_file () {
-            Gtk.FileChooserDialog chooser = new Gtk.FileChooserDialog (
-                _("Select a file to open"),
+            Gtk.FileChooserNative chooser = new Gtk.FileChooserNative (
+                _ ("Select a file to open"),
                 this,
-                Gtk.FileChooserAction.OPEN
+                Gtk.FileChooserAction.OPEN,
+                null,
+                null
             );
             var f = this.current_tab ().file;
             if (f != null) {
@@ -269,14 +270,12 @@ namespace Vapad {
                     print ("Error: %s\n", e.message);
                 }
             }
-            chooser.add_button (_("Accept"), Gtk.ResponseType.ACCEPT);
-            chooser.add_button (_("Cancel"), Gtk.ResponseType.CANCEL);
-            chooser.response.connect ( (dlg, res) => {
+            chooser.response.connect ((dlg, res) => {
                 if (res == Gtk.ResponseType.ACCEPT) {
                     File file = chooser.get_file ();
                     if (file != null) {
                         int n = this.notebook.get_current_page ();
-                        var tab = (Vapad.Tab)this.notebook.get_nth_page (n);
+                        var tab = (Vapad.Tab) this.notebook.get_nth_page (n);
                         if (tab.file != null) {
                             tab = new Vapad.Tab ();
                             this.setup_tab (tab);
@@ -285,7 +284,6 @@ namespace Vapad {
                         this.update_title (this.notebook.page_num (tab));
                     }
                 }
-                dlg.close ();
             });
             chooser.show ();
         }
@@ -299,22 +297,22 @@ namespace Vapad {
 
         private void check_tab_visibility () {
             switch (this.notebook.get_n_pages ()) {
-                case 0:
-                    this.close ();
-                    break;
-                case 1:
-                    this.notebook.set_show_tabs (false);
-                    break;
-                default:
-                    if (!this.notebook.get_show_tabs ()) {
-                        this.notebook.set_show_tabs (true);
-                    }
-                    break;
+            case 0:
+                this.close ();
+                break;
+            case 1:
+                this.notebook.set_show_tabs (false);
+                break;
+            default:
+                if (!this.notebook.get_show_tabs ()) {
+                    this.notebook.set_show_tabs (true);
+                }
+                break;
             }
         }
 
         public void update_title (uint num) {
-            var tab = (Vapad.Tab)this.notebook.get_nth_page ((int)num);
+            var tab = (Vapad.Tab) this.notebook.get_nth_page ((int) num);
             if (tab.file != null) {
                 string path = tab.file.get_path ();
                 string home = GLib.Environment.get_home_dir ();
@@ -323,22 +321,22 @@ namespace Vapad {
                 this.window_title.set_subtitle (title);
                 this.window_title.set_title (@"$PROGNAME-$VERSION ~ $fname");
             } else {
-                this.window_title.set_subtitle (_("New file"));
+                this.window_title.set_subtitle (_ ("New file"));
                 this.window_title.set_title (@"$PROGNAME-$VERSION");
             }
         }
 
         private void send_saved_toast (string name) {
-            var saved = _("saved");
+            var saved = _ ("saved");
             this.set_toast (@"$name $saved");
         }
 
         public Vapad.Tab? current_tab () {
-            return (Vapad.Tab)this.notebook.get_nth_page (this.notebook.get_current_page ());
+            return (Vapad.Tab) this.notebook.get_nth_page (this.notebook.get_current_page ());
         }
 
         public Vapad.Tab? nth_tab (int n) {
-            return (Vapad.Tab)this.notebook.get_nth_page (n);
+            return (Vapad.Tab) this.notebook.get_nth_page (n);
         }
 
         public int n_tabs () {
@@ -346,7 +344,7 @@ namespace Vapad {
         }
 
         private GtkSource.Buffer current_buffer () {
-            return (GtkSource.Buffer)this.current_tab ().sourceview.get_buffer ();
+            return (GtkSource.Buffer) this.current_tab ().sourceview.get_buffer ();
         }
 
         private void save_file () {
@@ -355,12 +353,12 @@ namespace Vapad {
         }
 
         private void save_as () {
-	    this.current_tab ().save_as ();
+            this.current_tab ().save_as ();
         }
 
         private void save_all () {
             for (int n = 0; n < this.notebook.get_n_pages (); n++) {
-                Tab tab = (Vapad.Tab)this.notebook.get_nth_page (n);
+                Tab tab = (Vapad.Tab) this.notebook.get_nth_page (n);
                 tab.save_file ();
             }
         }
@@ -437,7 +435,7 @@ namespace Vapad {
                 at_word_boundaries = this.whole_words.get_active (),
                 search_text = this.search_entry.get_text (),
             };
-            var list = (Gtk.ListStore)this.search_completion.get_model ();
+            var list = (Gtk.ListStore) this.search_completion.get_model ();
             Gtk.TreeIter iter;
             list.append (out iter);
             list.set (iter, 0, this.search_entry.get_text ());
@@ -465,7 +463,7 @@ namespace Vapad {
             Gtk.TextIter current;
             Gtk.TextIter start;
             Gtk.TextIter end;
-            buffer.get_iter_at_offset (out current, (int)position);
+            buffer.get_iter_at_offset (out current, (int) position);
             Gtk.TextIter sel_start;
             Gtk.TextIter sel_end;
             if (buffer.get_selection_bounds (out sel_start, out sel_end)) {
@@ -492,7 +490,7 @@ namespace Vapad {
             Gtk.TextIter current;
             Gtk.TextIter start;
             Gtk.TextIter end;
-            buffer.get_iter_at_offset (out current, (int)position);
+            buffer.get_iter_at_offset (out current, (int) position);
             Gtk.TextIter sel_start;
             Gtk.TextIter sel_end;
             if (buffer.get_selection_bounds (out sel_start, out sel_end)) {
@@ -509,9 +507,9 @@ namespace Vapad {
         private void advanced_search () {
             this.hide_search ();
             var dialog = new Vapad.SearchDialog (this);
-            dialog.strings_replaced.connect ( (n) => {
-                string replaced = _("replaced");
-                string occurances = _("occurances");
+            dialog.strings_replaced.connect ((n) => {
+                string replaced = _ ("replaced");
+                string occurances = _ ("occurances");
                 this.set_toast (@"$replaced $n $occurances");
             });
             dialog.show ();
@@ -520,7 +518,7 @@ namespace Vapad {
         private void replace_text () {
         }
 
-        private void set_toast (string str){
+        private void set_toast (string str) {
             var toast = new Adw.Toast (str) {
                 timeout = 3,
             };
@@ -532,10 +530,10 @@ namespace Vapad {
             if (this.vimode) {
                 app.set_accels_for_action ("win.search", {});
             } else {
-                app.set_accels_for_action ("win.search", {"<primary>f"});
+                app.set_accels_for_action ("win.search", { "<primary>f" });
             }
             for (int i = 0; i < this.notebook.get_n_pages (); i++) {
-                var tab = (Vapad.Tab)this.notebook.get_nth_page (i);
+                var tab = (Vapad.Tab) this.notebook.get_nth_page (i);
                 if (this.vimode) {
                     tab.set_vi_mode ();
                 } else {
@@ -543,101 +541,101 @@ namespace Vapad {
                 }
             }
         }
-        
+
         private void set_grid () {
-	    for (int i = 0; i < this.notebook.get_n_pages (); i++) {
-		var tab = (Vapad.Tab)this.notebook.get_nth_page (i);
-		if (this.display_grid) {
-		    tab.set_display_grid (true);
-		} else {
-		    tab.set_display_grid (false);
-		}
-	    }
+            for (int i = 0; i < this.notebook.get_n_pages (); i++) {
+                var tab = (Vapad.Tab) this.notebook.get_nth_page (i);
+                if (this.display_grid) {
+                    tab.set_display_grid (true);
+                } else {
+                    tab.set_display_grid (false);
+                }
+            }
         }
 
         private void set_theme () {
             var manager = new GtkSource.StyleSchemeManager ();
             var scheme = manager.get_scheme (this.editor_theme);
             for (int i = 0; i < this.notebook.get_n_pages (); i++) {
-                var tab = (Vapad.Tab)this.notebook.get_nth_page (i);
-                var buffer = (GtkSource.Buffer)tab.sourceview.get_buffer ();
+                var tab = (Vapad.Tab) this.notebook.get_nth_page (i);
+                var buffer = (GtkSource.Buffer) tab.sourceview.get_buffer ();
                 buffer.set_style_scheme (scheme);
             }
-            //this.set_toast (@"Set editor style $(this.editor_theme)");
+            // this.set_toast (@"Set editor style $(this.editor_theme)");
         }
 
         private string get_font_css (Pango.FontDescription font) {
             var family = font.get_family ();
             var style = "normal";
             switch (font.get_style ()) {
-                case Pango.Style.ITALIC:
-                    style = "Italic";
-                    break;
-                case Pango.Style.OBLIQUE:
-                    style = "Oblique";
-                    break;
-                default:
-                    style = "Normal";
-                    break;
+            case Pango.Style.ITALIC:
+                style = "Italic";
+                break;
+            case Pango.Style.OBLIQUE:
+                style = "Oblique";
+                break;
+            default:
+                style = "Normal";
+                break;
             }
             var size = font.get_size () / 1024;
             int weight = 400;
             switch (font.get_weight ()) {
-                case Pango.Weight.BOLD:
-                    weight = 700;
-                    break;
-                case Pango.Weight.THIN:
-                    weight = 100;
-                    break;
-                case Pango.Weight.BOOK:
-                    weight = 400;
-                    break;
-                case Pango.Weight.HEAVY:
-                    weight = 900;
-                    break;
-                case Pango.Weight.LIGHT:
-                    weight = 300;
-                    break;
-                case Pango.Weight.MEDIUM:
-                    weight = 500;
-                    break;
-                case Pango.Weight.SEMIBOLD:
-                    weight = 600;
-                    break;
-                case Pango.Weight.SEMILIGHT:
-                    weight = 350;
-                    break;
-                case Pango.Weight.ULTRABOLD:
-                    weight = 800;
-                    break;
-                case Pango.Weight.ULTRALIGHT:
-                    weight = 100;
-                    break;
-                case Pango.Weight.ULTRAHEAVY:
-                    weight = 950;
-                    break;
-                default:
-                    weight = 400;
-                    break;
+            case Pango.Weight.BOLD:
+                weight = 700;
+                break;
+            case Pango.Weight.THIN:
+                weight = 100;
+                break;
+            case Pango.Weight.BOOK:
+                weight = 400;
+                break;
+            case Pango.Weight.HEAVY:
+                weight = 900;
+                break;
+            case Pango.Weight.LIGHT:
+                weight = 300;
+                break;
+            case Pango.Weight.MEDIUM:
+                weight = 500;
+                break;
+            case Pango.Weight.SEMIBOLD:
+                weight = 600;
+                break;
+            case Pango.Weight.SEMILIGHT:
+                weight = 350;
+                break;
+            case Pango.Weight.ULTRABOLD:
+                weight = 800;
+                break;
+            case Pango.Weight.ULTRALIGHT:
+                weight = 100;
+                break;
+            case Pango.Weight.ULTRAHEAVY:
+                weight = 950;
+                break;
+            default:
+                weight = 400;
+                break;
             }
             var css = @"textview.view { font-family: $family; font-size: $(size)pt; font-weight: $weight; font-style: $style; }";
             return css;
         }
 
         private void set_font () {
-            var dlg = new Gtk.FontChooserDialog (_("Select a font"), this);
-            if (this.editor_font!= null) {
+            var dlg = new Gtk.FontChooserDialog (_ ("Select a font"), this);
+            if (this.editor_font != null) {
                 dlg.set_font (editor_font);
             }
-            dlg.response.connect ( (dlg,res) => {
+            dlg.response.connect ((dlg, res) => {
                 if (res == Gtk.ResponseType.OK) {
-                    var chooser = (Gtk.FontChooser)dlg;
+                    var chooser = (Gtk.FontChooser) dlg;
                     var font = chooser.get_font_desc ();
                     this.editor_font = font.to_string ();
                     var css = this.get_font_css (font);
                     for (int i = 0; i < this.notebook.get_n_pages (); i++) {
-                        var tab = (Vapad.Tab)this.notebook.get_nth_page (i);
-                        tab.set_css_font(css);
+                        var tab = (Vapad.Tab) this.notebook.get_nth_page (i);
+                        tab.set_css_font (css);
                     }
                 }
                 dlg.close ();
