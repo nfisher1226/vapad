@@ -215,8 +215,7 @@ namespace Vapad {
                 dlg.response.connect ((response) => {
                     if (response == "ok") {
                         if (tab.file != null) {
-                            tab.save_file ();
-                            dlg.close ();
+                            tab.save_file_on_close ();
                             this.notebook.remove_page (num);
                         } else {
                             var chooser = new Gtk.FileChooserNative (
@@ -234,16 +233,14 @@ namespace Vapad {
                                         GtkSource.File file = new GtkSource.File ();
                                         file.set_location (f);
                                         tab.sourcefile = file;
-                                        tab.save_file ();
+                                        tab.save_file_on_close ();
                                     }
                                 }
                                 this.notebook.remove_page (num);
                             });
-                            dlg.close ();
                             chooser.show ();
                         }
                     } else if (response != "delete-event") {
-                        dlg.close ();
                         this.notebook.remove_page (num);
                     }
                 });

@@ -97,6 +97,12 @@ namespace Vapad {
                 this.save_as ();
             }
         }
+
+        public void save_file_on_close () {
+            Buffer buffer = (Buffer) this.sourceview.get_buffer ();
+            FileSaver saver = new FileSaver (buffer, this.sourcefile);
+            saver.save_async.begin (-100, null, null, null);
+        }
         
         private void finish_save () {
             this.file_saved (this.file.get_basename ());
