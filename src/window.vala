@@ -205,16 +205,15 @@ namespace Vapad {
                 if (tab.file != null) {
                     fname = tab.file.get_basename ();
                 }
-                var dlg = new Gtk.MessageDialog (
-                    this,
-                    Gtk.DialogFlags.USE_HEADER_BAR,
-                    Gtk.MessageType.WARNING,
-                    Gtk.ButtonsType.YES_NO,
-                    _ ("Save %s before closing?"),
-                    fname
-                );
-                dlg.response.connect ((dlg, res) => {
-                    if (res == Gtk.ResponseType.YES) {
+                var dlg = new Adw.MessageDialog (this,_ ("Save %s before closing?").printf(fname),"");
+                dlg.add_response("cancel", _("_Cancel"));
+                dlg.add_response("ok", _("_OK"));
+                dlg.set_default_response("ok");
+                dlg.set_close_response("cancel");
+                dlg.set_response_appearance("ok", SUGGESTED);
+                dlg.show();
+                dlg.response.connect ((response) => {
+                    if (response == "ok") {
                         if (tab.file != null) {
                             tab.save_file ();
                             dlg.close ();
@@ -243,7 +242,7 @@ namespace Vapad {
                             dlg.close ();
                             chooser.show ();
                         }
-                    } else if (res != Gtk.ResponseType.DELETE_EVENT) {
+                    } else if (response != "delete-event") {
                         dlg.close ();
                         this.notebook.remove_page (num);
                     }
