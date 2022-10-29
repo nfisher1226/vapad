@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk" version ="4.0"/>
-  <object class="GtkBox" id="lbox">
-    <property name="orientation">horizontal</property>
-    <property name="hexpand">true</property>
-    <property name="can-focus">false</property>
-    <child>
-      <object class="GtkLabel" id="label">
-        <property name="label" translatable="yes">New File</property>
-        <property name="hexpand">true</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton" id="close_button">
-        <property name="has-frame">false</property>
-        <property name="icon-name">window-close-symbolic</property>
-      </object>
-    </child>
-  </object>
   <template class="VapadTab" parent="GtkBox">
     <property name="orientation">vertical</property>
     <property name="vexpand">true</property>

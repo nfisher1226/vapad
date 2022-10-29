@@ -16,26 +16,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using Gtk;
-using GtkSource;
-
 namespace Vapad {
     [GtkTemplate (ui = "/org/hitchhiker_linux/vapad/tab.ui")]
-    public class Tab : Box {
+    public class Tab : Gtk.Box {
         [GtkChild]
-        public unowned Box lbox;
-        [GtkChild]
-        public unowned Label label;
-        [GtkChild]
-        public unowned Button close_button;
-        [GtkChild]
-        public unowned View sourceview;
+        public unowned GtkSource.View sourceview;
         [GtkChild]
         private unowned Gtk.Box cmd_bar;
         [GtkChild]
         private unowned Gtk.Label cmd_bar_txt;
         [GtkChild]
         private unowned Gtk.Label cmd_txt;
+        public Adw.TabPage? page;
         public GLib.File? file;
         public GtkSource.File? sourcefile;
         public bool modified {get; set; }
@@ -64,12 +56,12 @@ namespace Vapad {
             this.file = f;
             this.sourcefile = file;
             this.setup_language ();
-            FileLoader loader = new FileLoader ((Buffer)this.sourceview.buffer, file);
+            var loader = new GtkSource.FileLoader ((GtkSource.Buffer)this.sourceview.buffer, file);
             loader.load_async.begin (-100, null, null, this.finish_load);
         }
         
         private void setup_language () {
-            Language language = new LanguageManager ()
+            var language = new GtkSource.LanguageManager ()
                 .get_default ()
                 .guess_language (this.file.get_path (), null);
             if (language != null) {
@@ -90,8 +82,8 @@ namespace Vapad {
 
         public void save_file () {
             if (this.file != null) {
-                Buffer buffer = (Buffer) this.sourceview.get_buffer ();
-                FileSaver saver = new FileSaver (buffer, this.sourcefile);
+                var buffer = (GtkSource.Buffer) this.sourceview.get_buffer ();
+                var saver = new GtkSource.FileSaver (buffer, this.sourcefile);
                 saver.save_async.begin (-100, null, null, this.finish_save);
             } else {
                 this.save_as ();
@@ -99,8 +91,8 @@ namespace Vapad {
         }
 
         public void save_file_on_close () {
-            Buffer buffer = (Buffer) this.sourceview.get_buffer ();
-            FileSaver saver = new FileSaver (buffer, this.sourcefile);
+            var buffer = (GtkSource.Buffer) this.sourceview.get_buffer ();
+            var saver = new GtkSource.FileSaver (buffer, this.sourcefile);
             saver.save_async.begin (-100, null, null, null);
         }
         
@@ -110,10 +102,10 @@ namespace Vapad {
         }
 
         public void save_as () {
-            FileChooserNative chooser = new FileChooserNative (
+            var chooser = new Gtk.FileChooserNative (
                 _("Save file as..."),
                 (Window)this.get_root (),
-                FileChooserAction.SAVE,
+                Gtk.FileChooserAction.SAVE,
                 null,
                 null
             );
@@ -131,7 +123,6 @@ namespace Vapad {
         		    this.set_lang_menu ((GLib.Menu)extra_menu);
     			}
                         this.save_file ();
-                        this.set_title ();
                     }
                 }
             });
@@ -140,8 +131,8 @@ namespace Vapad {
 
         private void set_title () {
             string name = this.file.get_basename ();
-            if (name != null) {
-                this.label.set_text (name);
+            if (name != null && this.page != null) {
+                this.page.set_title (name);
             }
         }
 
