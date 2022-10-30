@@ -18,7 +18,7 @@
 
 namespace Vapad {
     public const string PROGNAME = "Vapad";
-    public const string VERSION = "0.5.1";
+    public const string VERSION = "0.6.0";
     public const string[] AUTHORS = { "Nathan Fisher", "Alex Kryuchkov" };
 
     public class Application : Adw.Application {

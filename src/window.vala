@@ -26,7 +26,9 @@ namespace Vapad {
         [GtkChild]
         private unowned Gtk.MenuButton menu_button;
         [GtkChild]
-        public unowned Gtk.Notebook notebook;
+        private unowned Adw.TabBar tab_bar;
+        [GtkChild]
+        public unowned Adw.TabView tabview;
         [GtkChild]
         private unowned Gtk.Box search_box;
         [GtkChild]
@@ -102,9 +104,8 @@ namespace Vapad {
             var pop = (Gtk.PopoverMenu) this.menu_button.get_popover ();
             this.theme_switcher = new Vapad.ThemeSwitcher ();
             pop.add_child (this.theme_switcher, "theme");
-            this.notebook.page_removed.connect (check_tab_visibility);
-            this.notebook.page_added.connect (check_tab_visibility);
-            this.notebook.switch_page.connect ((nb, num) => update_title (num));
+            //this.notebook.switch_page.connect ((nb, num) => update_title (num));
+            //this.tabview.selected_page.notify.connect ((page) => update_title (page));
             this.search_entry.activate.connect (new_search);
 
             this.search_completion = new Gtk.EntryCompletion () {
@@ -158,12 +159,10 @@ namespace Vapad {
             var scheme = manager.get_scheme (this.editor_theme);
             var buffer = (GtkSource.Buffer) tab.sourceview.get_buffer ();
             buffer.set_style_scheme (scheme);
-            this.notebook.append_page (tab, tab.lbox);
-            tab.close_button.clicked.connect (() => {
-                this.close_tab (this.notebook.page_num (tab));
-            });
+            var page = this.tabview.append (tab);
+            tab.page = page;
             tab.file_saved.connect ((_, name) => {
-                this.update_title (this.notebook.get_current_page ());
+                this.update_title (this.tabview.get_selected_page ());
                 this.send_saved_toast (name);
             });
             if (this.vimode) {
@@ -178,9 +177,8 @@ namespace Vapad {
                 var font = Pango.FontDescription.from_string (this.editor_font);
                 tab.set_css_font (this.get_font_css (font));
             }
-            var n = this.notebook.page_num (tab);
-            this.notebook.set_current_page (n);
-            this.update_title (n);
+            this.tabview.set_selected_page (page);
+            this.update_title (page);
         }
 
         private void close_page () {
@@ -359,60 +357,70 @@ namespace Vapad {
             }
         }
 
+        private void tabn (int n) {
+            var page = this.tabview.get_nth_page (n);
+            if (page != null) {
+                this.tabview.set_selected_page (page);
+            }
+        }
+
         private void tab1 () {
-            this.notebook.set_current_page (0);
+            this.tabn (1);
         }
 
         private void tab2 () {
-            this.notebook.set_current_page (1);
+            this.tabn (2);
         }
 
         private void tab3 () {
-            this.notebook.set_current_page (2);
+            this.tabn (3);
         }
 
         private void tab4 () {
-            this.notebook.set_current_page (3);
+            this.tabn (4);
         }
 
         private void tab5 () {
-            this.notebook.set_current_page (4);
+            this.tabn (5);
         }
 
         private void tab6 () {
-            this.notebook.set_current_page (5);
+            this.tabn (6);
         }
 
         private void tab7 () {
-            this.notebook.set_current_page (6);
+            this.tabn (7);
         }
 
         private void tab8 () {
-            this.notebook.set_current_page (7);
+            this.tabn (8);
         }
 
         private void tab9 () {
-            this.notebook.set_current_page (8);
+            this.tabn (9);
         }
 
         private void last_tab () {
-            int num = this.notebook.get_n_pages ();
-            this.notebook.set_current_page (num - 1);
+            int num = this.tabview.get_n_pages ();
+            var page = this.tabview.get_nth_page (num - 1);
+            this.tabview.set_selected_page (page);
         }
 
         private void next_tab () {
-            if (this.notebook.get_current_page () >= this.notebook.get_n_pages () - 1) {
-                this.notebook.set_current_page (0);
+            var page = this.tabview.get_selected_page ();
+            if (this.tabview.get_page_position (page) >= this.notebook.get_n_pages () - 1) {
+                this.tabview.set_selected_page (0);
             } else {
-                this.notebook.next_page ();
+                this.tabview.select_next_page ();
             }
         }
 
         private void previous_tab () {
-            if (this.notebook.get_current_page () == 0) {
-                this.notebook.set_current_page (this.notebook.get_n_pages () - 1);
+            var page = this.tabview.get_selected_page ();
+            if (this.tabview.get_page_position (page) == 0) {
+                this.tabview.set_selected_page (this.tabview.get_n_pages () - 1);
             } else {
-                this.notebook.prev_page ();
+                this.tabview.select_previous_page ();
             }
         }
 
@@ -528,8 +536,8 @@ namespace Vapad {
             } else {
                 app.set_accels_for_action ("win.search", { "<primary>f" });
             }
-            for (int i = 0; i < this.notebook.get_n_pages (); i++) {
-                var tab = (Vapad.Tab) this.notebook.get_nth_page (i);
+            for (int i = 0; i < this.tabview.get_n_pages (); i++) {
+                var tab = (Vapad.Tab) this.tabview.get_nth_page (i).get_child ();
                 if (this.vimode) {
                     tab.set_vi_mode ();
                 } else {
@@ -539,8 +547,8 @@ namespace Vapad {
         }
 
         private void set_grid () {
-            for (int i = 0; i < this.notebook.get_n_pages (); i++) {
-                var tab = (Vapad.Tab) this.notebook.get_nth_page (i);
+            for (int i = 0; i < this.tabview.get_n_pages (); i++) {
+                var tab = (Vapad.Tab) this.tabview.get_nth_page (i).get_child ();
                 if (this.display_grid) {
                     tab.set_display_grid (true);
                 } else {
@@ -552,8 +560,8 @@ namespace Vapad {
         private void set_theme () {
             var manager = new GtkSource.StyleSchemeManager ();
             var scheme = manager.get_scheme (this.editor_theme);
-            for (int i = 0; i < this.notebook.get_n_pages (); i++) {
-                var tab = (Vapad.Tab) this.notebook.get_nth_page (i);
+            for (int i = 0; i < this.tabview.get_n_pages (); i++) {
+                var tab = (Vapad.Tab) this.tabview.get_nth_page (i).get_child ();
                 var buffer = (GtkSource.Buffer) tab.sourceview.get_buffer ();
                 buffer.set_style_scheme (scheme);
             }
@@ -629,8 +637,8 @@ namespace Vapad {
                     var font = chooser.get_font_desc ();
                     this.editor_font = font.to_string ();
                     var css = this.get_font_css (font);
-                    for (int i = 0; i < this.notebook.get_n_pages (); i++) {
-                        var tab = (Vapad.Tab) this.notebook.get_nth_page (i);
+                    for (int i = 0; i < this.tabview.get_n_pages (); i++) {
+                        var tab = (Vapad.Tab) this.tabview.get_nth_page (i).get_child ();
                         tab.set_css_font (css);
                     }
                 }

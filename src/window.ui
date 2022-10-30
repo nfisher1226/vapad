@@ -60,14 +60,18 @@
             <property name="vexpand">1</property>
             <property name="orientation">vertical</property>
             <child>
+              <object class="AdwTabBar" id="tab_bar">
+                <property name="autohide">True</property>
+                <property name="expand-tabs">True</property>
+                <property name="view">tabview</property>
+              </object>
+            </child>
+            <child>
               <object class="AdwToastOverlay" id="overlay">
                 <property name="child">
-                  <object class="GtkNotebook" id="notebook">
+                  <object class="AdwTabView" id="tabview">
                     <property name="hexpand">1</property>
                     <property name="vexpand">1</property>
-                    <property name="enable-popup">1</property>
-                    <property name="scrollable">1</property>
-                    <property name="show-tabs">0</property>
                   </object>
                 </property>
               </object>
