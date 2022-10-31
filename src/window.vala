@@ -104,8 +104,14 @@ namespace Vapad {
             var pop = (Gtk.PopoverMenu) this.menu_button.get_popover ();
             this.theme_switcher = new Vapad.ThemeSwitcher ();
             pop.add_child (this.theme_switcher, "theme");
-            //this.notebook.switch_page.connect ((nb, num) => update_title (num));
-            //this.tabview.selected_page.notify.connect ((page) => update_title (page));
+            this.tabview.notify["selected-page"].connect (() => {
+                var page = this.tabview.get_selected_page ();
+                this.update_title (page);
+            });
+            this.tabview.close_page.connect ((_tabview, page) => {
+                var tab = (Vapad.Tab)page.get_child ();
+                this.close_tab (tab);
+            });
             this.search_entry.activate.connect (new_search);
 
             this.search_completion = new Gtk.EntryCompletion () {
@@ -182,8 +188,8 @@ namespace Vapad {
         }
 
         private void close_page () {
-            var tab = this.current_tab ();
-            this.close_tab (tab);
+            var page = this.tabview.get_selected_page ();
+            this.tabview.close_page (page);
         }
 
         public void close_all () {
@@ -213,7 +219,7 @@ namespace Vapad {
                     if (response == "ok") {
                         if (tab.file != null) {
                             tab.save_file_on_close ();
-                            this.tabview.close_page (tab.page);
+                            this.tabview.close_page_finish (tab.page, true);
                         } else {
                             var chooser = new Gtk.FileChooserNative (
                                 _ ("Save file as..."),
@@ -233,17 +239,20 @@ namespace Vapad {
                                         tab.save_file_on_close ();
                                     }
                                 }
-                                this.tabview.close_page (tab.page);
+                                this.tabview.close_page_finish (tab.page, true);
                             });
                             chooser.show ();
                         }
                     } else if (response != "delete-event") {
-                        this.tabview.close_page (tab.page);
+                        this.tabview.close_page_finish (tab.page, true);
                     }
                 });
                 dlg.show ();
             } else {
-                this.tabview.close_page (tab.page);
+                this.tabview.close_page_finish (tab.page, true);
+            }
+            if (this.tabview.get_n_pages () == 0) {
+                this.close ();
             }
         }
 
