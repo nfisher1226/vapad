@@ -95,7 +95,7 @@ namespace Vapad {
                     win.new_page ();
                 }
                 win.current_tab ().load_file (file);
-                win.update_title (win.notebook.page_num (win.current_tab ()));
+                win.update_title (win.tabview.get_selected_page ());
             }
         }
 
