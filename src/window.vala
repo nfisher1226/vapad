@@ -66,16 +66,6 @@ namespace Vapad {
                 { "save_file", this.save_file },
                 { "save_as", this.save_as },
                 { "save_all", this.save_all },
-                { "tab1", this.tab1 },
-                { "tab2", this.tab2 },
-                { "tab3", this.tab3 },
-                { "tab4", this.tab4 },
-                { "tab5", this.tab5 },
-                { "tab6", this.tab6 },
-                { "tab7", this.tab7 },
-                { "tab8", this.tab8 },
-                { "tab9", this.tab9 },
-                { "last_tab", this.last_tab },
                 { "next_tab", this.next_tab },
                 { "previous_tab", this.previous_tab },
                 { "set_font", this.set_font },
@@ -184,6 +174,7 @@ namespace Vapad {
                 tab.set_css_font (this.get_font_css (font));
             }
             this.tabview.set_selected_page (page);
+            tab.page.set_title ("New File");
             this.update_title (page);
         }
 
@@ -296,7 +287,7 @@ namespace Vapad {
             this.setup_tab (tab);
         }
 
-        public void update_title (Adw.TabPage page) {
+        public void update_title (Adw.TabPage? page) {
             var tab = (Vapad.Tab) page.get_child ();
             if (tab.file != null) {
                 string path = tab.file.get_path ();
@@ -348,49 +339,6 @@ namespace Vapad {
             }
         }
 
-        private void tabn (int n) {
-            var page = this.tabview.get_nth_page (n);
-            if (page != null) {
-                this.tabview.set_selected_page (page);
-            }
-        }
-
-        private void tab1 () {
-            this.tabn (1);
-        }
-
-        private void tab2 () {
-            this.tabn (2);
-        }
-
-        private void tab3 () {
-            this.tabn (3);
-        }
-
-        private void tab4 () {
-            this.tabn (4);
-        }
-
-        private void tab5 () {
-            this.tabn (5);
-        }
-
-        private void tab6 () {
-            this.tabn (6);
-        }
-
-        private void tab7 () {
-            this.tabn (7);
-        }
-
-        private void tab8 () {
-            this.tabn (8);
-        }
-
-        private void tab9 () {
-            this.tabn (9);
-        }
-
         private void last_tab () {
             int num = this.n_tabs ();
             var page = this.tabview.get_nth_page (num - 1);
@@ -410,8 +358,7 @@ namespace Vapad {
         private void previous_tab () {
             var page = this.tabview.get_selected_page ();
             if (this.tabview.get_page_position (page) == 0) {
-                page = this.tabview.get_nth_page (this.n_tabs () - 1);
-                this.tabview.set_selected_page (page);
+                this.last_tab ();
             } else {
                 this.tabview.select_previous_page ();
             }

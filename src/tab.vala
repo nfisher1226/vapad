@@ -130,9 +130,11 @@ namespace Vapad {
         }
 
         private void set_title () {
-            string name = this.file.get_basename ();
-            if (name != null && this.page != null) {
-                this.page.set_title (name);
+            if (this.file != null) {
+                string name = this.file.get_basename ();
+                if (this.page != null) {
+                    this.page.set_title (name);
+                }
             }
         }
 

@@ -53,16 +53,6 @@ namespace Vapad {
             this.set_accels_for_action ("win.save_file", { "<primary>s" });
             this.set_accels_for_action ("win.save_as", { "<primary><shift>s" });
             this.set_accels_for_action ("win.save_all", { "<primary><shift>l" });
-            this.set_accels_for_action ("win.tab1", { "<alt>1" });
-            this.set_accels_for_action ("win.tab2", { "<alt>2" });
-            this.set_accels_for_action ("win.tab3", { "<alt>3" });
-            this.set_accels_for_action ("win.tab4", { "<alt>4" });
-            this.set_accels_for_action ("win.tab5", { "<alt>5" });
-            this.set_accels_for_action ("win.tab6", { "<alt>6" });
-            this.set_accels_for_action ("win.tab7", { "<alt>7" });
-            this.set_accels_for_action ("win.tab8", { "<alt>8" });
-            this.set_accels_for_action ("win.tab9", { "<alt>9" });
-            this.set_accels_for_action ("win.last_tab", { "<alt>0" });
             this.set_accels_for_action ("win.next_tab", { "<alt>Right" });
             this.set_accels_for_action ("win.previous_tab", { "<alt>Left" });
 
